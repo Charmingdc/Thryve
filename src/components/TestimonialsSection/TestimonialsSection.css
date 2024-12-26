@@ -1,6 +1,7 @@
 .testimonials-section {
     display: flex;
     flex-direction: column;
+    padding: 2rem;
 }
 
 .testimonials-section h2 {
@@ -10,18 +11,20 @@
 
 .testimonials-section .testimonials {
     display: flex;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-    justify-content: flex-start;
-    animation: scroll 10s linear infinite;
+    width: 100%;
+    justify-content: space-between;
+    padding: 2rem;
 }
 
 .testimonials .testimonial {
-    height: 80%;
     width: 30%;
-    flex-wrap: wrap;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    gap: 1rem;
 }
+
 
 .testimonial-author {
     display: flex;
@@ -32,4 +35,5 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    object-fit: cover;
 }

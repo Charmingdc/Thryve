@@ -10,6 +10,7 @@
     width: 100%;
     padding: 2rem;
     background-color: var(--lighter-color);
+    margin-top: 2rem;
 }
 
 .call-to-action-section .container {
