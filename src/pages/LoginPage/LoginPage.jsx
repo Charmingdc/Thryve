@@ -1,4 +1,4 @@
-import './LoginPage.css'
+import './LoginPage.css';
 
 
 const LoginPage = () => {
@@ -8,13 +8,13 @@ const LoginPage = () => {
       <form>
         <h1> Thryve </h1>
 
-        <div className="nav"> 
+        <div className="login-nav">
           <div> Login </div>
           <div> Signup </div>
         </div>
 
         <div className="group">
-          <input className="input" type="text" name="username" placeholder="Enter your username" /> 
+          <input className="input" type="text" name="username" placeholder="Enter your username" />
         </div>
 
         <div className="group">
@@ -28,7 +28,7 @@ const LoginPage = () => {
           Ohh, I forgot my password 🔐
         </a>
 
-        <button>
+        <button className='login-button'>
           Login
         </button>
 

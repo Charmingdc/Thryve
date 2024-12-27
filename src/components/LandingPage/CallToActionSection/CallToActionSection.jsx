@@ -3,7 +3,9 @@ const CallToActionSection = () => {
     return (
         <section className="call-to-action-section">
             <div className="container">
-                <div className="image"></div>
+                <div className="image">
+                    <img src="src/assets/LandingPageAssets/sync-data.png" alt="" />
+                </div>
                 <div className="description">
                     <p><b>New</b></p>
                     <h2>Sync with your other devices</h2>

@@ -1,9 +1,10 @@
-import CallToActionSection from "../../components/CallToActionSection/CallToActionSection";
-import CallToActionSection2 from "../../components/CallToActionSection2/CallToActionSection2";
-import FeaturesSection from "../../components/FeaturesSection/FeaturesSection";
-import Header from "../../components/Header/Header";
-import HeroSection from "../../components/HeroSection/HeroSection";
-import TestimonialsSection from "../../components/TestimonialsSection/TestimonialsSection";
+import CallToActionSection from "../../components/LandingPage/CallToActionSection/CallToActionSection";
+import CallToActionSection2 from "../../components/LandingPage/CallToActionSection2/CallToActionSection2";
+import FeaturesSection from "../../components/LandingPage/FeaturesSection/FeaturesSection";
+import Footer from "../../components/LandingPage/Footer/Footer";
+import Header from "../../components/LandingPage/Header/Header";
+import HeroSection from "../../components/LandingPage/HeroSection/HeroSection";
+import TestimonialsSection from "../../components/LandingPage/TestimonialsSection/TestimonialsSection";
 import "./LandingPage.css";
 
 const LandingPage = () => {
@@ -15,6 +16,7 @@ const LandingPage = () => {
             <CallToActionSection />
             <TestimonialsSection />
             <CallToActionSection2 />
+            <Footer />
         </div>
     );
 }

@@ -24,6 +24,14 @@
 
 .container .image {
     width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .image img {
+    width: 25rem;
+    height: 25rem;
 }
 
 .container .description {

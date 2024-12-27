@@ -27,6 +27,7 @@
     flex-direction: column;
     gap: 1rem;
     align-items: center;
+    justify-content: center;
 }
 
 .cta .container .cta-content h1 {
@@ -42,7 +43,7 @@
     font-size: 1rem;
     font-weight: 700;
     border: none;
-    border-radius: 5px;
+    border-radius: 2rem;
     cursor: pointer;
     width: fit-content;
     transition: background-color 0.3s ease-in-out;
@@ -50,4 +51,12 @@
 
 .cta .container .cta-content button:hover {
     background-color: var(--lighter-color);
+}
+
+
+.cta .container .cta-content img {
+    width: 15rem;
+    height: 15rem;
+    height: auto;
+    border-radius: 10px;
 }
