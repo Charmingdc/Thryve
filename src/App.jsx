@@ -1,15 +1,16 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import PWABadge from './PWABadge.jsx'
-import './App.css'
+import LandingPage from './pages/LandingPage/LandingPage.jsx'
 
 const App = () => {
   return (
-   <>
-    <h1> 
-      Thryve by Charmingdc and TechifyDev
-    </h1>
-    
-    <PWABadge />
-   </>
+    <BrowserRouter>
+      <Routes>
+        {/* Add your routes here */}
+        <Route path="/landing" element={<LandingPage />} />
+      </Routes>
+      <PWABadge />
+    </BrowserRouter>
   )
 }
 export default App

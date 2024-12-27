@@ -1,0 +1,74 @@
+:root {
+    --original-color: #8a2be2;
+    --lighter-color: #b57fef;
+}
+
+.header {
+    display: flex;
+    padding: 2rem 0;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    width: 20%;
+}
+
+.logo-container .logo {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    width: 60%;
+}
+
+.nav-links li {
+    margin: 0 1rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+}
+
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    width: 20%;
+    justify-content: space-evenly;
+}
+
+.auth-buttons .signin-btn {
+    background: transparent;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.auth-buttons .register-btn {
+    background-color: var(--original-color);
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+    color: white;
+}
+
+.auth-buttons .register-btn:hover {
+    background-color: var(--lighter-color);
+}

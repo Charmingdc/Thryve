@@ -1,0 +1,39 @@
+.testimonials-section {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+.testimonials-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.testimonials-section .testimonials {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 2rem;
+}
+
+.testimonials .testimonial {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    gap: 1rem;
+}
+
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+}
+
+.testimonials .testimonial img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
