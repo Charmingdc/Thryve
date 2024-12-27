@@ -38,7 +38,7 @@ body {
 .login-container a:active {
     color: var(--text-color);
     text-decoration: none;
-    width: auto;
+    width: fit-content;
 }
 
 form {
@@ -117,7 +117,7 @@ input:hover {
     box-shadow: 0 0 0 .2rem rgb(181 127 239 / 30%);
 }
 
-.icon {
+.login-icon {
     width: 1.5rem;
     height: 1.5rem;
     position: absolute;

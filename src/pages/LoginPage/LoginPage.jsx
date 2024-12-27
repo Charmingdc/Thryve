@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import { FiUser } from "react-icons/fi";
+import { FiLock } from "react-icons/fi";
 import './LoginPage.css';
 
 
@@ -7,7 +9,7 @@ const LoginPage = () => {
    <>
     <div className="login-container">
       <form>
-        <h1> Thryve </h1>
+        <h1> Welcom back </h1>
 
         <div className="login-nav">
           <div> Login </div>
@@ -18,14 +20,12 @@ const LoginPage = () => {
         </div>
 
         <div className="group">
+          <FiUser className='login-icon' />
           <input className="input" type="text" name="username" placeholder="Enter your username" />
         </div>
 
         <div className="group">
-          <svg stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="icon">
-            <path d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" stroke-linejoin="round" stroke-linecap="round"></path>
-          </svg>
-
+          <FiLock className='login-icon' />
           <input className="input" type="password" name="password" placeholder="Enter your password" />
         </div>
 
