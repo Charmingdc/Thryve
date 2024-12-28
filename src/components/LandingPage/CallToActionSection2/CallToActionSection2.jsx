@@ -1,4 +1,7 @@
+import { Link } from 'react-router-dom';
 import "./CallToActionSection2.css";
+
+
 const CallToActionSection2 = () => {
     return(
         <section className="cta">
@@ -8,7 +11,7 @@ const CallToActionSection2 = () => {
                 </div>
                 <div className="cta-content">
                     <h2>Thrive is free for everyone</h2>
-                    <button>Try thrive now</button>
+                    <Link to='/signup'> Try thrive now </Link>
                 </div>
                 <div className="cta-content to-be-removed">
                     <img src="src/assets/LandingPageAssets/free-for-everyone-two.png" />

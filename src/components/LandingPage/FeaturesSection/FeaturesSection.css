@@ -46,7 +46,10 @@
     height: 20rem;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 726px) {
+    .features-section h1 {
+        text-align: center;
+    }
     .features-section .container {
         flex-direction: column;
     }

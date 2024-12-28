@@ -11,7 +11,7 @@
 }
 
 .landing-page {
-    color: rgb(210, 210, 210);
+    color: var(--text-color);
     height: 100%;
     width: 100vw;
 }

@@ -9,7 +9,7 @@ const FeaturesSection = () => {
                         <img src="src/assets/LandingPageAssets/tangled-idea.png" className="" />
                     </div>
                     <h2>Clear your tangled mind</h2>
-                    <p>Access hundreds of brushes, shapes, and fonts to scribble your idea</p>
+                    <p>Organize your thoughts and bring clarity to your mind.</p>
                 </div>
                 <div className="feature">
                     <div className="image">
@@ -23,7 +23,7 @@ const FeaturesSection = () => {
                         <img src="src/assets/LandingPageAssets/your-choice.png" className="" />
                     </div>
                     <h2>The choice is yours</h2>
-                    <p>Customize your paper to create gorgeous page you want</p>
+                    <p>Reflect the way you want with variety of tools</p>
                 </div>
             </div>
         </section>

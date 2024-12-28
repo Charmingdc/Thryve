@@ -36,7 +36,7 @@
     color: #333;
 }
 
-.cta .container .cta-content button {
+.cta .container .cta-content a {
     padding: 1rem 2rem;
     background-color: var(--original-color);
     color: #fff;
@@ -46,10 +46,11 @@
     border-radius: 2rem;
     cursor: pointer;
     width: fit-content;
+    text-decoration: none;
     transition: background-color 0.3s ease-in-out;
 }
 
-.cta .container .cta-content button:hover {
+.cta .container .cta-content a:hover {
     background-color: var(--lighter-color);
 }
 

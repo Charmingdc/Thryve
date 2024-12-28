@@ -12,6 +12,13 @@
     padding: 1rem 2rem;
 }
 
+.header a,
+.header a:active,
+.header a:hover {
+    color: rgb(250, 250, 250);
+    text-decoration: none;
+}
+
 .logo-container {
     display: flex;
     align-items: center;

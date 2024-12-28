@@ -48,7 +48,7 @@
     margin-bottom: 1rem;
 }
 
-.description button {
+.description a {
     padding: 0.75rem 1.5rem;
     font-size: 1rem;
     background-color: var(--original-color);
@@ -57,14 +57,15 @@
     border-radius: 2rem;
     cursor: pointer;
     width: fit-content;
+    text-decoration: none;
     transition: background-color 0.3s ease;
 }
 
-.description button:hover {
+.description a:hover {
     background-color: var(--lighter-color);
 }
 
-@media (max-width: 800px) {
+@media (max-width: 726px) {
     .hero-image {
         display: none;
         justify-content: center;
@@ -74,5 +75,6 @@
     .description {
         width: 100%;
         align-items: center;
+        text-align: center;
     }
 }
