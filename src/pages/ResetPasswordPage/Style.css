@@ -1,0 +1,81 @@
+.reset-password-container {
+  width: 90vw;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5vw;
+  margin-top: -5vh;
+}
+
+.reset-psw-img-holder {
+  width: 20rem;
+  height: 20rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reset-psw-img-holder > img {
+  width: 100%;
+}
+
+.reset-password-container form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.reset-password-container form h1 {
+  font-size: 1.6rem;
+}
+
+.reset-password-container form p {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.reset-password-container .group {
+  margin: 1rem 0 .4rem 0;
+}
+
+.reset-password-container a {
+  text-decoration: none;
+  font-size: .9rem;
+  font-weight: bolder;
+  align-self: flex-start;
+  margin: 0 0 1.8rem .2rem;
+}
+
+.reset-password-container .reset-psw-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  position: absolute;
+  left: 1rem;
+  fill: none;
+}
+
+.reset-password-container button {
+  width: 100%;
+  height: 3.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(250, 250, 250);
+  background-color: var(--primary-color);
+  border: 0.2rem double var(--bg);
+  border-radius: 3rem;
+}
+
+
+@media (min-width: 726px) {
+  .reset-password-container {
+    flex-direction: row;
+  }
+
+  .reset-psw-img-holder {
+    width: 100%;
+  }
+}
