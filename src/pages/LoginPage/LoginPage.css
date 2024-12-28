@@ -33,6 +33,14 @@ body {
     margin-top: -2.5rem;
 }
 
+.login-container a,
+.login-container a:hover,
+.login-container a:active {
+    color: var(--text-color);
+    text-decoration: none;
+    width: fit-content;
+}
+
 form {
     width: 90%;
     height: auto;
@@ -41,7 +49,7 @@ form {
     padding: 5%;
 }
 
-form>h1 {
+form > h1 {
     color: var(--primary-color);
     text-align: center;
     margin-bottom: 1rem;
@@ -109,7 +117,7 @@ input:hover {
     box-shadow: 0 0 0 .2rem rgb(181 127 239 / 30%);
 }
 
-.icon {
+.login-icon {
     width: 1.5rem;
     height: 1.5rem;
     position: absolute;
