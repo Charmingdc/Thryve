@@ -1,4 +1,5 @@
 import "./FeaturesSection.css";
+
 const FeaturesSection = () => {
     return (
         <section className="features-section">
