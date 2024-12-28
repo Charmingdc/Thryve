@@ -60,3 +60,18 @@
     height: auto;
     border-radius: 10px;
 }
+
+@media (max-width: 800px) {
+    .to-be-removed {
+        display: none !important;
+    }
+
+    .container {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .cta .container .cta-content {
+        width: 100% !important;
+    }
+}

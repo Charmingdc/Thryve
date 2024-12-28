@@ -10,7 +10,7 @@ const CallToActionSection2 = () => {
                     <h2>Thrive is free for everyone</h2>
                     <button>Try thrive now</button>
                 </div>
-                <div className="cta-content">
+                <div className="cta-content to-be-removed">
                     <img src="src/assets/LandingPageAssets/free-for-everyone-two.png" />
                 </div>
             </div>

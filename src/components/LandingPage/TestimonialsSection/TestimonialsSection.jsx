@@ -23,6 +23,18 @@ const TestimonialsSection = () => {
           image="https://via.placeholder.com/400"
           title="CEO"
         />
+        <Testimonial
+          text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor."
+          author="John Smith"
+          image="https://via.placeholder.com/400"
+          title="CEO"
+        />
+        <Testimonial
+          text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor."
+          author="John Smith"
+          image="https://via.placeholder.com/400"
+          title="CEO"
+        />
       </div>
     </section>
   );

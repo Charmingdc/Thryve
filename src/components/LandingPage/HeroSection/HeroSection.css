@@ -63,3 +63,16 @@
 .description button:hover {
     background-color: var(--lighter-color);
 }
+
+@media (max-width: 800px) {
+    .hero-image {
+        display: none;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .description {
+        width: 100%;
+        align-items: center;
+    }
+}

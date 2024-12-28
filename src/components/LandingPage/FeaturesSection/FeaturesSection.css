@@ -45,3 +45,13 @@
     width: 20rem;
     height: 20rem;
 }
+
+@media (max-width: 800px) {
+    .features-section .container {
+        flex-direction: column;
+    }
+
+    .features-section .container .feature {
+        width: 100%;
+    }
+}

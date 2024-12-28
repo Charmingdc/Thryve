@@ -41,3 +41,40 @@
     width: 50%;
     max-width: 500px;
 }
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .container .image,
+    .container .description {
+        width: 100%;
+    }
+
+    .container .image img {
+        width: 15rem;
+        height: auto;
+    }
+
+    .description {
+        padding: 1rem;
+    }
+
+    .call-to-action-btn {
+        width: 100%;
+        max-width: 300px;
+        margin: 1rem auto 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .container .image img {
+        width: 12rem;
+    }
+
+    .description {
+        font-size: 0.9rem;
+    }
+}
