@@ -1,11 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-:root {
- --text-color: rgb(80, 80, 80);
- --bg: rgb(255, 255, 255);
- --primary-color: rgb(138, 43, 226);
- --secondary-color: rgb(181, 127, 239);
-}
 
 * {
  padding: 0;
@@ -105,7 +99,7 @@ form > h1 {
  padding-left: 3rem;
  padding-right: 2rem;
  color: var(--text-color);
- border: 0.1rem solid var(--secondary-color);
+ border: 0.040rem solid var(--secondary-color);
  border-radius: 3rem;
  margin: .6rem 0;
  transition: .5s ease;
@@ -118,7 +112,7 @@ form > h1 {
 .input:focus, input:hover {
  outline: none;
  border-color: var(--secondary-color);
- box-shadow: 0 0 0 .2rem rgb(181 127 239 / 30%);
+ box-shadow: 0 0 0 .3rem rgb(181 127 239 / 30%);
 }
 
 .signup-icon {
@@ -127,6 +121,14 @@ form > h1 {
  position: absolute;
  left: 1rem;
  fill: none;
+}
+
+.signup-terms-link {
+ font-size: .9rem;
+ margin: 0 0 0 .5rem;
+}
+.signup-terms-link a strong {
+  color: var(--primary-color);
 }
 
 .signup-button {

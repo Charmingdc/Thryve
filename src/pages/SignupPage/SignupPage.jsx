@@ -43,7 +43,10 @@ const SignupPage = () => {
          <FiLock className='signup-icon' />
          <input className='input' type='password' name='password' placeholder='Enter a secret password' />
         </div>
-
+        
+        <p className='signup-terms-link'>
+          By signing up you agree to our <Link to='/terms'> <strong> terms </strong> and <strong> conditions </strong> </Link>
+        </p>
 
         <button className='signup-button'>
          Signup

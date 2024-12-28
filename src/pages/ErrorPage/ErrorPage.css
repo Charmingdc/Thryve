@@ -6,7 +6,7 @@
  align-items: center;
  justify-content: center;
  color: var(--clr);
- background-color: var(--primary);
+ background-color: var(--bg);
 }
 
 .error-div > img {
@@ -15,8 +15,8 @@
 }
 
 .error-div a {
-  width: 12rem;
-  height: 4rem;
+  width: 10rem;
+  height: 3.6rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,18 +24,4 @@
   color: rgb(240, 240, 240);
   background-color: rgb(181, 127, 239);
   border-radius: 1rem;
-}
-
-
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --primary: rgb(10, 10, 10);
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    --primary: rgb(240, 240, 240);
-  }
 }
