@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import JournalRafiki from '../../assets/illustrations/journal-rafiki.png';
 import { FiUser } from "react-icons/fi";
 import { FiMail } from "react-icons/fi";
 import { FiLock } from "react-icons/fi";
@@ -9,6 +10,13 @@ const SignupPage = () => {
   return (
     <>
      <div className='signup-container'>
+      <div className='img-holder'>
+        <img 
+          src={JournalRafiki}
+          alt='Journal illustration'/>
+      </div>
+
+
       <form>
         <h1> Thryve </h1>
 
@@ -44,11 +52,12 @@ const SignupPage = () => {
         <div className='alternative'>
          Or Signup with
         </div>
-      </form> 
 
-      <div className='google-bar'>
-        <h2> Google </h2>
-      </div>
+        <div className='google-bar'>
+          <h2> Google </h2>
+        </div>
+        
+      </form> 
      </div>
     </>
   )

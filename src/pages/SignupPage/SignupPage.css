@@ -42,6 +42,10 @@ body {
  width: fit-content;
 }
 
+.img-holder {
+ display: none;
+}
+
 form {
  width: 90%;
  height: auto;
@@ -148,6 +152,7 @@ form > h1 {
 .google-bar {
  width: 50%;
  height: 3.2rem;
+ align-self: center;
  display: flex;
  align-items: center;
  justify-content: center;
@@ -156,4 +161,26 @@ form > h1 {
  padding: .4rem 5%;
  border: 0.1rem solid var(--secondary-color);
  border-radius: 3rem;
+ margin: 1rem 0;
+}
+
+
+
+
+@media (min-width: 726px) {
+  .signup-container {
+    width: 90vw;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    padding: 0 2vw;
+  }
+
+  .img-holder {
+    display: block;
+    margin-top: 1rem 0;
+  }
+  .img-holder > img {
+    width: 100%;
+  }
 }

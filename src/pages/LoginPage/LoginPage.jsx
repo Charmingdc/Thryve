@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import WelcomeImg from '../../assets/illustrations/welcome-amico.png';
 import { FiUser } from "react-icons/fi";
 import { FiLock } from "react-icons/fi";
 import './LoginPage.css';
@@ -8,6 +9,13 @@ const LoginPage = () => {
   return (
    <>
     <div className="login-container">
+      <div className='img-holder'>
+        <img 
+          src={WelcomeImg}
+          alt='Welcome img illustration'/>
+      </div>
+
+
       <form>
         <h1> Welcom back </h1>
 
@@ -40,11 +48,11 @@ const LoginPage = () => {
         <div className="alternative">
           Or Login with
         </div>
-      </form>
 
-      <div className="google-bar">
-        <h2> Google </h2>
-      </div>
+        <div className='google-bar'>
+          <h2> Google </h2>
+        </div>
+      </form>
     </div>
    </>
   )
