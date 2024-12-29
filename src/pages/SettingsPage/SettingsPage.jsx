@@ -13,8 +13,8 @@ const SettingsPage = () => {
 
        </div>
 
-       <h1 className='username-holder'>
-         John Doe
+       <div className='username-holder'>
+         <h1> John Doe </h1>
        </div>
       </div>
     </main>
