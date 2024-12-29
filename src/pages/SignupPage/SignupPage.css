@@ -8,16 +8,6 @@
  font-family: 'Poppins', Sans-Serif;
 }
 
-body {
- width: 100vw;
- min-height: 100vh;
- display: flex;
- align-items: center;
- justify-content: center;
- color: var(--text-color);
- background: var(--bg);
-}
-
 .signup-container {
  width: 100vw;
  height: 100vh;
@@ -125,7 +115,7 @@ form > h1 {
 
 .signup-terms-link {
  font-size: .9rem;
- margin: 0 0 0 .5rem;
+ margin: 0 0 .5rem .5rem;
 }
 .signup-terms-link a strong {
   color: var(--primary-color);

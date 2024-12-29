@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import WelcomeImg from '../../assets/illustrations/welcome-amico.png';
-import { FiUser } from "react-icons/fi";
-import { FiLock } from "react-icons/fi";
+import { HiOutlineUser } from "react-icons/hi2";
+import { HiOutlineLockClosed } from "react-icons/hi2";
 import './LoginPage.css';
 
 
@@ -28,12 +28,12 @@ const LoginPage = () => {
         </div>
 
         <div className="group">
-          <FiUser className='login-icon' />
+          <HiOutlineUser className='login-icon' />
           <input className="input" type="text" name="username" placeholder="Enter your username" />
         </div>
 
         <div className="group">
-          <FiLock className='login-icon' />
+          <HiOutlineLockClosed className='login-icon' />
           <input className="input" type="password" name="password" placeholder="Enter your password" />
         </div>
 

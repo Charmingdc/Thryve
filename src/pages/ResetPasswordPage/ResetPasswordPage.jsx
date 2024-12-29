@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FiMail } from 'react-icons/fi';
+import { HiOutlineMail } from "react-icons/hi";
 import ForgotPasswordImg from '../../assets/illustrations/forgot-password.png';
 import './Style.css';
 
@@ -22,7 +22,7 @@ const ResetPassword = () => {
 
 
         <div className='group'>
-          <FiMail className='reset-psw-icon' />
+          <HiOutlineMail className='reset-psw-icon' />
           <input className='input' type='email' name='email' placeholder='Enter your email'/>
         </div>
 

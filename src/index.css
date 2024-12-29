@@ -5,6 +5,15 @@
   --secondary-color: rgb(181, 127, 239);
 }
 
+body {
+  width: 100vw;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+  background-color: var(--bg);
+}
 
 @media (prefers-color-scheme: dark) {
   :root {

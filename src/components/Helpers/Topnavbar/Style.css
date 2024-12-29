@@ -1,0 +1,21 @@
+.topnav {
+  width: 90%;
+  height: 3.8rem;
+  display: flex;
+  align-items: center;
+  margin: .5rem 0 1rem 0;
+}
+
+.topnav-icon {
+  width: 3.4rem;
+  height: 3.4rem;
+  fill: rgba(181, 127, 239);
+  margin-right: 1rem;
+}
+
+
+@media (min-width: 726px) {
+  .topnav {
+    display: none;
+  }
+}

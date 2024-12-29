@@ -8,15 +8,6 @@
     font-family: 'Poppins', Sans-Serif;
 }
 
-body {
-    width: 100vw;
-    min-height: 90vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--bg);
-}
-
 .login-container {
     width: 100vw;
     height: 100vh;

@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import JournalRafiki from '../../assets/illustrations/journal-rafiki.png';
-import { FiUser } from "react-icons/fi";
-import { FiMail } from "react-icons/fi";
-import { FiLock } from "react-icons/fi";
+import { HiOutlineUser } from "react-icons/hi2";
+import { HiOutlineMail } from "react-icons/hi";
+import { HiOutlineLockClosed } from "react-icons/hi2";
 import './SignupPage.css';
 
 
@@ -30,17 +30,17 @@ const SignupPage = () => {
 
 
         <div className='group'>
-         <FiUser className='signup-icon' />
+         <HiOutlineUser className='signup-icon' />
          <input className='input' type="text" name='username' placeholder='Enter a unique username' />
         </div>
 
         <div className='group'>
-         <FiMail className='signup-icon' />
+         <HiOutlineMail className='signup-icon' />
          <input className='input' type='email' name='email' placeholder='Enter a valid email' />
         </div>
 
         <div className='group'>
-         <FiLock className='signup-icon' />
+         <HiOutlineLockClosed className='signup-icon' />
          <input className='input' type='password' name='password' placeholder='Enter a secret password' />
         </div>
         
