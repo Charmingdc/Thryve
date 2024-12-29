@@ -1,0 +1,55 @@
+.journals-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 5rem;
+    right: 0;
+    width: 80%;
+}
+
+.journals-container .journals {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 2rem;
+    flex-direction: column;
+}
+
+.journals-container .journal {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 1rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.journal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    border-radius: 10px;
+}
+
+
+.gratitude-qoute {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
