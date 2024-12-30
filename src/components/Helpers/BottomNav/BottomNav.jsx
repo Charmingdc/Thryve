@@ -1,12 +1,21 @@
-import { HiCalendar, HiCog, HiHome, HiUser } from "react-icons/hi2";
+import { Link } from 'react-router-dom';
+import { HiCalendar, HiHome, HiUser } from "react-icons/hi2";
 import "./BottomNav.css";
+
 const BottomNav = ({currentPage}) => {
   return (
-    <nav className="navbar">
-      <HiHome size={25} color={currentPage === "home" ? "rgb(138, 46, 226)" : "rgb(181, 127, 239)"} cursor={"pointer"}/>
-      <HiCalendar size={25} color={currentPage === "calender" ? "rgb(138, 46, 226)" : "rgb(181, 127, 239)"} cursor={"pointer"} />
-      <HiCog size={25} color={currentPage === "setting" ? "rgb(138, 46, 226)" : "rgb(181, 127, 239)"} cursor={"pointer"} />
-      <HiUser size={25} color={currentPage === "profile" ? "rgb(138, 46, 226)" : "rgb(181, 127, 239)"} cursor={"pointer"} />
+    <nav className="bottom-navbar">
+      <Link to='/home'> 
+        <HiHome size={28} color={currentPage === "home" ? "rgb(138, 46, 226)" : "rgb(181, 127, 239)"} cursor={"pointer"}/>
+      </Link>
+
+      <Link to='/calendar'>
+        <HiCalendar size={28} color={currentPage === "calender" ? "rgb(138, 46, 226)" : "rgb(181, 127, 239)"} cursor={"pointer"} />
+      </Link>
+
+      <Link to='/setting'>
+        <HiUser size={28} color={currentPage === "setting" ? "rgb(138, 46, 226)" : "rgb(181, 127, 239)"} cursor={"pointer"} />
+      </Link>
     </nav>
   );
 }

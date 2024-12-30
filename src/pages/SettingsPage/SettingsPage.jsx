@@ -1,5 +1,7 @@
-import './SettingsPage.css';
+import { HiMiniPencilSquare } from "react-icons/hi2";
 import Topnavbar from '../../components/Helpers/Topnavbar';
+import BottomNav from '../../components/Helpers/BottomNav';
+import './SettingsPage.css';
 
 
 const SettingsPage = () => {
@@ -8,15 +10,35 @@ const SettingsPage = () => {
       <Topnavbar currentPageName='Settings' />
       
 
-      <div className='user-info'>
-       <div className='setting-userdp-holder'>
+      <div className='setting-user-info'>
+        <div className='setting-userdp-holder'>
+        
+        </div>
 
-       </div>
-
-       <div className='username-holder'>
-         <h1> John Doe </h1>
-       </div>
+        <div className='username-holder'>
+          <h1> John Doe </h1>
+          <HiMiniPencilSquare className='icon' />
+        </div>
       </div>
+
+
+      <div className='settings-menu'>
+        <div>
+         <div className='icon-holder'></div>
+         <h2> Edit email </h2>
+        </div>
+
+        <div></div>
+
+        <div></div>
+
+        <div></div>
+
+        <div></div>
+      </div>
+
+
+      <BottomNav currentPage='setting' />
     </main>
   )
 }

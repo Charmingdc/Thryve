@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
 import JournalRafiki from '../../assets/illustrations/journal-rafiki.png';
-import { HiOutlineUser } from "react-icons/hi2";
+import { HiOutlineUser, HiOutlineLockClosed } from "react-icons/hi2";
 import { HiOutlineMail } from "react-icons/hi";
-import { HiOutlineLockClosed } from "react-icons/hi2";
 import './SignupPage.css';
 
 

@@ -3,6 +3,7 @@
   --bg: rgb(250, 250, 250);
   --primary-color: rgb(138, 46, 226);
   --secondary-color: rgb(181, 127, 239);
+  --shade: rgb(230, 230, 230);
 }
 
 body {
@@ -15,11 +16,13 @@ body {
   background-color: var(--bg);
 }
 
+
 @media (prefers-color-scheme: dark) {
   :root {
     --text-color: rgb(180, 180, 180);
     --bg: rgb(10, 10, 10);
     --primary-color: rgb(138, 43, 226);
     --secondary-color: rgb(181, 127, 239);
+    --shade: rgb(20, 20, 20);
   }
 }

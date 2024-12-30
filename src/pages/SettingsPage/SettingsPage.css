@@ -1,9 +1,62 @@
 .setting-container {
   width: 100vw;
-  height: 90vh;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   color: var(--text-color);
   background-color: var(--bg);
+}
+
+.setting-user-info {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.setting-userdp-holder {
+  width: 10rem;
+  height: 10rem;
+  background-color: var(--shade);
+  border-radius: 50%;
+  margin: 1.5rem 0 1rem 0;
+}
+
+.setting-container .username-holder {
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.setting-container .username-holder > h1 {
+  margin: 0 1rem;
+}
+
+.setting-container .username-holder > .icon {
+  width: 2rem;
+  height: 2rem;
+  fill: var(--primary-color)
+}
+
+.settings-menu {
+  width: 85%;
+  height: 30rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem 0 4rem 0;
+}
+
+.settings-menu > div {
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  border-bottom: 0.1rem solid var(--shade);
+  margin: .2rem 0;
 }

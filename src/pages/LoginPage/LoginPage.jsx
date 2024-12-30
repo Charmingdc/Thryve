@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import WelcomeImg from '../../assets/illustrations/welcome-amico.png';
-import { HiOutlineUser } from "react-icons/hi2";
-import { HiOutlineLockClosed } from "react-icons/hi2";
+import { HiOutlineUser, HiOutlineLockClosed } from "react-icons/hi2";
 import './LoginPage.css';
 
 
