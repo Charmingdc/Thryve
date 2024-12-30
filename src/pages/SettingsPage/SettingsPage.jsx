@@ -17,7 +17,7 @@ import './SettingsPage.css';
 const SettingsPage = () => {
   return (
     <main className='setting-container'>
-     <SideBar currentPage='home' />
+     <SideBar currentPage='setting' />
 
      <div className='setting-page'>
       <Topnavbar currentPageName='Settings' />

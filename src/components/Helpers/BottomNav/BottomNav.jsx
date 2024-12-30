@@ -10,7 +10,7 @@ const BottomNav = ({currentPage}) => {
       </Link>
 
       <Link to='/calendar'>
-        <HiCalendar size={28} color={currentPage === "calender" ? "rgb(138, 46, 226)" : "rgb(181, 127, 239)"} cursor={"pointer"} />
+        <HiCalendar size={28} color={currentPage === "calendar" ? "rgb(138, 46, 226)" : "rgb(181, 127, 239)"} cursor={"pointer"} />
       </Link>
 
       <Link to='/setting'>

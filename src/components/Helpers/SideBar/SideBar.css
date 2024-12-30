@@ -7,7 +7,7 @@
     padding: 2rem;
     gap: 2rem;
     z-index: 100;
-    position: absolute;
+    position: fixed;
     background-color: var(--shade);
     left: 0;
 }

@@ -22,7 +22,7 @@ const SideBar = ({currentPage}) => {
             <p>Calendar</p>
         </div>
 
-        <div onClick={() => navigate('/setting')} className="sidebar-link" style={{backgroundColor: currentPage === "settings" ? "var(--primary-color)" : ""}}>
+        <div onClick={() => navigate('/setting')} className="sidebar-link" style={{backgroundColor: currentPage === "setting" ? "var(--primary-color)" : ""}}>
             <HiUser size={25} />
             <p>Settings</p>
         </div>
