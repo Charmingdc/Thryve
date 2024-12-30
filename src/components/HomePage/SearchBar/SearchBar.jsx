@@ -1,4 +1,5 @@
-import { HiCalendar, HiUser } from "react-icons/hi2";
+import { HiCalendar } from "react-icons/hi2";
+import { IoSearch } from "react-icons/io5";
 import "./SearchBar.css";
 
 const SearchBar = () => {
@@ -7,7 +8,7 @@ const SearchBar = () => {
           <HiCalendar size={30} style={{color: "var(--primary-color)"}} />
           <div className=""></div> <input type="text" placeholder="Search Journey..." />
           <button>
-            <HiUser size={30} style={{color: "var(--primary-color)" }} />
+            <IoSearch size={30} style={{color: "var(--primary-color)" }} />
           </button>
         </div>
     )

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { HiOutlinePlusCircle } from "react-icons/hi2";
+import { HiOutlinePlus } from "react-icons/hi";
 import './Style.css';
 
 const ActionButton = () => {
@@ -8,7 +8,7 @@ const ActionButton = () => {
 
   return (
     <div className='action-button' onClick={() => navigate('/add-journal')}>
-      <HiOutlinePlusCircle className='icon' />
+      <HiOutlinePlus className='icon' />
     </div>
   )  
 }
