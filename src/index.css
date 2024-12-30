@@ -17,6 +17,16 @@ body {
 }
 
 
+
+/** animations keyframs */
+@keyframes dim {
+  50% {
+    filter: opacity(0.2);
+  }
+}
+
+
+/*** system based theme  ***/
 @media (prefers-color-scheme: dark) {
   :root {
     --text-color: rgb(180, 180, 180);

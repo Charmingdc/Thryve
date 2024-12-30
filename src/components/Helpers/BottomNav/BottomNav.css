@@ -9,10 +9,20 @@
     padding: .8rem 2rem;
     transform: translateX(-50%);
     background-color: var(--shade);
+    border: 0.040rem double var(--secondary-color);
     border-radius: 3rem;
     backdrop-filter: blur(10px);
 }
 
 .bottom-navbar a {
     text-decoration: none;
+}
+
+
+
+
+@media (min-width: 726px) {
+  .bottom-navbar {
+    display: none;
+  }
 }

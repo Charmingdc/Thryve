@@ -1,16 +1,15 @@
 .search-bar {
+    width: 90%;
+    max-width: 700px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 20px;
-    width: 100%;
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 1rem 2rem;
-    background-color: rgba(255, 255, 255, 0.041);
-    backdrop-filter: blur(10px);
+    padding: .5rem 2rem;
+    background-color: var(--shade);
     border-radius: 50px;
+    margin: 0 auto;
     margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 .search-bar input {
@@ -18,14 +17,17 @@
     border: none;
     border-radius: 30px;
     background: transparent;
-    color: white;
-    padding: 1rem;
-    font-size: 1rem;
-    font-weight: 500;
+    color: var(--text-color);
+    padding: .5rem 1rem;
+    font-size: .9rem;
+    font-weight: 200;
     outline: none;
     transition: all 0.3s;
 }
 
+.search-bar input:focus {
+    box-shadow: none;
+}
 
 .search-bar button {
     display: flex;
