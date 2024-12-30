@@ -27,7 +27,9 @@ const SettingsPage = () => {
       <div className='setting-user-info'>
         <div className='setting-userdp-holder'>
           <div className='setting-userdp'></div>
-          <HiOutlineCamera className='change-dp-button' />
+          <button className='change-dp-button'>
+            <HiOutlineCamera className='icon' />
+          </button>
         </div>
 
         <div className='username-holder'>
