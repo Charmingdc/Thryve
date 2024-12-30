@@ -1,10 +1,6 @@
 .journals-container {
     display: flex;
     flex-direction: column;
-    position: absolute;
-    top: 5rem;
-    right: 0;
-    width: 80%;
 }
 
 .journals-container .journals {
@@ -46,7 +42,6 @@
     font-weight: 500;
     margin-bottom: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 2rem;
     width: 90%;
     max-width: 800px;
