@@ -7,6 +7,7 @@
 .journals-container .journals {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     justify-content: space-between;
     margin-top: 0;
     padding: 1.3rem;
@@ -23,12 +24,13 @@
     padding-top: 1rem;
     background-color: transparent;
     border-radius: 1rem;
-    margin: .4rem 0; 
+    margin: .4rem 0;
 }
 
 .journal-content {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
     padding: 1.5rem 2rem;
     background-color: var(--shade);
@@ -53,11 +55,11 @@
     margin: 10px auto;
 }
 
-.gratitude-qoute > p:first-of-type {
+.gratitude-qoute>p:first-of-type {
     font-weight: bolder;
     margin-bottom: 0.8rem;
 }
 
-.gratitude-qoute > p {
+.gratitude-qoute>p {
     text-align: center;
 }
