@@ -13,13 +13,9 @@ const CalendarPage = () => {
        <div className='calendar-page'>
          <Topnavbar currentPageName='calendar' />
          
-         <div className='calendar-wrapper'>
+         <div className='calendar-wrapper'></div>
 
-         </div>
-
-         <div className='streak-box'>
-
-         </div>
+         <div className='streak-box'></div>
 
          <BottomNav currentPage='calendar' />
        </div>

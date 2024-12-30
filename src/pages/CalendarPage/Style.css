@@ -3,6 +3,7 @@
   height: 100vh;
   position: relative;
   display: flex;
+  margin-bottom: 6rem;
 }
 
 .calendar-page {
@@ -14,6 +15,23 @@
   overflow-y: auto;
 }
 
+.calendar-wrapper {
+  width: 86%;
+  min-height: 25rem;
+  background-color: var(--shade);
+  border-radius: 1rem;
+}
+
+.streak-box {
+  width: 86%;
+  height: 12rem;
+  display: flex;
+  background-color: red;
+  border-radius: 1rem;
+  margin: 1rem 0 4rem 0;
+}
+
+
 
 
 @media (min-width: 726px) {
@@ -21,5 +39,7 @@
     width: 75%;
     position: absolute;
     right: 0;
+    overflow-y: auto;
+    margin-top: 2rem;
   }
 }

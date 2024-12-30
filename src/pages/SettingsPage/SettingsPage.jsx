@@ -1,7 +1,8 @@
 import {
    HiMiniPencilSquare,
    HiOutlineLockClosed,
-   HiOutlineDocumentText
+   HiOutlineDocumentText,
+   HiOutlineCamera
 } from "react-icons/hi2";
 import { MdOutlinePassword } from "react-icons/md";
 import {
@@ -25,7 +26,8 @@ const SettingsPage = () => {
 
       <div className='setting-user-info'>
         <div className='setting-userdp-holder'>
-        
+          <div className='setting-userdp'></div>
+          <HiOutlineCamera className='change-dp-button' />
         </div>
 
         <div className='username-holder'>

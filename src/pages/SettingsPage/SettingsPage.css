@@ -23,13 +23,38 @@
 }
 
 .setting-userdp-holder {
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 1rem;
+}
+
+.setting-userdp {
   width: 10rem;
   height: 10rem;
+  object-fit: cover;
   background-color: var(--shade);
   filter: opacity(1);
   border-radius: 50%;
   margin: 1.5rem 0 1rem 0;
   animation: dim 1s linear infinite;
+}
+
+.change-dp-button {
+  width: 2rem;
+  height: 2rem;
+  position: absolute;
+  right: 14%;
+  bottom: 18%;
+  stroke: var(--secondary-color);
+  transition: 200ms;
+}
+
+.change-dp-button:hover {
+  stroke: var(--primary-color);
 }
 
 .setting-container .username-holder {
@@ -47,7 +72,12 @@
 .setting-container .username-holder > .icon {
   width: 2rem;
   height: 2rem;
-  fill: var(--primary-color)
+  fill: var(--secondary-color);
+  transition: 200ms;
+}
+
+.setting-container .username-holder > .icon:hover {
+  fill: var(--primary-color);
 }
 
 .settings-menu {
