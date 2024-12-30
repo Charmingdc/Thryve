@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { HiArrowLeftCircle } from "react-icons/hi2";
+import { FaChevronLeft } from "react-icons/fa6";
 import './Style.css';
 
 
@@ -9,7 +9,9 @@ const Topnavbar = ({currentPageName}) => {
   return (
     <>
      <div className='topnav'>
-       <HiArrowLeftCircle className='topnav-icon' onClick={() => navigate(-1)} />
+       <div className='topnav-icon-holder' onClick={() => navigate(-1)}>
+         <FaChevronLeft className='icon' />
+       </div>
            
        <h1> {currentPageName} </h1>
      </div>

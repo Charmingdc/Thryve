@@ -15,7 +15,16 @@ const CalendarPage = () => {
          
          <div className='calendar-wrapper'></div>
 
-         <div className='streak-box'></div>
+         <div className='streak-box'>
+          <div className='streak-box-text'>
+            <h2> Streak Insight </h2>
+          </div>
+          
+          <div className='streaks'>
+            <div></div>
+            <div></div>
+          </div>
+         </div>
 
          <BottomNav currentPage='calendar' />
        </div>

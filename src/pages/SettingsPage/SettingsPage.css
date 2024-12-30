@@ -44,16 +44,24 @@
 }
 
 .change-dp-button {
-  width: 2rem;
-  height: 2rem;
+  width: 3rem;
+  height: 3rem;
   position: absolute;
-  right: 14%;
-  bottom: 18%;
-  stroke: var(--secondary-color);
+  right: 10%;
+  bottom: 14%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 50%;
+  backdrop-filter: blur(5px);
   transition: 200ms;
 }
 
-.change-dp-button:hover {
+.change-dp-button .icon {
+  width: 1.6rem;
+  height: 1.6rem;
   stroke: var(--primary-color);
 }
 
@@ -70,9 +78,9 @@
 }
 
 .setting-container .username-holder > .icon {
-  width: 2rem;
-  height: 2rem;
-  fill: var(--secondary-color);
+  width: 1.8rem;
+  height: 1.8rem;
+  fill: var(--primary-color);
   transition: 200ms;
 }
 
@@ -106,7 +114,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--shade);
+  background-color: var(--secondary-color);
   border-radius: 50%;
   margin-right: .8rem;
 }

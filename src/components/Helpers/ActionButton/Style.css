@@ -8,8 +8,14 @@
   align-items: center;
   justify-content: center;
   color: rgb(255, 255, 255);
-  background-color: var(--primary-color);
+  background-color: var(--secondary-color);
+  backdrop-filter: blur(5px);
   border-radius: 50%;
+  transition: 300ms;
+}
+
+.action-button:hover {
+  background-color: var(--primary-color);
 }
 
 .action-button .icon {
