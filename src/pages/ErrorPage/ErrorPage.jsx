@@ -1,9 +1,11 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import PageNotFoundImg from '../../assets/illustrations/page-not-found.png';
 import './ErrorPage.css';
 
 
 const ErrorPage = () => {
+  const navigate = useNavigate();
+
   return (
     <>
      <div className='error-div'>
@@ -11,9 +13,9 @@ const ErrorPage = () => {
        src={PageNotFoundImg}
        alt='404 error, page not found'/>
 
-       <Link to='/'> 
+       <button onClick={() => navigate(-1)}> 
          Go back 
-       </Link>
+       </button>
      </div>
     </>
   )

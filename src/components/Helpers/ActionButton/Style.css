@@ -1,0 +1,19 @@
+.action-button {
+  width: 3.5rem;
+  height: 3.5rem;
+  position: fixed;
+  bottom: 16dvh;
+  right: 8dvw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(255, 255, 255);
+  background-color: var(--primary-color);
+  border-radius: 50%;
+}
+
+.action-button .icon {
+  width: 2.2rem;
+  height: 2.2rem;
+  fill: none;
+}
