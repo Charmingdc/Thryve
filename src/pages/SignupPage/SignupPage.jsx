@@ -20,19 +20,23 @@ const SignupPage = () => {
     e.preventDefault();
     const docRef = doc(db, 'users', userName);
     const userSnap = await getDoc(docRef);
-    const error = validateSignupInput(email, password, userName, userSnap);
+    const error = validateSignupInput(email, password, userName);
     try {
       if (error) throw new Error(error);
+      if(userSnap) throw new Error("Username have already been taken")
       const userInfo = await createUserWithEmailAndPassword(auth, email, password);
       const user = userInfo.user;
       setUserId(userInfo.user.uid);
       const userData = {
-        userName: userName,
+        userName: userName.toLowerCase(),
         email: email,
         userId: userId,
       }
-      await setDoc(doc(db, 'users', userName), userData);
+      await setDoc(doc(db, 'users', userName.toLowerCase()), userData);
       await updateProfile(user, { displayName: userName });
+      setUserName('');
+      setPassword('');
+      setEmail('');
       toast.success("Signed up successfully");
     } catch (e) {
       console.log(e.message);

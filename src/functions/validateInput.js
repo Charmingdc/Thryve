@@ -1,7 +1,4 @@
-export const validateSignupInput = (email, password, userName, userSnap) => {
-  if (userSnap.exists()) {
-    return "Username already exists";
-  }
+export const validateSignupInput = (email, password, userName) => {
   if (!email) {
     return "Input a valid email address";
   }
