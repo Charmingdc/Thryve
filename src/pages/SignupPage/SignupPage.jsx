@@ -1,16 +1,49 @@
-import { Link } from 'react-router-dom';
-import JournalRafiki from '../../assets/illustrations/journal-rafiki.png';
-import { HiOutlineUser, HiOutlineLockClosed } from "react-icons/hi2";
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { useState } from 'react';
 import { HiOutlineMail } from "react-icons/hi";
+import { HiOutlineLockClosed, HiOutlineUser } from "react-icons/hi2";
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import JournalRafiki from '../../assets/illustrations/journal-rafiki.png';
+import { auth, db } from '../../firebase/firebase-init';
+import { validateSignupInput } from '../../functions/validateInput';
 import './SignupPage.css';
 
 
 const SignupPage = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [userName, setUserName] = useState('');
+  const [userId, setUserId] = useState('');
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    const docRef = doc(db, 'users', userName);
+    const userSnap = await getDoc(docRef);
+    const error = validateSignupInput(email, password, userName, userSnap);
+    try {
+      if (error) throw new Error(error);
+      const userInfo = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userInfo.user;
+      setUserId(userInfo.user.uid);
+      const userData = {
+        userName: userName,
+        email: email,
+        userId: userId,
+      }
+      await setDoc(doc(db, 'users', userName), userData);
+      await updateProfile(user, { displayName: userName });
+      toast.success("Signed up successfully");
+    } catch (e) {
+      console.log(e.message);
+      toast.error(e.message);
+    }
+  }
   return (
     <>
      <div className='signup-container'>
       <div className='img-holder'>
-        <img 
+        <img
           src={JournalRafiki}
           alt='Journal illustration'/>
       </div>
@@ -30,24 +63,24 @@ const SignupPage = () => {
 
         <div className='group'>
          <HiOutlineUser className='signup-icon' />
-         <input className='input' type="text" name='username' placeholder='Enter a unique username' />
+         <input onChange={(e) => setUserName(e.target.value)} value={userName} className='input' type="text" name='username' placeholder='Enter a unique username' />
         </div>
 
         <div className='group'>
          <HiOutlineMail className='signup-icon' />
-         <input className='input' type='email' name='email' placeholder='Enter a valid email' />
+         <input onChange={(e) => setEmail(e.target.value)} value={email} className='input' type='email' name='email' placeholder='Enter a valid email' />
         </div>
 
         <div className='group'>
          <HiOutlineLockClosed className='signup-icon' />
-         <input className='input' type='password' name='password' placeholder='Enter a secret password' />
+         <input onChange={(e) => setPassword(e.target.value)} value={password} className='input' type='password' name='password' placeholder='Enter a secret password' />
         </div>
-        
+
         <p className='signup-terms-link'>
           By signing up you agree to our <Link to='/terms'> <strong> terms </strong> and <strong> conditions </strong> </Link>
         </p>
 
-        <button className='signup-button'>
+        <button onClick={handleSignup} className='signup-button'>
          Signup
         </button>
 
@@ -58,8 +91,8 @@ const SignupPage = () => {
         <div className='google-bar'>
           <h2> Google </h2>
         </div>
-        
-      </form> 
+
+      </form>
      </div>
     </>
   )
