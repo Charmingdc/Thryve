@@ -8,10 +8,11 @@ import LoginPage from './pages/LoginPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import SettingsPage from './pages/SettingsPage';
 import SignupPage from './pages/SignupPage';
-
+import AddJournalPage from './pages/AddJournalPage';
+import ViewJournalPage from './pages/ViewJournalPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './index.css';
-import ViewJournalPage from './pages/ViewJournalPage/ViewJournalPage.jsx';
+
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -26,6 +27,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='/home' element={<HomePage />} />
         <Route path='/setting' element={<SettingsPage />} />
         <Route path='/calendar' element={<CalendarPage />} />
+        <Route path='/add-journal' element={<AddJournalPage />} />
         <Route path='/view-journal' element={<ViewJournalPage />} />
       </Routes>
     </BrowserRouter>

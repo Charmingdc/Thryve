@@ -1,2 +1,3 @@
-import ViewJournalPage from "./ViewJournalPage";
+import ViewJournalPage from "./ViewJournalPage.jsx";
+
 export default ViewJournalPage;

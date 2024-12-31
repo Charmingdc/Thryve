@@ -4,6 +4,7 @@ import { HiFaceSmile } from "react-icons/hi2";
 import { FaChevronLeft } from "react-icons/fa";
 
 import SideBar from "../../components/Helpers/SideBar";
+import BottomNav from '../../components/Helpers/BottomNav';
 import "./ViewJournalPage.css";
 
 const ViewJournalPage = () => {
@@ -28,31 +29,32 @@ const ViewJournalPage = () => {
                         </div>
                     )}
                 </nav>
+
                 <div className="container">
-                <div className="view-journal-header">
-                    <div className="view-journal-icon">
+                  <div className="view-journal-header">
+                      <div className="view-journal-icon">
                         <HiFaceSmile size={30} />
-                    </div>
-                    <p className="feeling">Enjoyment</p>
-                    <div className="time">
-                        <span>Sun 24, 2024</span>
-                        <span>-</span>
-                        <span>12:00 AM</span>
-                    </div>
-                    <h3 className="title">
-                        Feeling happy today.
-                    </h3>
-                </div>
-                <div className="view-journal-body">
-                    <p className="entries">
-                        I woke up feeling happy today. I had a good night sleep and I am excited to start the day. I am looking forward to the things that I will do today. I am grateful for the good things that are happening in my life. I am happy and contented.
-                    </p>
-                    <div className="feeling-illustration">
-                        <HiFaceSmile size={500} />
-                    </div>
-                </div>
+                      </div>
+                      <p className="feeling">Enjoyment</p>
+                      <div className="time">
+                          <span>Sun 24, 2024</span>
+                          <span>-</span>
+                          <span>12:00 AM</span>
+                      </div>
+                      <h3 className="title">
+                          Feeling happy today.
+                      </h3>
+                  </div>
+                  
+                  <div className="view-journal-body">
+                      <p className="entries">
+                        nrnnf  I woke up feeling happy today. I had a good night sleep and I am excited to start the day. I am looking forward to the things that I will do today. I am grateful for the good things that are happening in my life. I am happy and contented.
+                      </p>
+                  </div>
                 </div>
             </div>
+
+            <BottomNav currentPage='home' />
         </div>
     )
 }
