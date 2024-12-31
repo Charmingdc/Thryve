@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { HiDotsVertical } from "react-icons/hi";
-import { HiArrowLeftCircle, HiFaceSmile } from "react-icons/hi2";
-import Sidebar from "../../components/Helpers/Sidebar/Sidebar";
+import { HiFaceSmile } from "react-icons/hi2";
+import { FaChevronLeft } from "react-icons/fa";
+
+import SideBar from "../../components/Helpers/SideBar";
 import "./ViewJournalPage.css";
 
 const ViewJournalPage = () => {
@@ -9,12 +11,16 @@ const ViewJournalPage = () => {
 
     return(
         <div className="view-journal-page">
-            <Sidebar />
+            <SideBar currentPage='home' />
+
             <div className="view-journal-container">
                 <nav className="nav-something">
-                    <HiArrowLeftCircle className='topnav-icon' onClick={() => navigate(-1)} />
+                   <div className='topnav-icon-holder'>
+                     <FaChevronLeft className='icon' onClick={() => navigate(-1)} />
+                    </div>
+
                     <h1> Journal Detail </h1>
-                    <HiDotsVertical className="topnav-icon" size={24} onClick={() => setShowOptions(prevState => !prevState)} />
+                    <HiDotsVertical className="topnav-icon" size={26} onClick={() => setShowOptions(prevState => !prevState)} />
                     {showOptions && (
                         <div className="options-menu">
                             <button className="option-button" style={{color: "var(--text-color)"}}>Edit</button>
