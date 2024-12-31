@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Topnavbar from '../../components/Helpers/Topnavbar';
 import SideBar from '../../components/Helpers/SideBar';
+import JournalActionTab from '../../components/Helpers/JournalActionTab';
 import './Style.css';
 
 
@@ -15,16 +16,22 @@ const AddJournalPage = () => {
       <div className='add-journal-page'>
         <Topnavbar currentPageName='New Journal' />
 
-        <input 
-          className='title-input' 
-          type='text'
-          placeholder='Untitled'
-          value={titleInput} />
+        <div className='inputs-container'>
+          <input 
+            className='title-input' 
+            type='text'
+            placeholder='Untitled'
+            value={titleInput}
+            onChange={(e) => setTitleInput(e.target.value)} />
         
-        <textarea 
-          className='main-input'
-          placeholder='Write your journal here'
-          value={mainInput} />
+          <textarea 
+            className='main-input'
+            placeholder='Write your journal content here'
+            value={mainInput}
+            onChange={(e) => setMainInput(e.target.value)} />
+        </div>
+
+        <JournalActionTab />
       </div>
     </main>
    </>

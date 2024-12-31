@@ -7,15 +7,13 @@ const Topnavbar = ({currentPageName}) => {
   const navigate = useNavigate();
 
   return (
-    <>
-     <div className='topnav'>
+     <nav className='topnav'>
        <div className='topnav-icon-holder' onClick={() => navigate(-1)}>
          <FaChevronLeft className='icon' />
        </div>
            
        <h1> {currentPageName} </h1>
-     </div>
-    </> 
+     </nav>
   )
 }
 
