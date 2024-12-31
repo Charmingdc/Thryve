@@ -8,11 +8,11 @@
 }
 
 .view-journal-container {
+    width: 75%;
+    height: 100%;
     padding: 2rem;
     padding-bottom: 5rem;
     position: absolute;
-    width: 75%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center !important;
@@ -22,6 +22,13 @@
     overflow-y: auto;
     margin-top: 4rem;
     scrollbar-width: none;
+}
+
+.view-journal-container .container {
+   padding: 2rem 1rem;
+   background-color: var(--shade);
+   border-radius: 1rem;
+   margin-top: 2rem;
 }
 
 .view-journal-container .view-journal-header {
@@ -34,36 +41,36 @@
     gap: 1rem;
 }
 
-.view-journal-icon {
-    width: 3.4rem;
-    height: 3.4rem;
-    background-color: rgba(181, 127, 239);
+.ellipsis-icon {
+    width: 2.2rem;
+    height: 2.2rem;
     display: flex;
-    justify-content: center;
+    fill: var(--primary-color);
+}
+
+.mood-icon-holder {
+    width: 4rem;
+    height: 4rem;
+    display: flex;
     align-items: center;
+    justify-content: center;
+    background-color: var(--secondary-color);
     border-radius: 50%;
-    padding: 1rem;
 }
 
 .view-journal-header .time {
     display: flex;
     justify-content: space-evenly;
-    width: 25%;
+    font-size: .9rem;
+    min-width: 15rem;
+    width: auto;
 }
 
 .view-journal-header .feeling {
     padding: 0.5rem 1rem;
     border-radius: 50px;
-    border: 1px solid var(--shade);
+    border: 1px solid var(--secondary-color);
     font-size: 15px;
-}
-
-.feeling-illustration {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    background-color: var(--shade);
 }
 
 .view-journal-body {
@@ -74,29 +81,28 @@
 }
 
 .nav-something {
+    width: 70%;
+    position: fixed;
+    top: 0%;
     display: flex;
     justify-content: space-between;
-    padding: 1rem 0;
-    width: 75%;
     align-items: center;
-    position: fixed;
-    top: 0;
-    right: 0;
+    padding: 1rem;
 }
 
 .options-menu {
     position: absolute;
     top: 4rem;
     right: 1rem;
-    background-color: var(--shade);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    z-index: 1001;
+    z-index: 10;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     padding: 0.5rem 0;
     color: var(--text-color);
+    background-color: var(--shade);
+    border-radius: .8rem;
+    border: 0.1rem solid var(--bg);
 }
 
 .option-button {
@@ -112,13 +118,17 @@
     background-color: var(--shade);
 }
 
+
+
 @media (max-width: 726px) {
     .view-journal-container {
         width: 100%;
     }
 
     .nav-something {
-        width: 100%;
+        width: 95%;
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
 
