@@ -8,7 +8,7 @@ import SignupPage from './pages/SignupPage';
 import HomePage from './pages/HomePage';
 import SettingsPage from './pages/SettingsPage';
 import CalendarPage from './pages/CalendarPage';
-
+import AddJournalPage from './pages/AddJournalPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './index.css';
 
@@ -25,6 +25,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='/home' element={<HomePage />} />
         <Route path='/setting' element={<SettingsPage />} />
         <Route path='/calendar' element={<CalendarPage />} />
+        <Route path='/add-journal' element={<AddJournalPage />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

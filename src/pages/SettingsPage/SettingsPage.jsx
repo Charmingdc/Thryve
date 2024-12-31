@@ -9,6 +9,7 @@ import {
   HiOutlineMail,
   HiOutlineLogout 
 } from "react-icons/hi";
+import { IoToggleOutline } from "react-icons/io5";
 import Topnavbar from '../../components/Helpers/Topnavbar';
 import SideBar from '../../components/Helpers/SideBar';
 import BottomNav from '../../components/Helpers/BottomNav';
@@ -63,9 +64,9 @@ const SettingsPage = () => {
 
         <div>
           <div className='icon-holder'>
-            <HiOutlineDocumentText className='icon' />
+            <IoToggleOutline className='icon' />
           </div>
-          <h3> Terms </h3>
+          <h3> Change theme </h3>
         </div>
 
         <div>
