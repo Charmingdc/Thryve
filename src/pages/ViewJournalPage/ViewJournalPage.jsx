@@ -1,7 +1,7 @@
 import { useState } from "react";
+import { FaChevronLeft } from "react-icons/fa";
 import { HiDotsVertical } from "react-icons/hi";
 import { HiFaceSmile } from "react-icons/hi2";
-import { FaChevronLeft } from "react-icons/fa";
 
 import SideBar from "../../components/Helpers/SideBar";
 import BottomNav from '../../components/Helpers/BottomNav';
@@ -29,10 +29,9 @@ const ViewJournalPage = () => {
                         </div>
                     )}
                 </nav>
-
                 <div className="container">
-                  <div className="view-journal-header">
-                      <div className="view-journal-icon">
+                <div className="view-journal-header">
+                    <div className="view-journal-icon">
                         <HiFaceSmile size={30} />
                       </div>
                       <p className="feeling">Enjoyment</p>

@@ -8,7 +8,7 @@
 }
 
 .view-journal-container {
-    padding: 2rem;
+    padding: 0;
     padding-bottom: 5rem;
     position: absolute;
     width: 75%;
@@ -23,6 +23,8 @@
     margin-top: 4rem;
     scrollbar-width: none;
 }
+
+
 
 .view-journal-container .view-journal-header {
     display: flex;
@@ -128,11 +130,6 @@
 
     .nav-something {
         width: 90%;
-    }
-
-    .view-journal-body {
-        align-self: center;
-        width: 80%;
     }
 }
 
