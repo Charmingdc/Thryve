@@ -23,7 +23,7 @@ const SignupPage = () => {
     const error = validateSignupInput(email, password, userName);
     try {
       if (error) throw new Error(error);
-      if(userSnap) throw new Error("Username have already been taken")
+      if(userSnap.exists()) throw new Error("Username have already been taken")
       const userInfo = await createUserWithEmailAndPassword(auth, email, password);
       const user = userInfo.user;
       setUserId(userInfo.user.uid);

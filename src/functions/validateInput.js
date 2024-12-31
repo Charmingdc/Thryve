@@ -13,3 +13,9 @@ export const validateSignupInput = (email, password, userName) => {
   }
   return null; // No validation errors
 };
+export const validateLogInInput = (username, password) => {
+  if (!username) return "invalid email";
+  if (username.length < 4) return "Invalid username";
+  if (password.length < 6) return "Invalid password";
+  return null;
+}

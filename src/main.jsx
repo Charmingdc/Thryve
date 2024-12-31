@@ -32,7 +32,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='/add-journal' element={<AddJournalPage />} />
         <Route path='/view-journal' element={<ViewJournalPage />} />
       </Routes>
-      <ToastContainer />
+      <ToastContainer position="bottom-right" />
     </BrowserRouter>
   </React.StrictMode>,
 )
