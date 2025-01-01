@@ -97,8 +97,8 @@ const handleGoogleLogin = async (e) => {
     }
 
     // Check if user exists in Firestore
-    const userEmail = user.email;
-    const docRef = doc(db, 'users', userEmail.toLowerCase());
+    const userName = user.email.split('@')[0].toLowerCase();;
+    const docRef = doc(db, 'users', userName.toLowerCase());
     const userSnap = await getDoc(docRef);
 
     if (!userSnap.exists()) {

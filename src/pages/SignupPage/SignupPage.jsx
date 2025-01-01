@@ -108,7 +108,7 @@ const SignupPage = () => {
       const userName = user.email.split('@')[0].toLowerCase();
 
       // check if user already exist in database
-      const docRef = doc(db, 'users', userName);
+      const docRef = doc(db, 'users', userName.toLowerCase());
       const userSnap = await getDoc(docRef);
 
       // throw an error if it is
