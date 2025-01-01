@@ -1,24 +1,46 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import LandingPage from './pages/LandingPage';
-import LoginPage from './pages/LoginPage';
-import SignupPage from './pages/SignupPage';
-import ErrorPage from './pages/ErrorPage';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Bounce, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import App from './App.jsx';
+import './index.css';
+import AddJournalPage from './pages/AddJournalPage';
+import CalendarPage from './pages/CalendarPage';
+import ErrorPage from './pages/ErrorPage';
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import ResetPasswordPage from './pages/ResetPasswordPage';
+import SettingsPage from './pages/SettingsPage';
+import SignupPage from './pages/SignupPage';
+import ViewJournalPage from './pages/ViewJournalPage';
 
-import './index.css'
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<App />} />
-        <Route path='/landing' element={<LandingPage />} />
+        <Route path='*' element={<ErrorPage />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/signup' element={<SignupPage />} />
-        <Route path='*' element={<ErrorPage />} />
+        <Route path='/reset-password' element={<ResetPasswordPage />} />
+        <Route path='/home' element={<HomePage />} />
+        <Route path='/setting' element={<SettingsPage />} />
+        <Route path='/calendar' element={<CalendarPage />} />
+        <Route path='/add-journal' element={<AddJournalPage />} />
+        <Route path='/view-journal' element={<ViewJournalPage />} />
       </Routes>
+      <ToastContainer 
+        position="top-center"
+        autoClose={3000}
+        newestOnTop
+        closeOnClick
+        pauseOnFocusLoss
+        pauseOnHover={true}
+        theme='colored'
+        transition={Bounce} />
     </BrowserRouter>
   </React.StrictMode>,
-) 
+)

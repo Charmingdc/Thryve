@@ -8,32 +8,31 @@
  font-family: 'Poppins', Sans-Serif;
 }
 
-body {
- width: 100vw;
- min-height: 100vh;
- display: flex;
- align-items: center;
- justify-content: center;
- color: var(--text-color);
- background: var(--bg);
-}
-
 .signup-container {
- width: 100vw;
- height: 100vh;
- display: flex;
- flex-direction: column;
- align-items: center;
- justify-content: center;
- margin-top: -1.5rem;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: -1.5rem;
 }
 
 .signup-container a,
 .signup-container a:active,
 .signup-container a:hover {
- color: var(--text-color);
- text-decoration: none;
- width: fit-content;
+  color: var(--text-color);
+  text-decoration: none;
+  width: fit-content;
+}
+ 
+.signup-container .loader {
+  border: 4px solid rgb(250, 250, 250);
+  border-left-color: transparent;
+  border-radius: 50%;
+  width: 1.6rem;
+  height: 1.6rem;
+  animation: spin89345 1s linear infinite;
 }
 
 .img-holder {
@@ -125,7 +124,7 @@ form > h1 {
 
 .signup-terms-link {
  font-size: .9rem;
- margin: 0 0 0 .5rem;
+ margin: 0 0 .5rem .5rem;
 }
 .signup-terms-link a strong {
   color: var(--primary-color);

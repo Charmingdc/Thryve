@@ -8,15 +8,6 @@
     font-family: 'Poppins', Sans-Serif;
 }
 
-body {
-    width: 100vw;
-    min-height: 90vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--bg);
-}
-
 .login-container {
     width: 100vw;
     height: 100vh;
@@ -35,6 +26,16 @@ body {
     color: var(--text-color);
     text-decoration: none;
     width: fit-content;
+}
+
+/* From Uiverse.io by Fernando-sv */ 
+.loader {
+   border: 4px solid rgb(250, 250, 250);
+   border-left-color: transparent;
+   border-radius: 50%;
+   width: 1.6rem;
+   height: 1.6rem;
+   animation: spin89345 1s linear infinite;
 }
 
 .img-holder {

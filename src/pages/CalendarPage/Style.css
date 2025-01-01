@@ -1,0 +1,69 @@
+.calendar-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  overflow-y: auto;
+  margin-bottom: 6rem;
+}
+
+.calendar-page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.calendar-wrapper {
+  width: 86%;
+  min-height: 60dvh;
+  background-color: var(--shade);
+  border-radius: 1rem;
+}
+
+.streak-box {
+  width: 86%;
+  min-height: 26dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2dvh 4%;
+  background-color: var(--shade);
+  border-radius: 1rem;
+  margin: 1rem 0 4rem 0;
+}
+
+.streak-box-text {
+  height: fit-content;
+  padding-bottom: .4rem;
+}
+
+ .streaks {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+ }
+
+ .streaks > div {
+  width: 100%;
+  height: 100%;
+  background-color: var(--secondary-color);
+  border-radius: 1rem;
+ }
+
+
+
+@media (min-width: 726px) {
+  .calendar-page {
+    width: 75%;
+    position: absolute;
+    right: 0;
+    overflow-y: auto;
+    margin-top: 2rem;
+  }
+}

@@ -7,10 +7,11 @@ const FeaturesSection = () => {
             <div className="container">
                 <div className="feature">
                     <div className="image">
-                        <img src="src/assets/LandingPageAssets/tangled-idea.png" className="" />
+                        <img src="/src/assets/LandingPageAssets/happy-sun-cuate.png" className="" />
                     </div>
-                    <h2>Clear your tangled mind</h2>
-                    <p>Organize your thoughts and bring clarity to your mind.</p>
+                    <h2> Express your gratitude </h2>
+                    <p> Celebrate each positive moment in your life and let gratitude illuminate your journey.
+                    </p>
                 </div>
                 <div className="feature">
                     <div className="image">

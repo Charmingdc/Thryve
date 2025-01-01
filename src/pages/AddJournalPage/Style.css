@@ -1,0 +1,65 @@
+.add-journal-container {
+  width: 100vw;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  margin-bottom: 6rem;
+}
+
+.add-journal-page {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inputs-container {
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.inputs-container .title-input {
+  width: 90%;
+  height: 20%;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-color);
+  background-color: transparent;
+  border: 0.1rem solid transparent;
+  box-shadow: none !important;
+}
+.inputs-container .title-input:focus {
+  outline: none;
+  box-shadow: none;
+  border: 0.1rem solid transparent;
+}
+
+.inputs-container .main-input {
+  width: 90%;
+  height: 70%;
+  padding: 5% 0;
+  color: var(--text-color);
+  background-color: transparent;
+  border: none;
+  border-top: 0.1rem solid var(--shade);
+}
+.inputs-container .main-input:focus {
+  outline: none;
+}
+
+
+@media (min-width: 726px) {
+  .add-journal-page {
+    width: 75%;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    margin-top: -2rem;
+  }
+}

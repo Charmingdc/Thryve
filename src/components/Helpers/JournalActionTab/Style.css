@@ -1,0 +1,43 @@
+.journal-actiontab {
+  width: 80%;
+  height: 4rem;
+  position: fixed;
+  bottom: 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: var(--shade);
+  border-radius: 3rem;
+}
+
+.journal-actiontab button {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+}
+
+.journal-actiontab button .icon {
+  width: 1.8rem;
+  height: 1.8rem;
+  fill: var(--text-color);
+  transition: 300ms;
+}
+
+.journal-actiontab button:hover .icon {
+  fill: var(--secondary-color);
+}
+
+.journal-actiontab button:last-of-type .icon {
+  fill: var(--primary-color);
+}
+
+
+@media (min-width: 726px) {
+  .journal-actiontab {
+    width: 60%;
+  }
+}

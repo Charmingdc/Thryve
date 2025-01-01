@@ -1,0 +1,28 @@
+.bottom-navbar {
+    width: 86%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    padding: .8rem 2rem;
+    transform: translateX(-50%);
+    background-color: var(--secondary-color);
+    border: 0.040rem double var(--secondary-color);
+    border-radius: 3rem;
+    backdrop-filter: blur(10px);
+}
+
+.bottom-navbar a {
+    text-decoration: none;
+}
+
+
+
+
+@media (min-width: 726px) {
+  .bottom-navbar {
+    display: none;
+  }
+}

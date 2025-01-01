@@ -1,0 +1,141 @@
+.setting-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  color: var(--text-color);
+}
+
+.setting-page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.setting-user-info {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.setting-userdp-holder {
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 1rem;
+}
+
+.setting-userdp {
+  width: 10rem;
+  height: 10rem;
+  object-fit: cover;
+  background-color: var(--shade);
+  filter: opacity(1);
+  border-radius: 50%;
+  margin: 1.5rem 0 1rem 0;
+  animation: dim 1s linear infinite;
+}
+
+.change-dp-button {
+  width: 3rem;
+  height: 3rem;
+  position: absolute;
+  right: 10%;
+  bottom: 14%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 50%;
+  backdrop-filter: blur(5px);
+  transition: 200ms;
+}
+
+.change-dp-button .icon {
+  width: 1.6rem;
+  height: 1.6rem;
+  stroke: var(--primary-color);
+}
+
+.setting-container .username-holder {
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.setting-container .username-holder > h1 {
+  margin: 0 1rem;
+}
+
+.setting-container .username-holder > .icon {
+  width: 1.8rem;
+  height: 1.8rem;
+  fill: var(--primary-color);
+  transition: 200ms;
+}
+
+.setting-container .username-holder > .icon:hover {
+  fill: var(--primary-color);
+}
+
+.settings-menu {
+  width: 85%;
+  height: 30rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2.5rem 0 10rem 0;
+}
+
+.settings-menu > div {
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  padding: 2rem 0;
+  padding-bottom: 2.5rem;
+  border-bottom: 0.1rem solid var(--shade);
+  margin: .5rem 0;
+}
+
+.settings-menu > div > .icon-holder {
+  width: 3.2rem;
+  height: 3.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--secondary-color);
+  border-radius: 50%;
+  margin-right: .8rem;
+}
+
+.settings-menu > div > .icon-holder .icon {
+  width: 1.6rem;
+  height: 1.6rem;
+  stroke: var(--primary-color);
+}
+.settings-menu > div:first-of-type .icon {
+  fill: var(--primary-color);
+}
+
+
+
+
+
+@media (min-width: 726px) {
+  .setting-page {
+    width: 75%;
+    position: absolute;
+    right: 0;
+  }
+}
