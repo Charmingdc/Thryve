@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import WelcomeImg from '../../assets/illustrations/welcome-amico.png';
 import Loader from '../../components/Helpers/Loader';
 
+import { GoogleAuthProvider } from 'firebase/auth/web-extension';
 import { auth, db } from '../../firebase/firebase-init';
 import { formatError } from '../../functions/formatFirebaseError';
 import { validateLogInInput } from '../../functions/validateInput';
@@ -26,7 +27,7 @@ const LoginPage = () => {
       const userSnap = await getDoc(docRef);
 
       // check if hsern exist
-      // then get user email else return 
+      // then get user email else return
       if (userSnap.exists()) {
         return userSnap.data().email;
       } else {
@@ -37,12 +38,12 @@ const LoginPage = () => {
       return null;
     }
   }
-  
+
   const handleLogIn = async (e) => {
     e.preventDefault();
 
     try {
-      // get response from validate inputs functions 
+      // get response from validate inputs functions
       const error = validateLogInInput(userName, password);
       if (error) throw new Error(error);
 
@@ -52,9 +53,9 @@ const LoginPage = () => {
       // get user email
       const email = await getEmailFromUserName(userName);
 
-      // display an error is username is not in the database 
+      // display an error is username is not in the database
       if (!email) throw new Error("Incorrect username");
-      
+
       // sign user in
       await signInWithEmailAndPassword(auth, email, password);
 
@@ -80,6 +81,29 @@ const LoginPage = () => {
     }
   }
 
+  const handleGoogleLogin = async (e) => {
+    e.preventDefault();
+    const provider = new GoogleAuthProvider();
+    try {
+      toast.info("Wait while we sign you in")
+      const userInfo = await signInWithPopup(auth, provider);
+      const user = userInfo.user;
+      if (user) {
+        toast.success("Welcome back");
+      } else {
+        toast.error("An error occured");
+      }
+    } catch (e) {
+      console.log(e.message);
+      if (e.message.startsWith('Firebase')) {
+        const errorMessage = await formatError(e.message);
+        toast.error(errorMessage);
+        return;
+      }
+
+      toast.error(e.message);
+    }
+  }
 
   return (
    <>
@@ -124,9 +148,9 @@ const LoginPage = () => {
           Or Login with
         </div>
 
-        <div className='google-bar'>
+        <button className='google-bar' onClick={handleGoogleLogin}>
           <h2> Google </h2>
-        </div>
+        </button>
       </form>
     </div>
    </>

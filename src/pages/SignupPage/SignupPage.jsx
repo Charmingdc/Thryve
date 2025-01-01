@@ -1,10 +1,15 @@
-import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from 'firebase/auth';
-import { GoogleAuthProvider } from 'firebase/auth/web-extension';
+import {
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  sendEmailVerification,
+  signInWithPopup,
+  updateProfile
+} from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { useState } from 'react';
 import { HiOutlineMail } from "react-icons/hi";
 import { HiOutlineLockClosed, HiOutlineUser } from "react-icons/hi2";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import JournalRafiki from '../../assets/illustrations/journal-rafiki.png';
@@ -18,6 +23,7 @@ import './SignupPage.css';
 
 
 const SignupPage = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -91,21 +97,27 @@ const SignupPage = () => {
     }
   }
 
-  const handleGoogleSignup = async () => {
+  const handleGoogleSignup = async (e) => {
+    e.preventDefault();
     const provider = new GoogleAuthProvider();
+
     try {
-      const result = await auth.signInWithPopup(provider);
+      const result = await signInWithPopup(auth, provider);
+      toast.info("Please wait while we sign you up");
       const user = result.user;
+      const userName = user.email.split('@')[0].toLowerCase();
 
       // check if user already exist in database
-      const docRef = doc(db, 'users', user.displayName.toLowerCase());
+      const docRef = doc(db, 'users', userName);
       const userSnap = await getDoc(docRef);
 
       // throw an error if it is
-      if(userSnap.exists()) throw new Error("Username have already been taken");
+      if (userSnap.exists()) {
+        toast.warning("You already have an account, please login");
+        return navigate('/login');
+      }
 
       // create user object
-      const userName = user.email.split('@')[0].toLowerCase();
       const userData = {
         userName: userName,
         email: user.email,
@@ -119,6 +131,7 @@ const SignupPage = () => {
       toast.success("Signed up successfully");
     } catch (e) {
       console.log(e.message);
+      console.log(e);
 
       // display error toast
       if (e.message.startsWith('Firebase')) {
@@ -180,9 +193,9 @@ const SignupPage = () => {
          Or Signup with
         </div>
 
-        <div className='google-bar'>
+        <button onClick={handleGoogleSignup} className='google-bar'>
           <h2> Google </h2>
-        </div>
+        </button>
 
       </form>
      </div>

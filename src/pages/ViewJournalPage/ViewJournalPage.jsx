@@ -1,7 +1,7 @@
 import { useState } from "react";
+import { FaChevronLeft } from "react-icons/fa6";
 import { HiDotsVertical } from "react-icons/hi";
 import { HiFaceSmile } from "react-icons/hi2";
-import { FaChevronLeft } from "react-icons/fa6";
 
 import SideBar from "../../components/Helpers/SideBar";
 import "./ViewJournalPage.css";
@@ -45,7 +45,7 @@ const ViewJournalPage = () => {
 
                     <h3 className="title">
                         Feeling happy today.
-                    </h3> 
+                    </h3>
                   </div>
 
                   <div className="view-journal-body">
