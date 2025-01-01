@@ -4,7 +4,10 @@ import { useState } from 'react';
 import { HiOutlineLockClosed, HiOutlineUser } from "react-icons/hi2";
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+
 import WelcomeImg from '../../assets/illustrations/welcome-amico.png';
+import Loader from '../../components/Helpers/Loader';
+
 import { auth, db } from '../../firebase/firebase-init';
 import { formatError } from '../../functions/formatFirebaseError';
 import { validateLogInInput } from '../../functions/validateInput';
@@ -114,7 +117,7 @@ const LoginPage = () => {
         </Link>
 
         <button onClick={handleLogIn} className='login-button'>
-          {loading ? <div className='loader'></div> : 'LogIn'}
+          {loading ? <Loader /> : 'LogIn'}
         </button>
 
         <div className="alternative">

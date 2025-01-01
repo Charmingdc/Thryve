@@ -5,7 +5,10 @@ import { HiOutlineMail } from "react-icons/hi";
 import { HiOutlineLockClosed, HiOutlineUser } from "react-icons/hi2";
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+
 import JournalRafiki from '../../assets/illustrations/journal-rafiki.png';
+import Loader from '../../components/Helpers/Loader';
+
 import { auth, db } from '../../firebase/firebase-init';
 import { formatError } from '../../functions/formatFirebaseError';
 import { validateSignupInput } from '../../functions/validateInput';
@@ -130,7 +133,7 @@ const SignupPage = () => {
         </p>
 
         <button onClick={handleSignup} className='signup-button'>
-          {loading ? <div className='loader'></div> : 'Signup'}
+          {loading ? <Loader /> : 'Signup'}
         </button>
 
         <div className='alternative'>
