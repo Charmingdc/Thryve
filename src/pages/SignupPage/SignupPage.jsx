@@ -1,4 +1,5 @@
 import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from 'firebase/auth';
+import { GoogleAuthProvider } from 'firebase/auth/web-extension';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { useState } from 'react';
 import { HiOutlineMail } from "react-icons/hi";
@@ -23,13 +24,13 @@ const SignupPage = () => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    // await validate input response    
+    // await validate input response
     const error = validateSignupInput(userName, password, email);
 
     try {
       // throw an error if there's an error when validating input
       if (error) throw new Error(error);
-      
+
       // set loading state to true
       setLoading(true);
 
@@ -47,14 +48,14 @@ const SignupPage = () => {
       const user = userInfo.user;
       setUserId(userInfo.user.uid);
 
-      // create user object 
+      // create user object
       const userData = {
         userName: userName.toLowerCase(),
         email: email,
         userId: userId,
       }
 
-      // save user info to database 
+      // save user info to database
       await setDoc(doc(db, 'users', userName.toLowerCase()), userData);
 
       // update user display name
@@ -67,7 +68,7 @@ const SignupPage = () => {
       setUserName('');
       setPassword('');
       setEmail('');
-      
+
       // show success toast
       toast.success("Signed up successfully");
     } catch (e) {
@@ -87,6 +88,45 @@ const SignupPage = () => {
     }
   }
 
+  const handleGoogleSignup = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      const result = await auth.signInWithPopup(provider);
+      const user = result.user;
+
+      // check if user already exist in database
+      const docRef = doc(db, 'users', user.displayName.toLowerCase());
+      const userSnap = await getDoc(docRef);
+
+      // throw an error if it is
+      if(userSnap.exists()) throw new Error("Username have already been taken");
+
+      // create user object
+      const userName = user.email.split('@')[0].toLowerCase();
+      const userData = {
+        userName: userName,
+        email: user.email,
+        userId: user.uid,
+      }
+
+      // save user info to database
+      await setDoc(doc(db, 'users', userName), userData);
+
+      // show success toast
+      toast.success("Signed up successfully");
+    } catch (e) {
+      console.log(e.message);
+
+      // display error toast
+      if (e.message.startsWith('Firebase')) {
+        const errorMessage = await formatError(e.message);
+        toast.error(errorMessage);
+        return;
+      }
+
+      toast.error(e.message);
+    }
+  }
 
   return (
     <>
