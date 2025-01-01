@@ -3,7 +3,8 @@ import { doc, getDoc } from 'firebase/firestore';
 import { useState } from 'react';
 import { HiOutlineLockClosed, HiOutlineUser } from "react-icons/hi2";
 import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
+
+import { toast } from 'sonner';
 
 import WelcomeImg from '../../assets/illustrations/welcome-amico.png';
 import Loader from '../../components/Helpers/Loader';

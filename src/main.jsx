@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Bounce, ToastContainer } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css";
+
+import { Toaster } from 'sonner';
+
 import App from './App.jsx';
 import './index.css';
 import AddJournalPage from './pages/AddJournalPage';
@@ -32,15 +33,18 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='/add-journal' element={<AddJournalPage />} />
         <Route path='/view-journal' element={<ViewJournalPage />} />
       </Routes>
-      <ToastContainer 
-        position="top-center"
-        autoClose={3000}
-        newestOnTop
-        closeOnClick
-        pauseOnFocusLoss
-        pauseOnHover={true}
-        theme='colored'
-        transition={Bounce} />
+      <Toaster 
+        position='top-center'
+        closeButton={true}
+        visibleToasts={2}
+        theme='system'
+        richColors={true}
+        toastOptions={{
+          style: {
+            padding: '1rem',
+            borderRadius: '3rem',
+          }
+        }} />
     </BrowserRouter>
   </React.StrictMode>,
 )

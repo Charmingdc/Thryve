@@ -154,7 +154,9 @@ input:hover {
     font-size: 1rem;
     font-weight: 400;
     padding: .4rem 5%;
-    border: 0.1rem solid var(--secondary-color);
+    color: var(---text-color);
+    background-color: var(--primary-color);
+    border: none;
     border-radius: 3rem;
     margin: 1rem 0;
 }

@@ -10,7 +10,8 @@ import { useState } from 'react';
 import { HiOutlineMail } from "react-icons/hi";
 import { HiOutlineLockClosed, HiOutlineUser } from "react-icons/hi2";
 import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+
+import { toast } from 'sonner';
 
 import JournalRafiki from '../../assets/illustrations/journal-rafiki.png';
 import Loader from '../../components/Helpers/Loader';

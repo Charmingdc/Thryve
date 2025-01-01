@@ -3,7 +3,7 @@ import { auth } from '../../firebase/firebase-init';
 
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { toast } from 'sonner';
 import { HiOutlineMail } from "react-icons/hi";
 import ForgotPasswordImg from '../../assets/illustrations/forgot-password.png';
 import Loader from '../../components/Helpers/Loader';
