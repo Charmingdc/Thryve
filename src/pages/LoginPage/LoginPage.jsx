@@ -1,4 +1,4 @@
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { useState } from 'react';
 import { HiOutlineLockClosed, HiOutlineUser } from "react-icons/hi2";
@@ -8,7 +8,6 @@ import { toast } from 'react-toastify';
 import WelcomeImg from '../../assets/illustrations/welcome-amico.png';
 import Loader from '../../components/Helpers/Loader';
 
-import { GoogleAuthProvider } from 'firebase/auth/web-extension';
 import { auth, db } from '../../firebase/firebase-init';
 import { formatError } from '../../functions/formatFirebaseError';
 import { validateLogInInput } from '../../functions/validateInput';
@@ -81,29 +80,48 @@ const LoginPage = () => {
     }
   }
 
-  const handleGoogleLogin = async (e) => {
-    e.preventDefault();
-    const provider = new GoogleAuthProvider();
-    try {
-      toast.info("Wait while we sign you in")
-      const userInfo = await signInWithPopup(auth, provider);
-      const user = userInfo.user;
-      if (user) {
-        toast.success("Welcome back");
-      } else {
-        toast.error("An error occured");
-      }
-    } catch (e) {
-      console.log(e.message);
-      if (e.message.startsWith('Firebase')) {
-        const errorMessage = await formatError(e.message);
-        toast.error(errorMessage);
-        return;
-      }
+const handleGoogleLogin = async (e) => {
+  e.preventDefault();
+  const provider = new GoogleAuthProvider();
 
-      toast.error(e.message);
+  try {
+    toast.info("Wait while we sign you in");
+
+    // Authenticate with Google and retrieve user info
+    const userInfo = await signInWithPopup(auth, provider);
+    const user = userInfo.user;
+
+    if (!user) {
+      toast.error("An error occurred during authentication");
+      return;
     }
+
+    // Check if user exists in Firestore
+    const userEmail = user.email;
+    const docRef = doc(db, 'users', userEmail.toLowerCase());
+    const userSnap = await getDoc(docRef);
+
+    if (!userSnap.exists()) {
+      // If user does not exist, sign out and throw error
+      await auth.signOut();
+      throw new Error("No account found with this Google account. Please sign up first.");
+    }
+
+    // User exists, proceed with login
+    toast.success("Welcome back!");
+  } catch (e) {
+    console.error(e.message);
+
+    if (e.message.startsWith('Firebase')) {
+      const errorMessage = await formatError(e.message);
+      toast.error(errorMessage);
+      return;
+    }
+
+    toast.error(e.message);
   }
+};
+
 
   return (
    <>
