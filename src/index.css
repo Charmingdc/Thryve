@@ -19,6 +19,17 @@ body {
 
 
 /** animations keyframs */
+
+
+@keyframes spin89345 {
+  0% {
+    transform: rotate(0deg);
+ }
+ 100% {
+    transform: rotate(360deg);
+ }
+}
+
 @keyframes dim {
   50% {
     filter: opacity(0.2);

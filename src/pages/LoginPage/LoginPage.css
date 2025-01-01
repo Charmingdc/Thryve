@@ -28,6 +28,16 @@
     width: fit-content;
 }
 
+/* From Uiverse.io by Fernando-sv */ 
+.loader {
+   border: 4px solid rgb(250, 250, 250);
+   border-left-color: transparent;
+   border-radius: 50%;
+   width: 1.6rem;
+   height: 1.6rem;
+   animation: spin89345 1s linear infinite;
+}
+
 .img-holder {
     display: none;
 }

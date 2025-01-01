@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+import { Bounce, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import App from './App.jsx';
 import './index.css';
@@ -32,7 +32,15 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='/add-journal' element={<AddJournalPage />} />
         <Route path='/view-journal' element={<ViewJournalPage />} />
       </Routes>
-      <ToastContainer position="bottom-right" />
+      <ToastContainer 
+        position="top-center"
+        autoClose={3000}
+        newestOnTop
+        closeOnClick
+        pauseOnFocusLoss
+        pauseOnHover={true}
+        theme='colored'
+        transition={Bounce} />
     </BrowserRouter>
   </React.StrictMode>,
 )
