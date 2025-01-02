@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { auth, db} from '../../firebase/firebase-init';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
@@ -6,23 +6,32 @@ import { onAuthStateChanged } from 'firebase/auth';
 
 import { toast } from 'sonner';
 import SpeechToText from '../../functions/speechToText';
+import validateJournal from '../../functions/validateJournal';
+
 import Topnavbar from '../../components/Helpers/Topnavbar';
 import SideBar from '../../components/Helpers/SideBar';
 import JournalActionTab from '../../components/Helpers/JournalActionTab';
+import MoodsBar from '../../components/Helpers/MoodsBar';
+
 import './Style.css';
-import speechToText from '../../functions/speechToText';
 
 
 const AddJournalPage = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [mood, setMood] = useState('');
+  const [showMoodBar, setShowMoodBar] = useState(false);
+  const [loading, setLoading] = useState(false);
+
 
   const writeWithVoice = async () => {
     try {
       toast.info('Voice text started');
 
+      // wait for speech transcript 
       const result = await SpeechToText();
       
+      // condition to check if user have finish speaking 
       if (result !== 'transcription endéd') {
         setContent((prev) => (
           prev ? `${prev} ${result}` : result
@@ -35,36 +44,42 @@ const AddJournalPage = () => {
     }
   }
 
+
   const clearContent = async () => {
+    // check if content is already empty
     if (content.trim() === '') {
       toast.error('Journal content is already empty');
       return;
     }
 
+    // clear journal content
     setContent('');
     toast.success('Journal content cleared');
   }
 
-  const addJournalMood = async () => {
-    alert('Set mood')
+
+  const addJournalMood = async (newMood) => {
+    // update state to display mood bar
+    setShowMoodBar(!showMoodBar);
+
+    try {
+      // update mood state
+      setMood(newMood);
+    } catch (error) {
+      console.error(error.message);
+    } 
   }
   
-
-  const validateJournal = async (title, content) => {
-    try {
-      if (title.trim() == '') return 'Please input your journal title';
-      if (content.trim() == '') return 'Empty journal content';
-    } catch (err) {
-      console.error(err.message + 'me')
-    }
-  }
-
+  
   const saveJournal = async () => {
     const validateErrors = await validateJournal(title, content);
     
     try {
       if (validateErrors) throw new Error(validateErrors);
+      if (!mood || mood === '') throw new Error('Please set a mood for this journal');
 
+      // display loading toast
+      const toastId = toast.loading('Saving your journal...');
       onAuthStateChanged(auth, async (user) => {
         try {
           // check if user is signed in
@@ -78,14 +93,18 @@ const AddJournalPage = () => {
 
           // define journal data structure 
           const journalData = {
-            title,
-            content,
+            journalTitle: title,
+            journalContent: content,
+            journalMood: mood,
             userId,
             createdAt: serverTimestamp()
           }
 
           // save journal
           await addDoc(journalRef, journalData);
+
+          // dismiss loading toast
+          toast.dismiss(toastId);
 
           // notify user of successfull adding of journal
           toast.success('Journal added successfully');
@@ -101,7 +120,10 @@ const AddJournalPage = () => {
     } catch (err)  {
       console.error(err.message)
       toast.error(err.message);
-    }  
+    } finally {
+      // dismiss loading toast
+      toast.dismiss(toastId);
+    }
   }
 
   const tabActions = {
@@ -111,7 +133,7 @@ const AddJournalPage = () => {
     saveJournal
   }
 
-
+  
   return (
    <>
     <main className='add-journal-container'>
@@ -135,6 +157,10 @@ const AddJournalPage = () => {
             onChange={(e) => setContent(e.target.value)} />
         </div>
 
+
+        {showMoodBar && (
+          <MoodsBar onMoodSelect={addJournalMood} />
+        )}
         <JournalActionTab actions={tabActions} />
       </div>
     </main>
