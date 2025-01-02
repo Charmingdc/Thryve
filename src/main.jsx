@@ -41,7 +41,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         richColors={true}
         toastOptions={{
           style: {
-            padding: '1rem',
+            padding: '.6rem',
             borderRadius: '3rem',
           }
         }} />
