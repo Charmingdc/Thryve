@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
-
+import { toast } from "sonner";
 import { db } from '../../firebase/firebase-init';
-import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { collection, onSnapshot, orderBy, query, where } from "firebase/firestore";
 import getUserId from '../../functions/getUserId';
 
 import SideBar from "../../components/Helpers/SideBar";
@@ -17,7 +17,6 @@ const HomePage = () => {
   const hasFetched = useRef(false);
   const [journals, setJournals] = useState([]);
   
-
 
   const getRandomQuote = async () => {
     try {
@@ -44,10 +43,12 @@ const HomePage = () => {
 
   useEffect(() => {
     const getJournals = async () => {
-      try {
+      try {  
         const userId = await getUserId();
+        if (!userId) return;
+
         const journalsRef = collection(db, 'journals');
-        const q = query(journalsRef, where('userId', '==', userId));
+        const q = query(journalsRef, where('userId', '==', userId), orderBy('createdAt', 'desc'));
 
         onSnapshot(q, (snapshot) => {
           let journalData = [];
@@ -57,16 +58,16 @@ const HomePage = () => {
             journalData.push(docData);
           });
 
+          
           setJournals(journalData);
         });
       } catch (err) {
         console.error(err.messsage);
       }
     }
-
+ 
     getJournals();
   }, []);
-
 
 
   useEffect(() => {
@@ -78,8 +79,9 @@ const HomePage = () => {
     // update hasFetched ref to true
     hasFetched.current = true;
   }, []);
- 
+  
 
+  
   return (
    <>
     <div className="home-page-container">
