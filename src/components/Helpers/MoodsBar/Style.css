@@ -17,7 +17,8 @@
   align-items: center;
   justify-content: center;
   background-color: var(--bg);
-  border: none;
+  object-fit: cover;
+  border: .1rem solid transparent;
   border-radius: 50%;
   margin-top: 0rem;
 }
@@ -28,8 +29,13 @@
   transition: 300ms;
 }
 
-.moods-bar button:hover .icon {
-  margin-top: -.5rem;
+.moods-bar button .icon:first-of-type {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.moods-bar button:hover {
+  border: .1rem solid var(--primary-color);
 }
 
 

@@ -5,7 +5,7 @@ import './Style.css';
 
 
 const JournalActionTab = ({actions}) => {
-  const {writeWithVoice, clearContent, addJournalMood, saveJournal} = actions;
+  const {writeWithVoice, clearContent, toggleMoodsBar, saveJournal} = actions;
 
 
   return (
@@ -18,7 +18,7 @@ const JournalActionTab = ({actions}) => {
         <VscClearAll className='icon' />
       </button>
 
-      <button onClick={addJournalMood}> 
+      <button onClick={toggleMoodsBar}> 
         <HiFaceSmile className='icon' />
       </button>
 

@@ -58,16 +58,17 @@ const AddJournalPage = () => {
   }
 
 
-  const addJournalMood = async (newMood) => {
-    // update state to display mood bar
-    setShowMoodBar(!showMoodBar);
-
+  const handleMoodUpdate = async (newMood) => {
     try {
       // update mood state
       setMood(newMood);
     } catch (error) {
-      console.error(error.message);
-    } 
+       console.error(error.message);
+    }
+  }
+  const toggleMoodsBar = async () => {
+    // update state to display mood bar
+    setShowMoodBar(!showMoodBar);
   }
   
   
@@ -129,11 +130,15 @@ const AddJournalPage = () => {
   const tabActions = {
     writeWithVoice,
     clearContent,
-    addJournalMood,
+    toggleMoodsBar,
     saveJournal
   }
 
   
+  useEffect(() => {
+   if (mood) toast.info(`Selected toast in ${mood.toLocaleUpperCase()}`)
+  }, [mood]);
+
   return (
    <>
     <main className='add-journal-container'>
@@ -159,7 +164,7 @@ const AddJournalPage = () => {
 
 
         {showMoodBar && (
-          <MoodsBar onMoodSelect={addJournalMood} />
+          <MoodsBar onMoodSelect={handleMoodUpdate} />
         )}
         <JournalActionTab actions={tabActions} />
       </div>
