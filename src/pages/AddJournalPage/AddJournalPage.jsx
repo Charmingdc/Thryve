@@ -81,7 +81,7 @@ const AddJournalPage = () => {
 
       // display loading toast
       const toastId = toast.loading('Saving your journal...');
-      onAuthStateChanged(auth, async (user) => {
+      const unsubscribe = onAuthStateChanged(auth, async (user) => {
         try {
           // check if user is signed in
           if (!user) return;
@@ -114,6 +114,7 @@ const AddJournalPage = () => {
           setTitle('');
           setContent('');
 
+          unsubscribe()
         } catch (err) {
           toast.error(err.message);
         } 
@@ -121,10 +122,7 @@ const AddJournalPage = () => {
     } catch (err)  {
       console.error(err.message)
       toast.error(err.message);
-    } finally {
-      // dismiss loading toast
-      if (toastId) toast.dismiss(toastId);
-    }
+    } 
   }
 
   const tabActions = {
