@@ -52,6 +52,12 @@
    margin-right: 2rem;
 }
 
+.journal-content .journal-image img {
+   padding: 1rem 0;
+   background-color: var(--bg);
+   border-radius: .8rem;
+}
+
 .gratitude-quote {
     width: 90%;
     max-width: 800px;
