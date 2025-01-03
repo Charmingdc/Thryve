@@ -41,7 +41,7 @@
     margin-bottom: .8rem;
 }
 
-.gratitude-qoute {
+.gratitude-quote {
     width: 90%;
     max-width: 800px;
     min-height: 8.5rem;
@@ -55,11 +55,11 @@
     margin: 10px auto;
 }
 
-.gratitude-qoute>p:first-of-type {
+.gratitude-quote>p:first-of-type {
     font-weight: bolder;
     margin-bottom: 0.8rem;
 }
 
-.gratitude-qoute>p {
+.gratitude-quote>p {
     text-align: center;
 }

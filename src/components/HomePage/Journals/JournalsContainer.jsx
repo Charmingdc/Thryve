@@ -1,11 +1,11 @@
-import GratituteQoute from "./GratitudeQoute";
+import GratituteQoute from "./GratitudeQuote";
 import Journal from "./Journal";
 import "./Journal.css";
 
-const JournalsContainer = () => {
+const JournalsContainer = ({gratitudeQuote}) => {
     return (
         <div className="journals-container">
-            <GratituteQoute />
+            <GratituteQoute quote={gratitudeQuote} />
             <div className="journals">
                 <Journal />
                 <Journal />

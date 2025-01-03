@@ -105,7 +105,7 @@ const AddJournalPage = () => {
           await addDoc(journalRef, journalData);
 
           // dismiss loading toast
-          toast.dismiss(toastId);
+          if (toastId) toast.dismiss(toastId);
 
           // notify user of successfull adding of journal
           toast.success('Journal added successfully');
@@ -123,7 +123,7 @@ const AddJournalPage = () => {
       toast.error(err.message);
     } finally {
       // dismiss loading toast
-      toast.dismiss(toastId);
+      if (toastId) toast.dismiss(toastId);
     }
   }
 
@@ -136,7 +136,7 @@ const AddJournalPage = () => {
 
   
   useEffect(() => {
-   if (mood) toast.info(`Selected toast in ${mood.toLocaleUpperCase()}`)
+   if (mood) toast.info(`Selected mood in ${mood.toLocaleUpperCase()}`)
   }, [mood]);
 
   return (
