@@ -1,4 +1,8 @@
 import { useState, useEffect, useRef } from "react";
+import { toast } from "sonner";
+import { db } from '../../firebase/firebase-init';
+import { collection, onSnapshot, orderBy, query, where } from "firebase/firestore";
+import getUserId from '../../functions/getUserId';
 
 import SideBar from "../../components/Helpers/SideBar";
 import BottomNav from "../../components/Helpers/BottomNav";
@@ -8,10 +12,13 @@ import SearchBar from "../../components/HomePage/SearchBar/SearchBar";
 import "./HomePage.css";
 
 
+
 const HomePage = () => {
   const [quote, setQuote] = useState('');
   const hasFetched = useRef(false);
-
+  const [journals, setJournals] = useState([]);
+  const [filteredJournals, setFilteredJournals] = useState(null);
+  
 
   const getRandomQuote = async () => {
     try {
@@ -34,27 +41,59 @@ const HomePage = () => {
       console.error(err.message);
     }
   }
+  
+  const handleJournalSearch = (filteredData) => {
+    setFilteredJournals(filteredData);
+  };
+
+  useEffect(() => {
+    const getJournals = async () => {
+      try {  
+        const userId = await getUserId();
+        if (!userId) return;
+
+        const journalsRef = collection(db, 'journals');
+        const q = query(journalsRef, where('userId', '==', userId), orderBy('createdAt', 'desc'));
+
+        onSnapshot(q, (snapshot) => {
+          let journalData = [];
+
+          snapshot.forEach((doc) => {
+            const docData = {...doc.data(), id: doc.id};
+            journalData.push(docData);
+          });
+          
+          setJournals(journalData);
+        });
+      } catch (err) {
+        console.error(err.messsage);
+      }
+    }
+    getJournals();
+  }, []);
 
 
   useEffect(() => {
     // check if function have run before, if yes return immediately 
     if (hasFetched.current) return;
 
-    // get random quote
-    getRandomQuote();
+    getRandomQuote(); // get random quote
 
     // update hasFetched ref to true
     hasFetched.current = true;
-  }, [])
+  }, []);
 
+
+  
   return (
    <>
     <div className="home-page-container">
       <SideBar currentPage="home" />
       
       <div className="home-page">
-        <SearchBar />
-        <JournalsContainer gratitudeQuote={quote} />
+        <SearchBar datas={journals} onJournalSearch={handleJournalSearch} />
+
+        <JournalsContainer gratitudeQuote={quote} journals={filteredJournals || journals} />
       </div>
     </div>
     

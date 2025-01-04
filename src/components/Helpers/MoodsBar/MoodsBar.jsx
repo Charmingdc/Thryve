@@ -1,8 +1,8 @@
-import GratefulIcon from '../../../assets/icons/grateful.png';
-import JoyfulIcon from '../../../assets/icons/joyful.png';
-import InspiredIcon from '../../../assets/icons/inspired.png';
-import PeacefulIcon from '../../../assets/icons/meditate.png';
-import HopefulIcon from '../../../assets/icons/hopeful.png';
+import GratefulIcon from '/public/icons/grateful.png';
+import JoyfulIcon from '/public/icons/joyful.png';
+import InspiredIcon from '/public/icons/inspired.png';
+import PeacefulIcon from '/public/icons/meditate.png';
+import HopefulIcon from '/public/icons/inspired.png';
 
 import './Style.css';
 

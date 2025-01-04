@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
+import { useNavigate
 
+ } from 'react-router-dom';
 import { auth, db} from '../../firebase/firebase-init';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -22,6 +24,7 @@ const AddJournalPage = () => {
   const [mood, setMood] = useState('');
   const [showMoodBar, setShowMoodBar] = useState(false);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
 
   const writeWithVoice = async () => {
@@ -81,7 +84,7 @@ const AddJournalPage = () => {
 
       // display loading toast
       const toastId = toast.loading('Saving your journal...');
-      onAuthStateChanged(auth, async (user) => {
+      const unsubscribe = onAuthStateChanged(auth, async (user) => {
         try {
           // check if user is signed in
           if (!user) return;
@@ -114,6 +117,11 @@ const AddJournalPage = () => {
           setTitle('');
           setContent('');
 
+          // unsubscribe from onAuthStateChanged listener
+          unsubscribe();
+
+          // redirect to home page
+          navigate('/home');
         } catch (err) {
           toast.error(err.message);
         } 
@@ -121,10 +129,7 @@ const AddJournalPage = () => {
     } catch (err)  {
       console.error(err.message)
       toast.error(err.message);
-    } finally {
-      // dismiss loading toast
-      if (toastId) toast.dismiss(toastId);
-    }
+    } 
   }
 
   const tabActions = {
