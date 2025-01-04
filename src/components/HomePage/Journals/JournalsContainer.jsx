@@ -14,7 +14,7 @@ const JournalsContainer = ({gratitudeQuote, journals }) => {
             <Journal journal={journal} key={index} />
           ))
         ) : (
-         <h1> No journals </h1>    
+         <h1 style={{textAlign: 'center'}}> No gratitude journals added yet 🥺 </h1>    
         )}     
       </div>
     </div>
