@@ -12,10 +12,12 @@ import SearchBar from "../../components/HomePage/SearchBar/SearchBar";
 import "./HomePage.css";
 
 
+
 const HomePage = () => {
   const [quote, setQuote] = useState('');
   const hasFetched = useRef(false);
   const [journals, setJournals] = useState([]);
+  const [filteredJournals, setFilteredJournals] = useState(null);
   
 
   const getRandomQuote = async () => {
@@ -39,7 +41,10 @@ const HomePage = () => {
       console.error(err.message);
     }
   }
-
+  
+  const handleJournalSearch = (filteredData) => {
+    setFilteredJournals(filteredData);
+  };
 
   useEffect(() => {
     const getJournals = async () => {
@@ -57,7 +62,6 @@ const HomePage = () => {
             const docData = {...doc.data(), id: doc.id};
             journalData.push(docData);
           });
-
           
           setJournals(journalData);
         });
@@ -65,7 +69,6 @@ const HomePage = () => {
         console.error(err.messsage);
       }
     }
- 
     getJournals();
   }, []);
 
@@ -79,7 +82,7 @@ const HomePage = () => {
     // update hasFetched ref to true
     hasFetched.current = true;
   }, []);
-  
+
 
   
   return (
@@ -88,9 +91,9 @@ const HomePage = () => {
       <SideBar currentPage="home" />
       
       <div className="home-page">
-        <SearchBar />
+        <SearchBar datas={journals} onJournalSearch={handleJournalSearch} />
 
-        <JournalsContainer gratitudeQuote={quote} journals={journals} />
+        <JournalsContainer gratitudeQuote={quote} journals={filteredJournals || journals} />
       </div>
     </div>
     
