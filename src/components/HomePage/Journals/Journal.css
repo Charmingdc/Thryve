@@ -4,6 +4,13 @@
     margin-bottom: 8rem;
 }
 
+.journals-container a,
+.journals-container a:active
+.journals-container a:hover {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
 .journals-container .journals {
     display: flex;
     flex-wrap: wrap;

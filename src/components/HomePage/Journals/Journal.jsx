@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import journalDate from '../../../functions/journalDate.js';
 import journalTime from '../../../functions/journalTime.js';
 import getMoodPicture from '../../../functions/getMoodPicture.js';
@@ -36,6 +37,7 @@ const Journal = ({journal}) => {
 
 
     return (
+      <Link to={`/view-journal/${journal.id}`}>
         <div className="journal">
             <time dateTime={logicalDate}> { stringDate } </time>
             <div className="journal-content">
@@ -50,6 +52,7 @@ const Journal = ({journal}) => {
                 </div>
             </div>
         </div>
+      </Link>
     );
 }
 export default Journal;

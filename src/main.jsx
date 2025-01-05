@@ -31,7 +31,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='/setting' element={<SettingsPage />} />
         <Route path='/calendar' element={<CalendarPage />} />
         <Route path='/add-journal' element={<AddJournalPage />} />
-        <Route path='/view-journal' element={<ViewJournalPage />} />
+        <Route path='/view-journal/:journalId' element={<ViewJournalPage />} />
       </Routes>
       <Toaster 
         position='top-center'
@@ -42,7 +42,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         toastOptions={{
           style: {
             padding: '.6rem',
-            borderRadius: '3rem',
+            borderRadius: '2rem',
           }
         }} />
     </BrowserRouter>
