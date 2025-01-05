@@ -60,7 +60,8 @@ const ViewJournalPage = () => {
 
         // get journal data
         const docSnap = await getDoc(journalRef);
-        const docData = docSnap.data();
+        const docData = {...docSnap.data(), id: docSnap.id};
+        console.log('doc data:', docData)
 
         // transform journal mood to journal icons
         const moodIconUrl = getMoodPicture(docData.journalMood);
@@ -104,7 +105,7 @@ const ViewJournalPage = () => {
 
                     {showOptions && (
                         <div className="options-menu">
-                            <button className="option-button" style={{color: "var(--text-color)"}}>Edit</button>
+                            <button className="option-button" style={{color: "var(--text-color)"}} onClick={() => navigate(`/edit-journal/${journalDetails.id}`)}> Edit </button>
                             <button className="option-button" style={{color: "var(--text-color)"}} onClick={handleJournalDelete}> Delete Journal </button>
                         </div>
                     )}

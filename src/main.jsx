@@ -15,6 +15,7 @@ import ResetPasswordPage from './pages/ResetPasswordPage';
 import SettingsPage from './pages/SettingsPage';
 import SignupPage from './pages/SignupPage';
 import ViewJournalPage from './pages/ViewJournalPage';
+import EditJournalPage from './pages/EditJournalPage/EditJournalPage.jsx';
 
 
 
@@ -32,6 +33,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='/calendar' element={<CalendarPage />} />
         <Route path='/add-journal' element={<AddJournalPage />} />
         <Route path='/view-journal/:journalId' element={<ViewJournalPage />} />
+        <Route path='/edit-journal/:journalId' element={<EditJournalPage />} />
       </Routes>
       <Toaster 
         position='top-center'
