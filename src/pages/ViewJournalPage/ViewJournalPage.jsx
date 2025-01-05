@@ -10,8 +10,6 @@ import { HiFaceSmile } from "react-icons/hi2";
 
 import SideBar from "../../components/Helpers/SideBar";
 import "./ViewJournalPage.css";
-import { toast } from "sonner";
-
 
 
 const ViewJournalPage = () => {
@@ -19,7 +17,6 @@ const ViewJournalPage = () => {
     const [fullDate, setFullDate] = useState('');
     const [time, setTime] = useState('');
     const [showOptions, setShowOptions] = useState(false);
-    const [loading, setLoading] = useState(true);
     const hasFetched = useRef(false);
     const params = useParams();
   
