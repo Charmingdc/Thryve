@@ -1,9 +1,10 @@
 import Testimonial from "./Testimonial";
 import "./TestimonialsSection.css";
+
 const TestimonialsSection = () => {
   return (
     <section className="testimonials-section">
-      <h2 className="section-title">People loves us</h2>
+      <h2 className="section-title">People love us</h2>
       <div className="testimonials">
         <Testimonial
           text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor."
@@ -25,18 +26,19 @@ const TestimonialsSection = () => {
         />
         <Testimonial
           text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor."
-          author="John Smith"
+          author="Emily Clarke"
           image="https://via.placeholder.com/400"
-          title="CEO"
+          title="CTO"
         />
         <Testimonial
           text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor."
-          author="John Smith"
+          author="Michael Johnson"
           image="https://via.placeholder.com/400"
-          title="CEO"
+          title="Manager"
         />
       </div>
     </section>
   );
-}
+};
+
 export default TestimonialsSection;

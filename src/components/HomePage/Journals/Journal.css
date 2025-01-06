@@ -4,6 +4,14 @@
     margin-bottom: 8rem;
 }
 
+.journals-container a,
+.journals-container a:active
+.journals-container a:hover {
+    width: 100%;
+    text-decoration: none;
+    color: var(--text-color);
+}
+
 .journals-container .journals {
     display: flex;
     flex-wrap: wrap;
@@ -32,7 +40,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 1.5rem 2rem;
+    padding: 1rem;
     background-color: var(--shade);
     border-radius: 1rem;
 }
@@ -41,7 +49,24 @@
     margin-bottom: .8rem;
 }
 
-.gratitude-qoute {
+.journal-content p {
+   height: 4rem;
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   overflow: hidden;
+   -webkit-line-clamp: 3;
+   text-overflow: ellipsis;
+   font-size: .9rem;
+   margin-right: 2rem;
+}
+
+.journal-content .journal-image img {
+   padding: 1rem 0;
+   background-color: var(--bg);
+   border-radius: .8rem;
+}
+
+.gratitude-quote {
     width: 90%;
     max-width: 800px;
     min-height: 8.5rem;
@@ -55,11 +80,11 @@
     margin: 10px auto;
 }
 
-.gratitude-qoute>p:first-of-type {
+.gratitude-quote>p:first-of-type {
     font-weight: bolder;
     margin-bottom: 0.8rem;
 }
 
-.gratitude-qoute>p {
+.gratitude-quote>p {
     text-align: center;
 }

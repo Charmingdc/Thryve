@@ -1,24 +1,28 @@
-import { HiMicrophone, HiPencilSquare, HiFaceSmile, HiCheckCircle } from "react-icons/hi2";
+import { HiMicrophone, HiFaceSmile, HiCheckCircle } from "react-icons/hi2";
+import { VscClearAll } from "react-icons/vsc";
 
 import './Style.css';
 
 
-const JournalActionTab = () => {
+const JournalActionTab = ({actions}) => {
+  const {writeWithVoice, clearContent, toggleMoodsBar, saveJournal} = actions;
+
+
   return (
     <nav className='journal-actiontab'>
-      <button>
+      <button onClick={writeWithVoice}>
         <HiMicrophone className='icon' />
       </button>
 
-      <button>
-        <HiPencilSquare className='icon' />
+      <button onClick={clearContent}>
+        <VscClearAll className='icon' />
       </button>
 
-      <button>
+      <button onClick={toggleMoodsBar}> 
         <HiFaceSmile className='icon' />
       </button>
 
-      <button>
+      <button onClick={saveJournal}>
         <HiCheckCircle className='icon' />
       </button>
     </nav>

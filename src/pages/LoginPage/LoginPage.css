@@ -28,16 +28,6 @@
     width: fit-content;
 }
 
-/* From Uiverse.io by Fernando-sv */ 
-.loader {
-   border: 4px solid rgb(250, 250, 250);
-   border-left-color: transparent;
-   border-radius: 50%;
-   width: 1.6rem;
-   height: 1.6rem;
-   animation: spin89345 1s linear infinite;
-}
-
 .img-holder {
     display: none;
 }
@@ -164,7 +154,9 @@ input:hover {
     font-size: 1rem;
     font-weight: 400;
     padding: .4rem 5%;
-    border: 0.1rem solid var(--secondary-color);
+    color: var(---text-color);
+    background-color: var(--primary-color);
+    border: none;
     border-radius: 3rem;
     margin: 1rem 0;
 }

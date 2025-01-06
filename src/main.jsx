@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Bounce, ToastContainer } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css";
+
+import { Toaster } from 'sonner';
+
 import App from './App.jsx';
 import './index.css';
 import AddJournalPage from './pages/AddJournalPage';
@@ -14,6 +15,7 @@ import ResetPasswordPage from './pages/ResetPasswordPage';
 import SettingsPage from './pages/SettingsPage';
 import SignupPage from './pages/SignupPage';
 import ViewJournalPage from './pages/ViewJournalPage';
+import EditJournalPage from './pages/EditJournalPage/EditJournalPage.jsx';
 
 
 
@@ -30,17 +32,21 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='/setting' element={<SettingsPage />} />
         <Route path='/calendar' element={<CalendarPage />} />
         <Route path='/add-journal' element={<AddJournalPage />} />
-        <Route path='/view-journal' element={<ViewJournalPage />} />
+        <Route path='/view-journal/:journalId' element={<ViewJournalPage />} />
+        <Route path='/edit-journal/:journalId' element={<EditJournalPage />} />
       </Routes>
-      <ToastContainer 
-        position="top-center"
-        autoClose={3000}
-        newestOnTop
-        closeOnClick
-        pauseOnFocusLoss
-        pauseOnHover={true}
-        theme='colored'
-        transition={Bounce} />
+      <Toaster 
+        position='top-center'
+        closeButton={true}
+        visibleToasts={2}
+        theme='system'
+        richColors={true}
+        toastOptions={{
+          style: {
+            padding: '.6rem',
+            borderRadius: '2rem',
+          }
+        }} />
     </BrowserRouter>
   </React.StrictMode>,
 )

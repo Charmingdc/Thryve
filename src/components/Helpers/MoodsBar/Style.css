@@ -1,0 +1,47 @@
+.moods-bar {
+  width: 80%;
+  height: 4rem;
+  position: fixed;
+  bottom: 18%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: var(--shade);
+  border-radius: 3rem;
+}
+
+.moods-bar button {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg);
+  object-fit: cover;
+  border: .1rem solid transparent;
+  border-radius: 50%;
+  margin-top: 0rem;
+}
+
+.moods-bar button .icon {
+  width: 1.8rem;
+  height: 1.8rem;
+  transition: 300ms;
+}
+
+.moods-bar button .icon:first-of-type {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.moods-bar button:hover {
+  border: .1rem solid var(--primary-color);
+}
+
+
+
+@media (min-width: 726px) {
+  .moods-bar {
+    width: 60%;
+  }
+}

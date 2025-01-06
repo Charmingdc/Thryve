@@ -1,29 +1,29 @@
+import { useState, useEffect, useRef } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { auth, db} from '../../firebase/firebase-init';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
-import { addDoc, collection, doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
-import {
-  useNavigate
-} from 'react-router-dom';
-import { auth, db } from '../../firebase/firebase-init';
 
 import { toast } from 'sonner';
 import SpeechToText from '../../functions/speechToText';
 import validateJournal from '../../functions/validateJournal';
 
+import Topnavbar from '../../components/Helpers/Topnavbar';
+import SideBar from '../../components/Helpers/SideBar';
 import JournalActionTab from '../../components/Helpers/JournalActionTab';
 import MoodsBar from '../../components/Helpers/MoodsBar';
-import SideBar from '../../components/Helpers/SideBar';
-import Topnavbar from '../../components/Helpers/Topnavbar';
 
 import './Style.css';
 
 
-const AddJournalPage = () => {
+const EditJournalPage = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [mood, setMood] = useState('');
   const [showMoodBar, setShowMoodBar] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const hasFetched = useRef(false);
+  const params = useParams();
   const navigate = useNavigate();
 
 
@@ -31,10 +31,10 @@ const AddJournalPage = () => {
     try {
       toast.info('Voice text started');
 
-      // wait for speech transcript
+      // wait for speech transcript 
       const result = await SpeechToText();
-
-      // condition to check if user have finish speaking
+      
+      // condition to check if user have finish speaking 
       if (result !== 'transcription endéd') {
         setContent((prev) => (
           prev ? `${prev} ${result}` : result
@@ -73,45 +73,30 @@ const AddJournalPage = () => {
     // update state to display mood bar
     setShowMoodBar(!showMoodBar);
   }
+  
+  const getJournal = async () => {
+    setLoading(true);
+    const journalId = params.journalId;
+    
+    try {
+      const docRef = doc(db, 'journals', journalId);
 
-const updateStreak = async () => {
-  const username = auth.currentUser?.email?.split('@')[0];
-  if (!username) return;
+      const docSnap = await getDoc(docRef);
+      const docData = docSnap.data();
 
-  try {
-    const userRef = doc(db, 'users', username);
-    const userDoc = await getDoc(userRef);
-    const userData = userDoc.data();
-
-    const currentDate = Date.now();
-    const lastJournalDate = userData?.lastJournalDate || null; // Handle missing date
-    const streak = userData?.streak || 0; // Default to 0 for new users
-
-    if (!lastJournalDate) {
-      // Initialize streak for new users or if lastJournalDate is missing
-      await setDoc(userRef, { streak: 1, lastJournalDate: currentDate }, { merge: true });
-      return;
+      setTitle(docData.journalTitle);
+      setContent(docData.journalContent);
+      setMood(docData.journalMood);
+    } catch (err) {
+      setLoading(false);
+      console.error(err.message);
     }
-
-    const dayDifference = parseInt((currentDate - lastJournalDate) / 86400000);
-
-    if (dayDifference === 1) {
-      // Increment streak if exactly one day has passed
-      const newStreak = streak + 1;
-      await setDoc(userRef, { streak: newStreak, lastJournalDate: currentDate }, { merge: true });
-    } else if (dayDifference > 1) {
-      // Reset streak if more than one day has passed
-      await setDoc(userRef, { streak: 1, lastJournalDate: currentDate }, { merge: true });
-    }
-  } catch (error) {
-    console.error('Error updating streak:', error.message);
   }
-}
 
 
   const saveJournal = async () => {
     const validateErrors = await validateJournal(title, content);
-
+    
     try {
       if (validateErrors) throw new Error(validateErrors);
       if (!mood || mood === '') throw new Error('Please set a mood for this journal');
@@ -123,30 +108,24 @@ const updateStreak = async () => {
           // check if user is signed in
           if (!user) return;
 
-          // get user id
-          const userId = user.uid;
+          // make a reference to journals collection 
+          const journalRef = doc(db, 'journals', params.journalId);
 
-          // make a reference to journals collection
-          const journalRef = collection(db, 'journals');
-
-          // define journal data structure
+          // define journal data structure 
           const journalData = {
             journalTitle: title,
             journalContent: content,
             journalMood: mood,
-            userId,
-            createdAt: serverTimestamp()
           }
 
           // save journal
-          await addDoc(journalRef, journalData);
+          await updateDoc(journalRef, journalData);
 
           // dismiss loading toast
           if (toastId) toast.dismiss(toastId);
-          updateStreak();
 
           // notify user of successfull adding of journal
-          toast.success('Journal added successfully');
+          toast.success('Journal edited successfully');
 
           // reset inputs
           setTitle('');
@@ -156,15 +135,15 @@ const updateStreak = async () => {
           unsubscribe();
 
           // redirect to home page
-          navigate('/home');
+          navigate(`/home`);
         } catch (err) {
           toast.error(err.message);
-        }
+        } 
       });
     } catch (err)  {
       console.error(err.message)
       toast.error(err.message);
-    }
+    } 
   }
 
   const tabActions = {
@@ -174,28 +153,37 @@ const updateStreak = async () => {
     saveJournal
   }
 
-
+  
   useEffect(() => {
    if (mood) toast.info(`Selected mood in ${mood.toLocaleUpperCase()}`)
   }, [mood]);
+   
+  useEffect(() => {
+   if (hasFetched.current) return;
+
+   getJournal();
+
+   hasFetched.current = true;
+  }, []);
+
 
   return (
    <>
-    <main className='add-journal-container'>
+    <main className='edit-journal-container'>
       <SideBar currentPage='home' />
 
-      <div className='add-journal-page'>
-        <Topnavbar currentPageName='New Journal' />
-
+      <div className='edit-journal-page'>
+        <Topnavbar currentPageName='Edit Journal' />
+ 
         <div className='inputs-container'>
-          <input
-            className='title-input'
+          <input 
+            className='title-input' 
             type='text'
             placeholder='Untitled'
             value={title}
             onChange={(e) => setTitle(e.target.value)} />
-
-          <textarea
+        
+          <textarea 
             className='main-input'
             placeholder='Write your journal content here'
             value={content}
@@ -214,4 +202,4 @@ const updateStreak = async () => {
 }
 
 
-export default AddJournalPage
+export default EditJournalPage
