@@ -44,7 +44,8 @@
   border-radius: .8rem;
 }
 
-.fc-daygrid .fc-scrollgrid {
+.fc-daygrid .fc-scrollgrid,
+.fc-daygrid .fc-scrollgrid-liquid {
   border: 0.1rem solid transparent;
 }
 
