@@ -93,7 +93,7 @@ const updateStreak = async () => {
       return;
     }
 
-    const dayDifference = parseInt((currentDate - lastJournalDate) / 86400000);
+    const dayDifference = Math.floor((currentDate - lastJournalDate) / 86400000);
 
     if (dayDifference === 1) {
       // Increment streak if exactly one day has passed
