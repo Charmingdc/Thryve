@@ -52,7 +52,7 @@ const CalendarPage = () => {
             await setDoc(docRef, { streak: 0, lastJournalDate: currentDate }, { merge: true });
             setStreak(0); // Reset streak locally as well
           }
-          if (dayDifference === 0) console.log("You've added a journal today")
+          if (dayDifference === 0) console.log("No current streak")
         } catch (error) {
           console.error("Error updating streaks:", error.message);
         }

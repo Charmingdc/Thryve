@@ -86,10 +86,11 @@ const updateStreak = async () => {
     const currentDate = Date.now();
     const lastJournalDate = userData?.lastJournalDate || null; // Handle missing date
     const streak = userData?.streak || 0; // Default to 0 for new users
+    const highesStreak = userData?.highestStreak || 0;
 
     if (!lastJournalDate) {
       // Initialize streak for new users or if lastJournalDate is missing
-      await setDoc(userRef, { streak: 1, lastJournalDate: currentDate }, { merge: true });
+      await setDoc(userRef, { streak: 1, lastJournalDate: currentDate, highestStreak: 1 }, { merge: true });
       return;
     }
 
@@ -98,7 +99,8 @@ const updateStreak = async () => {
     if (dayDifference === 1) {
       // Increment streak if exactly one day has passed
       const newStreak = streak + 1;
-      await setDoc(userRef, { streak: newStreak, lastJournalDate: currentDate }, { merge: true });
+      const newHighestStreak = highesStreak + 1;
+      await setDoc(userRef, { streak: newStreak, lastJournalDate: currentDate, highestStreak: newHighestStreak }, { merge: true });
     } else if (dayDifference > 1) {
       // Reset streak if more than one day has passed
       await setDoc(userRef, { streak: 1, lastJournalDate: currentDate }, { merge: true });
