@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { auth, db} from '../../firebase/firebase-init';
-import { doc, getDoc, collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 
 import { toast } from 'sonner';
@@ -13,7 +13,7 @@ import SideBar from '../../components/Helpers/SideBar';
 import JournalActionTab from '../../components/Helpers/JournalActionTab';
 import MoodsBar from '../../components/Helpers/MoodsBar';
 
-// import './Style.css';
+import './Style.css';
 
 
 const EditJournalPage = () => {
@@ -108,29 +108,24 @@ const EditJournalPage = () => {
           // check if user is signed in
           if (!user) return;
 
-          // get user id
-          const userId = user.uid;
-
           // make a reference to journals collection 
-          const journalRef = collection(db, 'journals');
+          const journalRef = doc(db, 'journals', params.journalId);
 
           // define journal data structure 
           const journalData = {
             journalTitle: title,
             journalContent: content,
             journalMood: mood,
-            userId,
-            createdAt: serverTimestamp()
           }
 
           // save journal
-          await addDoc(journalRef, journalData);
+          await updateDoc(journalRef, journalData);
 
           // dismiss loading toast
           if (toastId) toast.dismiss(toastId);
 
           // notify user of successfull adding of journal
-          toast.success('Journal added successfully');
+          toast.success('Journal edited successfully');
 
           // reset inputs
           setTitle('');
@@ -140,7 +135,7 @@ const EditJournalPage = () => {
           unsubscribe();
 
           // redirect to home page
-          navigate('/home');
+          navigate(`/home`);
         } catch (err) {
           toast.error(err.message);
         } 
@@ -174,11 +169,11 @@ const EditJournalPage = () => {
 
   return (
    <>
-    <main className='add-journal-container'>
+    <main className='edit-journal-container'>
       <SideBar currentPage='home' />
 
-      <div className='add-journal-page'>
-        <Topnavbar currentPageName='New Journal' />
+      <div className='edit-journal-page'>
+        <Topnavbar currentPageName='Edit Journal' />
  
         <div className='inputs-container'>
           <input 
