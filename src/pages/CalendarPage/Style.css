@@ -19,8 +19,46 @@
 .calendar-wrapper {
   width: 86%;
   min-height: 60dvh;
+  padding: 2%;
   background-color: var(--shade);
   border-radius: 1rem;
+}
+
+/* Target the FullCalendar container and apply border and border-radius */
+.fc {
+  color: var(--text-color);
+  border: 0.1rem solid var(--secondary-color); /* Example border color */
+  border-radius: .6rem; /* Example border radius */
+  padding: 10px; /* Optional: adds some spacing around the calendar */
+}
+
+/* Change the font size of the calendar's month title */
+.fc-toolbar .fc-toolbar-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.fc-daygrid {
+  border: 0.1rem solid var(--bg);
+  border-radius: .8rem;
+}
+
+.fc-daygrid .fc-scrollgrid {
+  border: 0.1rem solid transparent;
+}
+
+.fc-daygrid .fc-day {
+  border: .1rem solid var(--bg);
+}
+/* Change border color for all day cells in the calendar */
+.fc-daygrid-day.fc-day {
+  border: 1px solid var(--bg); /* Example border color for day cells */
+}
+
+  /* Optional: Change border color for today (highlight today's date) */
+.fc-daygrid-day.fc-day-today {
+  border: 0.1rem solid var(--secondary-color); /* Example border color for today */
 }
 
 .streak-box {
