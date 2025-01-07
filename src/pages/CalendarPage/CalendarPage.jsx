@@ -12,12 +12,17 @@ import SideBar from '../../components/Helpers/SideBar';
 import Topnavbar from '../../components/Helpers/Topnavbar';
 import { auth, db } from '../../firebase/firebase-init';
 import './Style.css';
+import { useRef } from "react";
 
 
 const CalendarPage = () => {
-  const [streak, setStreak] = useState(0);
+  const [streakCount, setStreakCount] = useState(0);
+  const [highestStreakCount, setHighestStreakCount] = useState(0);
+  const hasFetched = useRef(false);
 
   useEffect(() => {
+    if (hasFetched.current) return;
+
     const updateStreaks = () => {
       onAuthStateChanged(auth, async (user) => {
         if (!user) {
@@ -26,9 +31,16 @@ const CalendarPage = () => {
         }
 
         try {
-          const username = user.displayName;
-          console.log(username);
+          const normalizeDate = (date) => {
+            const normalizedDate = new Date(date);
+            normalizedDate.setHours(0, 0, 0, 0);
 
+            return normalizedDate.getTime();
+          }
+
+
+          const username = user.displayName.toLowerCase();
+          
           const docRef = doc(db, 'users', username);
           const userSnap = await getDoc(docRef);
 
@@ -38,21 +50,20 @@ const CalendarPage = () => {
           }
 
           const userData = userSnap.data();
-          const lastDate = new Date(userData.lastJournalDate);
-          const currentDate = new Date();
+          const lastDate = normalizeDate(userData.lastJournalDate);
+          const currentDate = normalizeDate(Date.now());
 
-          const dayDifference = Math.floor((currentDate - lastDate) / 86400000);
-          console.log(dayDifference);
+          const userCurrentStreakCount = userData?.currentStreakCount || 0;
+          const userHighestStreakCount = userData?.highestStreakCount || 0;
 
-          if (dayDifference === 1) {
-            setStreak(userData.streak);
-            console.log("Streak maintained:", userData.streak);
-          } else if (dayDifference > 1) {
-            console.log("No streak or missed a day");
-            await setDoc(docRef, { streak: 0, lastJournalDate: currentDate }, { merge: true });
-            setStreak(0); // Reset streak locally as well
+          const dayDifference = (currentDate - lastDate) / (100 * 60 * 60 * 24);
+
+          if (dayDifference > 1) {
+            setStreakCount(0);
+          } else {
+            setStreakCount(userCurrentStreakCount);
           }
-          if (dayDifference === 0) console.log("No current streak")
+          setHighestStreakCount(userHighestStreakCount);
         } catch (error) {
           console.error("Error updating streaks:", error.message);
         }
@@ -60,6 +71,7 @@ const CalendarPage = () => {
     };
 
     updateStreaks();
+    hasFetched.current = true;
   }, []);
 
 
@@ -89,8 +101,24 @@ const CalendarPage = () => {
           </div>
 
           <div className='streaks'>
-            <div></div>
-            <div></div>
+            <div>
+              <div>
+                <img src='/icons/streak-icon.png' alt={streakCount} />
+                <h1> { streakCount } </h1>
+              </div>
+
+              <p> current streak </p>  
+            </div>
+
+            <div>
+              <div>
+                <img src='/icons/streak-icon-purple.png' />
+                <h1> { highestStreakCount } </h1>
+              </div>
+
+              <p> Highest streak </p>
+            </div>
+
           </div>
          </div>
 

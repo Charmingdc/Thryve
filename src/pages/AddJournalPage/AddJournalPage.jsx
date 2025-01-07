@@ -75,35 +75,43 @@ const AddJournalPage = () => {
   }
 
 const updateStreak = async () => {
-  const username = auth.currentUser?.email?.split('@')[0];
+  const username = auth.currentUser?.displayName.toLowerCase();
   if (!username) return;
 
   try {
+    const normalizeDate = (date) => {
+      const normalizedDate = new Date(date);
+      normalizedDate.setHours(0, 0, 0, 0);
+
+      return normalizedDate.getTime();
+    }
+
     const userRef = doc(db, 'users', username);
     const userDoc = await getDoc(userRef);
     const userData = userDoc.data();
 
-    const currentDate = Date.now();
-    const lastJournalDate = userData?.lastJournalDate || null; // Handle missing date
-    const streak = userData?.streak || 0; // Default to 0 for new users
-    const highesStreak = userData?.highestStreak || 0;
+    const currentDate = normalizeDate(Date.now());
+    const lastJournalDate = normalizeDate(userData?.lastJournalDate) || null; // Handle missing date
+    let currentStreakCount = userData?.currentStreakCount || 0; // Default to 0 for new users
+    let highestStreakCount = userData?.highestStreakCount || 0;
+    
 
     if (!lastJournalDate) {
       // Initialize streak for new users or if lastJournalDate is missing
-      await setDoc(userRef, { streak: 1, lastJournalDate: currentDate, highestStreak: 1 }, { merge: true });
+      await setDoc(userRef, { currentStreakCount: 1, lastJournalDate: currentDate, highestStreakCount: 1 }, { merge: true });
       return;
     }
 
-    const dayDifference = Math.floor((currentDate - lastJournalDate) / 86400000);
+    const dayDifference = (currentDate - lastJournalDate) / (100 * 60 * 60 * 24);
 
     if (dayDifference === 1) {
       // Increment streak if exactly one day has passed
-      const newStreak = streak + 1;
-      const newHighestStreak = highesStreak + 1;
-      await setDoc(userRef, { streak: newStreak, lastJournalDate: currentDate, highestStreak: newHighestStreak }, { merge: true });
+      currentStreakCount += 1;
+      if (currentStreakCount >= highestStreakCount) highestStreakCount = currentStreakCount;
+      await setDoc(userRef, { currentStreakCount, lastJournalDate: currentDate, highestStreakCount }, { merge: true });
     } else if (dayDifference > 1) {
       // Reset streak if more than one day has passed
-      await setDoc(userRef, { streak: 1, lastJournalDate: currentDate }, { merge: true });
+      await setDoc(userRef, { currentStreakCount: 1, lastJournalDate: currentDate }, { merge: true });
     }
   } catch (error) {
     console.error('Error updating streak:', error.message);
