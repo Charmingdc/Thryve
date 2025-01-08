@@ -1,9 +1,3 @@
-import GratefulIcon from '/public/icons/grateful.png';
-import JoyfulIcon from '/public/icons/joyful.png';
-import InspiredIcon from '/public/icons/inspired.png';
-import PeacefulIcon from '/public/icons/meditate.png';
-import HopefulIcon from '/public/icons/inspired.png';
-
 import './Style.css';
 
 const MoodsBar = ({onMoodSelect}) => {
@@ -15,23 +9,23 @@ const MoodsBar = ({onMoodSelect}) => {
    return (
      <div className='moods-bar'>
         <button onClick={() => handleMoodClick('grateful')}>
-         <img src={GratefulIcon} alt='Grateful icon' className='icon' />
+         <img src='/icons/grateful.png' alt='Grateful icon' className='icon' />
         </button>
 
         <button onClick={() => handleMoodClick('joyful')}>
-         <img src={JoyfulIcon} alt='joyful icon' className='icon' />
+         <img src='/icons/joyful.png' alt='joyful icon' className='icon' />
         </button>
 
         <button onClick={() => handleMoodClick('inspired')}>
-         <img src={InspiredIcon} alt='inspired icon' className='icon' />
+         <img src='/icons/inspired.png' alt='inspired icon' className='icon' />
         </button>
 
         <button onClick={() => handleMoodClick('peaceful')}>
-         <img src={PeacefulIcon} alt='peaceful icon' className='icon' />
+         <img src='/icons/meditate.png' alt='peaceful icon' className='icon' />
         </button>
 
         <button onClick={() => handleMoodClick('hopeful')}>
-         <img src={HopefulIcon} alt='hopeful icon' className='icon' />
+         <img src='/icons/hopeful.png' alt='hopeful icon' className='icon' />
         </button>
      </div>
    )

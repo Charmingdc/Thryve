@@ -148,6 +148,7 @@
  background-color: var(--shade);
  border-top-left-radius: 2rem;
  border-top-right-radius: 2rem;
+ z-index: 30;
  transition: 400ms;
 }
 
