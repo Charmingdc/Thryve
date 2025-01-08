@@ -1,7 +1,6 @@
 import {
    HiMiniPencilSquare,
    HiOutlineLockClosed,
-   HiOutlineDocumentText,
    HiOutlineCamera
 } from "react-icons/hi2";
 import { MdOutlinePassword } from "react-icons/md";
@@ -41,13 +40,6 @@ const SettingsPage = () => {
 
 
       <div className='settings-menu'>
-        <div>
-          <div className='icon-holder'>
-            <MdOutlinePassword className='icon' />
-          </div>
-          <h3> Edit pin </h3>
-        </div>
-
         <div>
           <div className='icon-holder'>
             <HiOutlineMail className='icon' />

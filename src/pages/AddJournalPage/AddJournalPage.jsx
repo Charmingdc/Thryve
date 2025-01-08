@@ -1,9 +1,7 @@
 import { onAuthStateChanged } from 'firebase/auth';
 import { addDoc, collection, doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
-import {
-  useNavigate
-} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { auth, db } from '../../firebase/firebase-init';
 
 import { toast } from 'sonner';

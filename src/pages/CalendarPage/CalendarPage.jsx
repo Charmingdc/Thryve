@@ -6,24 +6,27 @@ import FullCalendar from '@fullcalendar/react';
 
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import BottomNav from '../../components/Helpers/BottomNav';
 import SideBar from '../../components/Helpers/SideBar';
 import Topnavbar from '../../components/Helpers/Topnavbar';
+import Loader from '../../components/Helpers/Loader';
 import { auth, db } from '../../firebase/firebase-init';
 import './Style.css';
-import { useRef } from "react";
 
 
 const CalendarPage = () => {
   const [streakCount, setStreakCount] = useState(0);
   const [highestStreakCount, setHighestStreakCount] = useState(0);
+  const [loading, setLoading] = useState(true);
   const hasFetched = useRef(false);
 
   useEffect(() => {
     if (hasFetched.current) return;
 
     const updateStreaks = () => {
+      setLoading(true);
+
       onAuthStateChanged(auth, async (user) => {
         if (!user) {
           console.warn("User is not logged in.");
@@ -58,6 +61,7 @@ const CalendarPage = () => {
 
           const dayDifference = (currentDate - lastDate) / (100 * 60 * 60 * 24);
 
+          console.log(currentDate, lastDate);
           if (dayDifference > 1) {
             setStreakCount(0);
           } else {
@@ -66,6 +70,8 @@ const CalendarPage = () => {
           setHighestStreakCount(userHighestStreakCount);
         } catch (error) {
           console.error("Error updating streaks:", error.message);
+        } finally {
+          setLoading(false);
         }
       });
     };
@@ -100,7 +106,10 @@ const CalendarPage = () => {
             <h2> Streak Insight </h2>
           </div>
 
-          <div className='streaks'>
+          { loading ? (
+            <Loader />
+          ) : 
+          (<div className='streaks'>
             <div>
               <div>
                 <img src='/icons/streak-icon.png' alt={streakCount} />
@@ -118,8 +127,8 @@ const CalendarPage = () => {
 
               <p> Highest streak </p>
             </div>
-
-          </div>
+          </div>)}
+          
          </div>
 
          <BottomNav currentPage='calendar' />

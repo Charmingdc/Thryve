@@ -124,10 +124,11 @@
   height: 1.6rem;
   stroke: var(--primary-color);
 }
+/*
 .settings-menu > div:first-of-type .icon {
   fill: var(--primary-color);
 }
-
+*/
 
 
 
