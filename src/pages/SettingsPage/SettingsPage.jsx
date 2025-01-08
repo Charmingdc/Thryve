@@ -1,20 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
+import { auth, db } from '../../firebase/firebase-init';
 
-import {
-   HiMiniPencilSquare,
-   HiOutlineLockClosed,
-   HiOutlineCamera
-} from "react-icons/hi2";
-import {
-  HiOutlineMail,
-  HiOutlineLogout 
-} from "react-icons/hi";
+import { HiMiniPencilSquare, HiOutlineLockClosed, HiOutlineCamera } from "react-icons/hi2";
+import {HiOutlineMail, HiOutlineLogout } from "react-icons/hi";
 import { IoToggleOutline } from "react-icons/io5";
+
 import Topnavbar from '../../components/Helpers/Topnavbar';
 import SideBar from '../../components/Helpers/SideBar';
 import BottomNav from '../../components/Helpers/BottomNav';
 import './SettingsPage.css';
+import { deleteDoc, doc, getDoc, setDoc } from "firebase/firestore";
+import { onAuthStateChanged, updateProfile } from "firebase/auth";
 
 
 const SettingsPage = () => {
@@ -22,16 +19,58 @@ const SettingsPage = () => {
   const [showModalWrapper, setShowModalWrapper] = useState(false);
   const [showUsernameModal, setShowUsernameModal] = useState(false);
 
-
+ 
   const handleShowModal = () => {
     setShowModalWrapper(false);
     setShowUsernameModal(false);
-  
   }
-  const handleUsernameUpdate = () => {
-    setShowModalWrapper(true);
-    setShowUsernameModal(true);
+
+  const handleUsernameUpdate = async (e) => {
+    e.preventDefault();
+    
+    try {
+      onAuthStateChanged(auth, async(user) => {
+        if (!user) return;
+
+        const oldUsername = user.displayName.toLowerCase();
+        const newUsername = usernameInput;
+        const normalizedUsername = newUsername.toLowerCase();
+
+        const oldUserDocRef = doc(db, 'users', oldUsername);
+        const newUserDocRef = doc(db, 'users', normalizedUsername);
+
+        try {
+          const oldUserDocSnap = await getDoc(oldUserDocRef);
+          if (!oldUserDocSnap.exists()) {
+            console.error(`Old username doesn't:`, err.message);
+            return;
+          }
+
+          const newUserDocSnap = await getDoc(newUserDocRef);
+          if (newUserDocSnap.exists()) {
+            console.error('Username already choosen');
+            return;
+          }
+
+          const oldUserData = oldUserDocSnap.data();
+          await setDoc(newUserDocRef, oldUserData);
+
+          await deleteDoc(oldUserDocRef);
+
+          await updateProfile(user, {displayName: newUsername});
+
+        } catch (err) {
+          console.error(err.message);
+        } 
+      });
+    } catch (err) {
+      console.error('Error changing username:', err.message);
+    }
   }
+
+  useEffect(() => {
+    if (showUsernameModal === true) setShowModalWrapper(true);
+  }, [showUsernameModal]);
 
   return (
     <main className='setting-container'>
@@ -51,7 +90,7 @@ const SettingsPage = () => {
 
         <div className='username-holder'>
           <h1> John Doe </h1>
-          <HiMiniPencilSquare className='icon' onClick={handleUsernameUpdate} />
+          <HiMiniPencilSquare className='icon' onClick={() => setShowUsernameModal(true)} />
         </div>
       </div>
 
@@ -88,7 +127,7 @@ const SettingsPage = () => {
 
 
       {showModalWrapper && <section className='modals-wrapper' onClick={handleShowModal}>
-        <form className={showUsernameModal ? 'modal' : 'hide-modal'} id='cg-username-modal'>
+        <form className={showUsernameModal ? 'modal' : 'hide-modal'} onClick={(e) => e.stopPropagation()} onSubmit={(e) => handleUsernameUpdate(e)}>
           <h2> Edit username </h2>
 
           <div className='group'>
