@@ -135,7 +135,8 @@
   z-index: 20;
 }
 
-.modal {
+.modal,
+.hide-modal {
  position: fixed;
  bottom: 0;
  width: 100%;

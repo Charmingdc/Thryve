@@ -19,10 +19,17 @@ import './SettingsPage.css';
 
 const SettingsPage = () => {
   const [usernameInput, setUsernameInput] = useState('');
+  const [showModalWrapper, setShowModalWrapper] = useState(false);
   const [showUsernameModal, setShowUsernameModal] = useState(false);
 
 
   const handleShowModal = () => {
+    setShowModalWrapper(false);
+    setShowUsernameModal(false);
+  
+  }
+  const handleUsernameUpdate = () => {
+    setShowModalWrapper(true);
     setShowUsernameModal(true);
   }
 
@@ -44,7 +51,7 @@ const SettingsPage = () => {
 
         <div className='username-holder'>
           <h1> John Doe </h1>
-          <HiMiniPencilSquare className='icon' />
+          <HiMiniPencilSquare className='icon' onClick={handleUsernameUpdate} />
         </div>
       </div>
 
@@ -80,8 +87,8 @@ const SettingsPage = () => {
       </div>
 
 
-      <section className='modals-wrapper' onClick={handleShowModal}>
-        <form className={showUsernameModal ? 'hide-modal' : 'modal'} id='cg-username-modal'>
+      {showModalWrapper && <section className='modals-wrapper' onClick={handleShowModal}>
+        <form className={showUsernameModal ? 'modal' : 'hide-modal'} id='cg-username-modal'>
           <h2> Edit username </h2>
 
           <div className='group'>
@@ -96,7 +103,7 @@ const SettingsPage = () => {
   
            <button className='save-button'> Save Changes </button>
         </form>
-      </section>
+      </section>}
 
       <BottomNav currentPage='setting' />
      </div>
