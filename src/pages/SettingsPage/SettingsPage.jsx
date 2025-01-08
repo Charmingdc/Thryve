@@ -1,9 +1,11 @@
+import { useState } from "react";
+
+
 import {
    HiMiniPencilSquare,
    HiOutlineLockClosed,
    HiOutlineCamera
 } from "react-icons/hi2";
-import { MdOutlinePassword } from "react-icons/md";
 import {
   HiOutlineMail,
   HiOutlineLogout 
@@ -16,6 +18,14 @@ import './SettingsPage.css';
 
 
 const SettingsPage = () => {
+  const [usernameInput, setUsernameInput] = useState('');
+  const [showUsernameModal, setShowUsernameModal] = useState(false);
+
+
+  const handleShowModal = () => {
+    setShowUsernameModal(true);
+  }
+
   return (
     <main className='setting-container'>
      <SideBar currentPage='setting' />
@@ -69,6 +79,24 @@ const SettingsPage = () => {
         </div>
       </div>
 
+
+      <section className='modals-wrapper' onClick={handleShowModal}>
+        <form className={showUsernameModal ? 'hide-modal' : 'modal'} id='cg-username-modal'>
+          <h2> Edit username </h2>
+
+          <div className='group'>
+            <HiOutlineMail className='input-icon' />
+            <input 
+             type='text'
+             className='input'
+             placeholder='Enter a unique username'
+             value={usernameInput}
+             onChange={(e) => setUsernameInput(e.target.value)} />
+          </div>
+  
+           <button className='save-button'> Save Changes </button>
+        </form>
+      </section>
 
       <BottomNav currentPage='setting' />
      </div>

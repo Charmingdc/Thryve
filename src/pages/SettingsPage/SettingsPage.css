@@ -124,6 +124,59 @@
   height: 1.6rem;
   stroke: var(--primary-color);
 }
+
+.modals-wrapper {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  backdrop-filter: blur(3px);
+  z-index: 20;
+}
+
+.modal {
+ position: fixed;
+ bottom: 0;
+ width: 100%;
+ height: auto;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ padding: 1rem 2rem;
+ background-color: var(--shade);
+ border-top-left-radius: 2rem;
+ border-top-right-radius: 2rem;
+ transition: 400ms;
+}
+
+.hide-modal {
+  position: fixed;
+  bottom: -100%;
+  transition-duration: 300ms;
+}
+
+.modal h2 {
+ margin-bottom: 1rem;
+}
+
+.modal .save-button {
+  width: 100%;
+  height: 3.4rem;
+  color: rgb(250, 250, 250);
+  background-color: var(--primary-color);
+  border: 0.1rem double var(--bg);
+  border-radius: 3rem;
+  margin-top: 1rem;
+}
+
+.input-icon {
+  width: 1.6rem;
+  height: 1.6rem;
+  position: absolute;
+  left: 1rem;
+  fill: none;
+}
 /*
 .settings-menu > div:first-of-type .icon {
   fill: var(--primary-color);
