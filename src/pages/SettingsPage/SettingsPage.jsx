@@ -19,7 +19,7 @@ import { onAuthStateChanged, updateProfile } from "firebase/auth";
 const SettingsPage = () => {
   const [userDetails, setUserDetails] = useState({});
   const [usernameInput, setUsernameInput] = useState('');
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState('');
 
   const [showModalWrapper, setShowModalWrapper] = useState(false);
   const [showDpModal, setShowDpModal] = useState(false);
@@ -125,7 +125,6 @@ const SettingsPage = () => {
       });
     } catch (err) {
       console.error('Error changing username:', err.message);
-    } finally {
     }
   }
   
@@ -211,7 +210,7 @@ const SettingsPage = () => {
             value={selectedFile}
             onChange={handleDpUpdate} />
 
-          <label for='dp-picker' className='upload-wrapper'>
+          <label htmlFor='dp-picker' className='upload-wrapper'>
             <IoImageOutline className='icon' />
             <p> Upload or take a picture </p>
           </label>
