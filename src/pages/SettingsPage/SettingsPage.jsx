@@ -12,11 +12,10 @@ import './SettingsPage.css';
 
 import { auth, db } from '../../firebase/firebase-init';
 import { deleteDoc, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
-import { EmailAuthProvider, onAuthStateChanged, sendEmailVerification, updateEmail, updateProfile } from "firebase/auth";
+import { EmailAuthProvider, onAuthStateChanged, sendEmailVerification, updateEmail, updateProfile, reauthenticateWithCredential } from "firebase/auth";
 
 import uploadUserDp from '../../functions/uploadUserDp';
-import { reauthenticateWithCredential } from "firebase/auth/cordova";
-import { useSearchParams } from "react-router-dom";
+import { formatError } from '../../functions/formatFirebaseError.js';
 
 
 const SettingsPage = () => {
@@ -25,11 +24,13 @@ const SettingsPage = () => {
   const [selectedFile, setSelectedFile] = useState('');
   const [emailInput, setEmailInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
+  const [newPasswordInput, setNewPasswordInput] = useState('');
 
   const [showModalWrapper, setShowModalWrapper] = useState(false);
   const [showDpModal, setShowDpModal] = useState(false);
   const [showUsernameModal, setShowUsernameModal] = useState(false);
   const [showEmailModal, setShowEmailModal] = useState(false);
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
 
   const [loading, setLoading] = useState(false);
  
@@ -39,6 +40,7 @@ const SettingsPage = () => {
     setShowUsernameModal(false);
     setShowDpModal(false);
     setShowEmailModal(false);
+    setShowPasswordModal(false);
   }
 
   const getUserDetails = () => {
@@ -178,33 +180,50 @@ const SettingsPage = () => {
     try {
       const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       const isEmailValid = regex.test(emailInput);
-
+       
+      // check if email is valid
       if (!isEmailValid) throw new Error('Please enter a valid email');
       if (passwordInput.trim().length < 6) throw new Error('Password must not be less than 6 characters');
 
+      // get currently authenticated user
       const user = auth.currentUser;
+      // check if current email is verified 
       if (!user.emailVerified) throw new Error('Current email is not verified, please verify it first and try again.');
 
       const username = user.displayName.toLowerCase();
       const password = passwordInput.trim();
       const newEmail = emailInput.trim();
-      const docRef = doc(db, 'users', username);
 
+      // get a reference to user doc
+      const docRef = doc(db, 'users', username);
+      
+      // get user credentials
       const credential = EmailAuthProvider.credential(user.email, password);
 
+      // reauthenticate user
       await reauthenticateWithCredential(user, credential);
 
+      // update user email
       await updateEmail(user, newEmail);
 
+      // update user doc
       await updateDoc(docRef, {email: newEmail});
 
+      // send verification email
       await sendEmailVerification(user);
       
+      // display success toast
       toast.success('Email updated successfully, check your new email for verification link.');
 
       setShowEmailModal(false);
     } catch (err) {
-      toast.error(err.message);
+      const formattedErr = await formatError(err.message);
+      if (err.message.startsWith('Firebase')) {
+        toast.error(formattedErr);
+        return;
+      }
+
+      toast.error(err.message); 
       console.error('Error updating email:', err.message);
     } finally {
       setLoading(false);
@@ -232,6 +251,11 @@ const SettingsPage = () => {
     showEmailModal && setEmailInput('');
     showEmailModal && setPasswordInput('');
   }, [showEmailModal]);
+
+  useEffect(() => {
+    (showPasswordModal === true) ? setShowModalWrapper(true) : setShowModalWrapper(false);
+    setShowPasswordModal && setPasswordInput('');
+  }, [showPasswordModal]);
 
   return (
     <main className='setting-container'>
@@ -268,7 +292,7 @@ const SettingsPage = () => {
           <h3> Edit email </h3>
         </div>
 
-        <div>
+        <div onClick={() => setShowPasswordModal(true)}>
           <div className='icon-holder'>
             <HiOutlineLockClosed className='icon' />
           </div>
@@ -311,8 +335,10 @@ const SettingsPage = () => {
         </form>
 
         <form className={showUsernameModal ? 'modal' : 'hide-modal'} onClick={(e) => e.stopPropagation()} onSubmit={(e) => handleUsernameUpdate(e)}>
-          <h2> Edit username </h2>
+          <h2> Change username </h2>
 
+          {loading ? <Loader /> : (
+          <>
           <div className='group'>
             <HiOutlineUser className='input-icon' />
             <input 
@@ -323,16 +349,16 @@ const SettingsPage = () => {
               onChange={(e) => setUsernameInput(e.target.value)} />
           </div>
           
-          {loading ? <Loader /> : (
-            <button className='save-button'> Save Changes </button>
+          <button className='save-button'> Save Changes </button>
+          </>
           )}
         </form>
 
         <form className={showEmailModal ? 'modal' : 'hide-modal'} onClick={(e) => e.stopPropagation()} onSubmit={(e) => handleEmailUpdate(e)}>
-          <h2> Edit Email </h2>
+          <h2> Change Email </h2>
 
           {loading ? <Loader /> : (
-            <>
+          <>
           <div className='group'>
             <HiOutlineMail className='input-icon' />
             <input
@@ -356,6 +382,32 @@ const SettingsPage = () => {
           <button className='save-button'> Save Changes </button>
           </>
           )}
+        </form>
+
+        <form className={showPasswordModal ? 'modal' : 'hide-modal'} onClick={(e) => e.stopPropagation()}>
+          <h2> Change Password </h2>
+
+          <div className='group'>
+            <HiOutlineLockClosed className='input-icon' />
+            <input
+              className='input'
+              type='password'
+              placeholder='Enter your old password'
+              value={passwordInput}
+              onChange={(e) => setPasswordInput(e.target.value)} />
+          </div>
+
+          <div className='group'>
+            <HiOutlineLockClosed className='input-icon' />
+            <input
+              className='input'
+              type='password'
+              placeholder='Enter your new password' 
+              value={newPasswordInput}
+              onChange={(e) => setNewPasswordInput(e.target.value)} />
+          </div>
+
+          <button className='save-button'> Save Changes </button>
         </form>
       </section>}
 
