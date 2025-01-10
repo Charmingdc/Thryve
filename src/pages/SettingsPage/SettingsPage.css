@@ -71,6 +71,7 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  margin-top: -.8rem;
 }
 
 .setting-container .username-holder > h1 {
