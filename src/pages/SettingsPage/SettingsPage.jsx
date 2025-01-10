@@ -249,7 +249,6 @@ const SettingsPage = () => {
       const user = auth.currentUser;
       if (!user) return;
 
-      console.log('currently logged in user:', user);
       // get current user auth credentials 
       const credential = EmailAuthProvider.credential(user.email, oldPassword);
 
