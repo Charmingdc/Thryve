@@ -12,7 +12,7 @@ import './SettingsPage.css';
 
 import { auth, db } from '../../firebase/firebase-init';
 import { deleteDoc, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
-import { EmailAuthProvider, onAuthStateChanged, sendEmailVerification, updateEmail, updateProfile, reauthenticateWithCredential } from "firebase/auth";
+import { EmailAuthProvider, onAuthStateChanged, sendEmailVerification, updateEmail, updateProfile, reauthenticateWithCredential, updatePassword } from "firebase/auth";
 
 import uploadUserDp from '../../functions/uploadUserDp';
 import { formatError } from '../../functions/formatFirebaseError.js';
@@ -187,6 +187,9 @@ const SettingsPage = () => {
 
       // get currently authenticated user
       const user = auth.currentUser;
+
+      if (!user) return;
+
       // check if current email is verified 
       if (!user.emailVerified) throw new Error('Current email is not verified, please verify it first and try again.');
 
@@ -232,6 +235,48 @@ const SettingsPage = () => {
     }
   }
   
+
+  const handlePasswordUpdate = async (e) => {
+    e.preventDefault();
+
+    setLoading(true);
+    try {
+      // get currently signed-in used 
+      const user = auth.currentUser;
+      if (!user) return;
+
+      console.log('currently')
+      // get current user auth credentials 
+      const credential = EmailAuthProvider.credential(user.email, oldPassword);
+
+      // reauthenticate current user
+      await reauthenticateWithCredential(user, credential);
+
+      // update password
+      await updatePassword(user, newPassword);
+
+      // show success toast
+      toast.success(`Password changed to ${newPassword} successfully`);
+
+      setShowPasswordModal(false);
+    } catch (err) {
+      const formatedErr = await formatError(err.message);
+      if (err.message.startsWith('Firebase')) {
+        toast.error(formatedErr);
+        return;
+      }
+
+      toast.error(err.message);
+      console.error('Error updating password:', err.message);
+    } finally {
+      // reset states
+      setLoading(false);
+      setPasswordInput('');
+      setNewPasswordInput('');
+    }
+  }
+
+
   useEffect(() => {
     const unsubscribe  = getUserDetails();
     return () => unsubscribe();
@@ -384,10 +429,12 @@ const SettingsPage = () => {
           )}
         </form>
 
-        <form className={showPasswordModal ? 'modal' : 'hide-modal'} onClick={(e) => e.stopPropagation()}>
+        <form className={showPasswordModal ? 'modal' : 'hide-modal'} onClick={(e) => e.stopPropagation()} onSubmit={(e) => handlePasswordUpdate(e)}>
           <h2> Change Password </h2>
 
-          <div className='group'>
+          {loading ? <Loader /> : (
+           <>
+           <div className='group'>
             <HiOutlineLockClosed className='input-icon' />
             <input
               className='input'
@@ -408,6 +455,8 @@ const SettingsPage = () => {
           </div>
 
           <button className='save-button'> Save Changes </button>
+          </>
+          )}
         </form>
       </section>}
 
