@@ -11,10 +11,12 @@ import BottomNav from '../../components/Helpers/BottomNav';
 import './SettingsPage.css';
 
 import { auth, db } from '../../firebase/firebase-init';
-import { deleteDoc, doc, getDoc, setDoc } from "firebase/firestore";
-import { onAuthStateChanged, updateProfile } from "firebase/auth";
+import { deleteDoc, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { EmailAuthProvider, onAuthStateChanged, sendEmailVerification, updateEmail, updateProfile } from "firebase/auth";
 
 import uploadUserDp from '../../functions/uploadUserDp';
+import { reauthenticateWithCredential } from "firebase/auth/cordova";
+import { useSearchParams } from "react-router-dom";
 
 
 const SettingsPage = () => {
@@ -172,16 +174,42 @@ const SettingsPage = () => {
   const handleEmailUpdate = async (e) => {
     e.preventDefault();
 
-    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    const isEmailValid = regex.test(emailInput);
-
-    if (!isEmailValid) throw new Error('Please enter a valid email');
-    if (passwordInput.trim().length < 6) throw new Error('Password must not be less than 6 characters');
-
+    setLoading(true);
     try {
+      const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      const isEmailValid = regex.test(emailInput);
 
+      if (!isEmailValid) throw new Error('Please enter a valid email');
+      if (passwordInput.trim().length < 6) throw new Error('Password must not be less than 6 characters');
+
+      const user = auth.currentUser;
+      if (!user.emailVerified) throw new Error('Current email is not verified, please verify it first and try again.');
+
+      const username = user.displayName.toLowerCase();
+      const password = passwordInput.trim();
+      const newEmail = emailInput.trim();
+      const docRef = doc(db, 'users', username);
+
+      const credential = EmailAuthProvider.credential(user.email, password);
+
+      await reauthenticateWithCredential(user, credential);
+
+      await updateEmail(user, newEmail);
+
+      await updateDoc(docRef, {email: newEmail});
+
+      await sendEmailVerification(user);
+      
+      toast.success('Email updated successfully, check your new email for verification link.');
+
+      setShowEmailModal(false);
     } catch (err) {
+      toast.error(err.message);
       console.error('Error updating email:', err.message);
+    } finally {
+      setLoading(false);
+      setEmailInput('');
+      setPasswordInput('');
     }
   }
   
@@ -303,6 +331,8 @@ const SettingsPage = () => {
         <form className={showEmailModal ? 'modal' : 'hide-modal'} onClick={(e) => e.stopPropagation()} onSubmit={(e) => handleEmailUpdate(e)}>
           <h2> Edit Email </h2>
 
+          {loading ? <Loader /> : (
+            <>
           <div className='group'>
             <HiOutlineMail className='input-icon' />
             <input
@@ -324,6 +354,8 @@ const SettingsPage = () => {
           </div>
 
           <button className='save-button'> Save Changes </button>
+          </>
+          )}
         </form>
       </section>}
 
