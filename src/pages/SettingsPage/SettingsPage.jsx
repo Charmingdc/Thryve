@@ -240,12 +240,16 @@ const SettingsPage = () => {
     e.preventDefault();
 
     setLoading(true);
+    const oldPassword = passwordInput.trim();
+    const newPassword = newPasswordInput.trim();
+
+    if (oldPassword.length < 6 || newPassword.length < 6) throw new Error('Password must not be less than 6 characters');
     try {
       // get currently signed-in used 
       const user = auth.currentUser;
       if (!user) return;
 
-      console.log('currently')
+      console.log('currently logged in user:', user);
       // get current user auth credentials 
       const credential = EmailAuthProvider.credential(user.email, oldPassword);
 
