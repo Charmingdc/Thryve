@@ -107,6 +107,7 @@ const SignupPage = () => {
       toast.info("Please wait while we sign you up");
       const user = result.user;
       const userName = user.email.split('@')[0].toLowerCase();
+      await updateProfile(user, { displayName: userName });
 
       // check if user already exist in database
       const docRef = doc(db, 'users', userName.toLowerCase());

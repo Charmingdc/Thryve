@@ -21,7 +21,7 @@ body {
 /** animations keyframs */
 @keyframes dim {
   50% {
-    filter: opacity(0.2);
+    background-color: var(--bg);
   }
 }
 
