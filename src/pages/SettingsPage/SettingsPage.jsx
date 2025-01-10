@@ -14,23 +14,29 @@ import { auth, db } from '../../firebase/firebase-init';
 import { deleteDoc, doc, getDoc, setDoc } from "firebase/firestore";
 import { onAuthStateChanged, updateProfile } from "firebase/auth";
 
+import uploadUserDp from '../../functions/uploadUserDp';
 
 
 const SettingsPage = () => {
   const [userDetails, setUserDetails] = useState({});
   const [usernameInput, setUsernameInput] = useState('');
   const [selectedFile, setSelectedFile] = useState('');
+  const [emailInput, setEmailInput] = useState('');
+  const [passwordInput, setPasswordInput] = useState('');
 
   const [showModalWrapper, setShowModalWrapper] = useState(false);
   const [showDpModal, setShowDpModal] = useState(false);
   const [showUsernameModal, setShowUsernameModal] = useState(false);
+  const [showEmailModal, setShowEmailModal] = useState(false);
 
   const [loading, setLoading] = useState(false);
  
+
   const handleShowModal = () => {
     setShowModalWrapper(false);
     setShowUsernameModal(false);
     setShowDpModal(false);
+    setShowEmailModal(false);
   }
 
   const getUserDetails = () => {
@@ -54,12 +60,38 @@ const SettingsPage = () => {
 
   const handleDpUpdate = async (e) => {
     e.preventDefault();
-    alert('started working on dp update');
+    
+    setLoading(true);
+    const toastId = toast.loading(' Updating your display picture...');
     try {
+      const user = auth.currentUser;
+
       const file = e.target.files[0];
-      console.log(file);
+      if (!file) {
+        toast.error('No image selected');
+        return;
+      }
+
+      const photoURL = await uploadUserDp(file);
+      await updateProfile(user, {photoURL});
+
+      // remove loading toast
+      toast.dismiss(toastId);
+
+      // display success toast
+      toast.success('Display picture updated successfully');
     } catch (err) {
       console.error('Error updating user dp:', err.message);
+    } finally {
+      getUserDetails(); // re-fetch user details
+
+      // remove loading toast
+      toast.dismiss(toastId);
+
+      // reset all states
+      setLoading(false);
+      setShowDpModal(false);
+      setSelectedFile('');
     }
   }
 
@@ -69,6 +101,14 @@ const SettingsPage = () => {
 
     setLoading(true);
     try {
+      if (usernameInput.trim().length < 4) {
+        toast.error('Username must not be less than 4 characters');
+
+        setLoading(false);
+        setUsernameInput('');
+        return;
+      }
+
       const unsubscribe = onAuthStateChanged(auth, async(user) => {
         if (!user) return;
 
@@ -125,6 +165,23 @@ const SettingsPage = () => {
       });
     } catch (err) {
       console.error('Error changing username:', err.message);
+    } 
+  }
+
+
+  const handleEmailUpdate = async (e) => {
+    e.preventDefault();
+
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const isEmailValid = regex.test(emailInput);
+
+    if (!isEmailValid) throw new Error('Please enter a valid email');
+    if (passwordInput.trim().length < 6) throw new Error('Password must not be less than 6 characters');
+
+    try {
+
+    } catch (err) {
+      console.error('Error updating email:', err.message);
     }
   }
   
@@ -134,13 +191,19 @@ const SettingsPage = () => {
   }, []);
 
   useEffect(() => {
-    if (showUsernameModal === true) setShowModalWrapper(true);
-    if (showUsernameModal === false) setShowModalWrapper(false);
+    (showUsernameModal === true) ? setShowModalWrapper(true) : setShowModalWrapper(false);
+    showUsernameModal && setUsernameInput('');
   }, [showUsernameModal]);
   
   useEffect(() => {
     (showDpModal === true) ? setShowModalWrapper(true) : setShowModalWrapper(false);
   }, [showDpModal]);
+
+  useEffect(() => {
+    (showEmailModal === true) ? setShowModalWrapper(true) : setShowModalWrapper(false);
+    showEmailModal && setEmailInput('');
+    showEmailModal && setPasswordInput('');
+  }, [showEmailModal]);
 
   return (
     <main className='setting-container'>
@@ -170,7 +233,7 @@ const SettingsPage = () => {
 
 
       <div className='settings-menu'>
-        <div>
+        <div onClick={() => setShowEmailModal(true)}>
           <div className='icon-holder'>
             <HiOutlineMail className='icon' />
           </div>
@@ -207,13 +270,16 @@ const SettingsPage = () => {
           <input
             id='dp-picker'
             type='file'
+            accept='image/*'
             value={selectedFile}
             onChange={handleDpUpdate} />
 
-          <label htmlFor='dp-picker' className='upload-wrapper'>
+          {loading ? <Loader /> : (
+            <label htmlFor='dp-picker' className='upload-wrapper'>
             <IoImageOutline className='icon' />
             <p> Upload or take a picture </p>
           </label>
+          )}
         </form>
 
         <form className={showUsernameModal ? 'modal' : 'hide-modal'} onClick={(e) => e.stopPropagation()} onSubmit={(e) => handleUsernameUpdate(e)}>
@@ -228,8 +294,36 @@ const SettingsPage = () => {
               value={usernameInput}
               onChange={(e) => setUsernameInput(e.target.value)} />
           </div>
-  
-          <button className='save-button'> { loading ? <Loader /> : 'Save Changes' } </button>
+          
+          {loading ? <Loader /> : (
+            <button className='save-button'> Save Changes </button>
+          )}
+        </form>
+
+        <form className={showEmailModal ? 'modal' : 'hide-modal'} onClick={(e) => e.stopPropagation()} onSubmit={(e) => handleEmailUpdate(e)}>
+          <h2> Edit Email </h2>
+
+          <div className='group'>
+            <HiOutlineMail className='input-icon' />
+            <input
+              className='input'
+              type='email'
+              placeholder='Enter your preferred email'
+              value={emailInput}
+              onChange={(e) => setEmailInput(e.target.value)} />
+          </div>
+
+          <div className='group'>
+            <HiOutlineLockClosed className='input-icon' />
+            <input
+              className='input'
+              type='password'
+              placeholder='Enter your password'
+              value={passwordInput}
+              onChange={(e) => setPasswordInput(e.target.value)} />
+          </div>
+
+          <button className='save-button'> Save Changes </button>
         </form>
       </section>}
 
