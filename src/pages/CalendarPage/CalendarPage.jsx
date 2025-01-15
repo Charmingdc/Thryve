@@ -5,12 +5,12 @@ import FullCalendar from '@fullcalendar/react';
 // import "@fullcalendar/timegrid/main.css";
 
 import { onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc, setDoc } from "firebase/firestore";
-import { useEffect, useState, useRef } from 'react';
+import { doc, getDoc } from "firebase/firestore";
+import { useEffect, useRef, useState } from 'react';
 import BottomNav from '../../components/Helpers/BottomNav';
+import Loader from '../../components/Helpers/Loader';
 import SideBar from '../../components/Helpers/SideBar';
 import Topnavbar from '../../components/Helpers/Topnavbar';
-import Loader from '../../components/Helpers/Loader';
 import { auth, db } from '../../firebase/firebase-init';
 import './Style.css';
 
@@ -43,7 +43,7 @@ const CalendarPage = () => {
 
 
           const username = user.displayName.toLowerCase();
-          
+
           const docRef = doc(db, 'users', username);
           const userSnap = await getDoc(docRef);
 
@@ -59,7 +59,7 @@ const CalendarPage = () => {
           const userCurrentStreakCount = userData?.currentStreakCount || 0;
           const userHighestStreakCount = userData?.highestStreakCount || 0;
 
-          const dayDifference = (currentDate - lastDate) / (100 * 60 * 60 * 24);
+          const dayDifference = Math.floor((currentDate - lastDate) / (100 * 60 * 60 * 24));
 
           console.log(currentDate, lastDate);
           if (dayDifference > 1) {
@@ -108,7 +108,7 @@ const CalendarPage = () => {
 
           { loading ? (
             <Loader />
-          ) : 
+          ) :
           (<div className='streaks'>
             <div>
               <div>
@@ -116,7 +116,7 @@ const CalendarPage = () => {
                 <h1> { streakCount } </h1>
               </div>
 
-              <p> current streak </p>  
+              <p> current streak </p>
             </div>
 
             <div>
@@ -128,7 +128,7 @@ const CalendarPage = () => {
               <p> Highest streak </p>
             </div>
           </div>)}
-          
+
          </div>
 
          <BottomNav currentPage='calendar' />
