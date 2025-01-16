@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useAuth } from '../../AuthContext.jsx';
+import { useAuth } from '../../AuthContext.js';
 
 import { toast } from "sonner";
 import { HiMiniPencilSquare, HiOutlineLockClosed, HiOutlineCamera, HiOutlineUser } from "react-icons/hi2";
@@ -282,6 +282,12 @@ const SettingsPage = () => {
       setNewPasswordInput('');
     }
   }
+  
+  
+  const handleLogout = () => {
+    alert('Log user out');
+    logout();
+  }
 
 
   useEffect(() => {
@@ -358,7 +364,7 @@ const SettingsPage = () => {
           <h3> Change theme </h3>
         </div>
 
-        <div onClick={logout}>
+        <div onClick={handleLogout}>
           <div className='icon-holder'>
             <HiOutlineLogout className='icon' />
           </div>
