@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useAuth } from '../../contexts/AuthContext.js';
+import { useAuth } from '../../contexts/AuthContext.jsx';
 
 import { toast } from "sonner";
 import { HiMiniPencilSquare, HiOutlineLockClosed, HiOutlineCamera, HiOutlineUser } from "react-icons/hi2";
