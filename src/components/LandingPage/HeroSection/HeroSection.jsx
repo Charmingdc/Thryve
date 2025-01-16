@@ -13,7 +13,7 @@ const HeroSection = () => {
                 <Link to='/signup'> Get Started </Link>
             </div>
             <div className="hero-image">
-                <img src="src/assets/LandingPageAssets/header-image.png" alt="Hero Image" />
+                <img src="/LandingPageAssets/header-image.png" alt="Hero Image" />
             </div>
         </section>
     )

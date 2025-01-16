@@ -6,7 +6,7 @@ const CallToActionSection = () => {
         <section className="call-to-action-section">
             <div className="container">
                 <div className="image">
-                    <img src="src/assets/LandingPageAssets/sync-data.png" alt="" />
+                    <img src="/LandingPageAssets/sync-data.png" alt="" />
                 </div>
                 <div className="description">
                     <p><b>New</b></p>
