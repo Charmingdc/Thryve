@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
+import { useAuth } from '../../AuthContext.jsx';
+
 import { toast } from "sonner";
 import { HiMiniPencilSquare, HiOutlineLockClosed, HiOutlineCamera, HiOutlineUser } from "react-icons/hi2";
 import {HiOutlineMail, HiOutlineLogout } from "react-icons/hi";
@@ -19,6 +21,8 @@ import { formatError } from '../../functions/formatFirebaseError.js';
 
 
 const SettingsPage = () => {
+  const { user, logout } = useAuth();
+  
   const [userDetails, setUserDetails] = useState({});
   const [usernameInput, setUsernameInput] = useState('');
   const [selectedFile, setSelectedFile] = useState('');
@@ -354,7 +358,7 @@ const SettingsPage = () => {
           <h3> Change theme </h3>
         </div>
 
-        <div>
+        <div onClick={logout}>
           <div className='icon-holder'>
             <HiOutlineLogout className='icon' />
           </div>
