@@ -12,7 +12,7 @@ export const ThemeProvider = ({ children }) => {
 
   // Update the CSS root variables when theme changes
   useEffect(() => {
-    const rootElement = document.documentElement;
+    const rootElement = document.getElementById('body')
 
     if (theme === 'light') {
       rootElement.classList.add('light');
