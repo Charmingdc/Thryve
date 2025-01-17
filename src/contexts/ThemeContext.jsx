@@ -5,35 +5,49 @@ import { auth, db } from '../firebase/firebase-init.js';
 
 export const ThemeContext = createContext();
 
-
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState('dark'); // Default theme
+  const [theme, setTheme] = useState('system'); // Default to system
 
+  // Detect system theme
+  const getSystemTheme = () => {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  };
 
-  // Update the CSS root variables when theme changes
+  
   useEffect(() => {
-    const rootElement = document.getElementById('body')
+    const rootElement = document.getElementById('body');
 
-    if (theme === 'light') {
-      rootElement.classList.add('light');
-    } else {
+    if (theme === 'dark') {
+      rootElement.classList.add('dark');
       rootElement.classList.remove('light');
+    } else if (theme === 'light') {
+      rootElement.classList.add('light');
+      rootElement.classList.remove('dark');
+    } else {
+      const systemTheme = getSystemTheme();
+      rootElement.classList.add(systemTheme);
+      rootElement.classList.remove(systemTheme === 'dark' ? 'light' : 'dark');
+      setTheme('system');
     }
   }, [theme]);
 
 
+  // Fetch theme from Firestore or fallback to system theme
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      if (!currentUser) return;
+      if (!currentUser) {
+        const systemTheme = getSystemTheme();
+        setTheme(systemTheme);
+        return;
+      }
 
       try {
         const username = currentUser.displayName.toLowerCase();
         const docRef = doc(db, 'users', username);
         const docSnap = await getDoc(docRef);
 
-        const userDetails = docSnap.exists() ? docSnap.data() : {};
-        const savedTheme = userDetails?.userTheme || 'dark';
-        setTheme(savedTheme);
+        const savedTheme = docSnap.exists() ? docSnap.data()?.userTheme : null;
+        setTheme(savedTheme || getSystemTheme());
       } catch (error) {
         console.error('Error fetching theme:', error);
       }
@@ -43,25 +57,29 @@ export const ThemeProvider = ({ children }) => {
   }, []);
 
 
+
+  // Toggle theme and persist it to Firestore
   const toggleTheme = async () => {
     try {
       const currentUser = auth.currentUser;
-      if (!currentUser) return;
+      const newTheme = theme === 'dark' ? 'light' : 'dark';
 
-      const username = currentUser.displayName.toLowerCase();
-      const docRef = doc(db, 'users', username);
-      const docSnap = await getDoc(docRef);
+      setTheme(newTheme);
 
-      const userDetails = docSnap.exists() ? docSnap.data() : {};
-      const savedTheme = userDetails?.userTheme || 'dark';
-      const updatedTheme = savedTheme === 'dark' ? 'light' : 'dark';
-
-      setTheme(updatedTheme);
-
-      if (!userDetails.userTheme) {
-        await setDoc(docRef, { userTheme: updatedTheme }, { merge: true });
-      } else {
-        await updateDoc(docRef, { userTheme: updatedTheme });
+      if (currentUser) {
+        const username = currentUser.displayName.toLowerCase();
+        const docRef = doc(db, 'users', username);
+        
+        const docSnap = await getDoc(docRef)
+        const userDetails = docSnap.data()
+          
+         if (!userDetails?.userTheme) {
+            await setDoc(docRef, {
+              userTheme: newTheme
+            }, {merge: true});
+         } else {
+           await updateDoc(docRef, { userTheme: newTheme });
+         }
       }
     } catch (error) {
       console.error('Error toggling theme:', error);
