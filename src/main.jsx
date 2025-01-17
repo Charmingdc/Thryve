@@ -30,11 +30,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
    <ThemeProvider>
      <BrowserRouter>
        <Routes>
-         <Route path='/' element={
-           <PublicRoute>
-             <App />
-           </PublicRoute>
-         } />
+         <Route path='/' element={<App />} />
          <Route path='*' element={<ErrorPage />} />
          <Route path='/login' element={<PublicRoute> 
              <LoginPage /> 
