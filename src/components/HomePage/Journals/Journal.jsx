@@ -28,8 +28,8 @@ const Journal = ({journal}) => {
       handleDateAndTime();
 
 
-      const handleMoodPicture = () => {
-        const pictureUrl = getMoodPicture(journal.journalMood);
+      const handleMoodPicture = async () => {
+        const pictureUrl = await getMoodPicture(journal.journalMood);
         setMoodPicture(pictureUrl);
       }
       handleMoodPicture();

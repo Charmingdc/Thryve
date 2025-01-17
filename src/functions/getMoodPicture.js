@@ -1,17 +1,17 @@
-const getMoodPicture = (mood) => {
+const getMoodPicture = async (mood) => {
   let pictureUrl = '';
 
   switch (mood) {
     case 'grateful':
-        pictureUrl = '/public/icons/grateful.png';
+        pictureUrl = '/icons/grateful.png';
         break;
 
     case 'joyful':
-        pictureUrl = '/public/icons/joyful.png';
+        pictureUrl = '/icons/joyful.png';
         break;
 
     case 'inspired':
-        pictureUrl = '/public/icons/inspired.png';
+        pictureUrl = '/icons/inspired.png';
         break;
 
     case 'peaceful':
@@ -19,7 +19,7 @@ const getMoodPicture = (mood) => {
         break;
 
     case 'hopeful':
-        pictureUrl = '/public/icons/hopeful.png';
+        pictureUrl = '/icons/hopeful.png';
         break;
   }
 

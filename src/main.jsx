@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { ThemeProvider } from './contexts/ThemeContext.jsx';
 import { AuthProvider } from './contexts/AuthContext.jsx';
 
 import { Toaster } from 'sonner';
@@ -26,6 +27,7 @@ import EditJournalPage from './pages/EditJournalPage/EditJournalPage.jsx';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
    <AuthProvider>
+   <ThemeProvider>
      <BrowserRouter>
        <Routes>
          <Route path='/' element={<App />} />
@@ -89,6 +91,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           }
         }} />
      </BrowserRouter>
+    </ThemeProvider>
     </AuthProvider>
   </React.StrictMode>,
 )

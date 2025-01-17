@@ -64,7 +64,7 @@ const ViewJournalPage = () => {
         console.log('doc data:', docData)
 
         // transform journal mood to journal icons
-        const moodIconUrl = getMoodPicture(docData.journalMood);
+        const moodIconUrl = await getMoodPicture(docData.journalMood);
 
         // get and format date and time 
         const date = new Date(docData.createdAt.toDate());

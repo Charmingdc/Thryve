@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useAuth } from '../../contexts/AuthContext.jsx';
+import { useTheme } from '../../contexts/ThemeContext.jsx';
 
 import { toast } from "sonner";
 import { HiMiniPencilSquare, HiOutlineLockClosed, HiOutlineCamera, HiOutlineUser } from "react-icons/hi2";
@@ -22,6 +23,7 @@ import { formatError } from '../../functions/formatFirebaseError.js';
 
 const SettingsPage = () => {
   const { user, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme()
   
   const [userDetails, setUserDetails] = useState({});
   const [usernameInput, setUsernameInput] = useState('');
@@ -283,12 +285,12 @@ const SettingsPage = () => {
     }
   }
   
+  const handleLogout = () => logout();
   
-  const handleLogout = () => {
-    alert('Log user out');
-    logout();
+  
+  const handleThemeUpdate = async () => {
+    await toggleTheme();
   }
-
 
   useEffect(() => {
     const unsubscribe  = getUserDetails();
@@ -357,7 +359,7 @@ const SettingsPage = () => {
           <h3> Edit password </h3>
         </div>
 
-        <div>
+        <div onClick={handleThemeUpdate}>
           <div className='icon-holder'>
             <IoToggleOutline className='icon' />
           </div>
