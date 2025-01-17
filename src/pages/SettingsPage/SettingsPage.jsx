@@ -289,7 +289,9 @@ const SettingsPage = () => {
   
   
   const handleThemeUpdate = async () => {
+    alert('Toggled theme change');
     await toggleTheme();
+    alert('Updated to:', theme);
   }
 
   useEffect(() => {

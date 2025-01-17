@@ -61,7 +61,7 @@ const ViewJournalPage = () => {
         // get journal data
         const docSnap = await getDoc(journalRef);
         const docData = {...docSnap.data(), id: docSnap.id};
-        console.log('doc data:', docData)
+   
 
         // transform journal mood to journal icons
         const moodIconUrl = await getMoodPicture(docData.journalMood);

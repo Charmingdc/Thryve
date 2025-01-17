@@ -7,6 +7,14 @@
   --shade: rgb(20, 20, 20);
 }
 
+.dark {
+  --text-color: rgb(180, 180, 180);
+  --bg: rgb(10, 10, 10);
+  --primary-color: rgb(138, 43, 226);
+  --secondary-color: rgba(196, 148, 240, 0.2);
+  --shade: rgb(20, 20, 20);
+}
+
 /** root variables for light theme **/
 .light {
   --text-color: rgb(80, 80, 80);

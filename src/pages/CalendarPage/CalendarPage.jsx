@@ -61,7 +61,7 @@ const CalendarPage = () => {
 
           const dayDifference = Math.floor((currentDate - lastDate) / (100 * 60 * 60 * 24));
 
-          console.log(currentDate, lastDate);
+      
           if (dayDifference > 1) {
             setStreakCount(0);
           } else {
