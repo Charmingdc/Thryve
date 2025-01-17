@@ -1,12 +1,16 @@
-import "@fullcalendar/common/main.css"; // Core CSS
-import dayGridPlugin from "@fullcalendar/daygrid"; // DayGrid view plugin
-import interactionPlugin from "@fullcalendar/interaction"; // Interaction plugin (dragging, date click)
+import "@fullcalendar/common/main.css"; 
+import dayGridPlugin from "@fullcalendar/daygrid"; 
+import interactionPlugin from "@fullcalendar/interaction"; 
 import FullCalendar from '@fullcalendar/react';
-// import "@fullcalendar/timegrid/main.css";
+
+
 
 import { onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, collection, onSnapshot } from "firebase/firestore";
 import { useEffect, useRef, useState } from 'react';
+
+import { toast } from 'sonner';
+
 import BottomNav from '../../components/Helpers/BottomNav';
 import Loader from '../../components/Helpers/Loader';
 import SideBar from '../../components/Helpers/SideBar';
@@ -16,13 +20,51 @@ import './Style.css';
 
 
 const CalendarPage = () => {
+  const [events, setEvents] = useState([]);
   const [streakCount, setStreakCount] = useState(0);
   const [highestStreakCount, setHighestStreakCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const hasFetched = useRef(false);
+  
+  
+  
+  const fetchJournals = () => {
+    const journalsCollection = collection(db, "journals");
+
+    return onSnapshot(journalsCollection, (snapshot) => {
+      const journalData = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      const moodColors = {
+        grateful: "rgb(255, 223, 186)",
+        joyful: "rgb(255, 165, 0)",
+        inspired: "rgb(135, 206, 235)",
+        peaceful: "rgb(144, 238, 144)",
+        hopeful: "rgb(216, 191, 216)",
+      };
+
+      // Map Firestore data to FullCalendar format
+      const formattedEvents = journalData.map((journal) => ({
+        title: journal.journalTitle,
+        start: journal.createdAt.toDate().toISOString(),
+        backgroundColor: moodColors[journal.journalMood],
+        borderColor: moodColors[journal.journalMood],
+        url: `/view-journal/${journal.id}`,
+      }));
+
+      setEvents(formattedEvents);
+    });
+  };
+
+
 
   useEffect(() => {
     if (hasFetched.current) return;
+    
+    
+    const unsubscribe = fetchJournals(); // fetch journals and update events state
 
     const updateStreaks = () => {
       setLoading(true);
@@ -41,9 +83,7 @@ const CalendarPage = () => {
             return normalizedDate.getTime();
           }
 
-
           const username = user.displayName.toLowerCase();
-
           const docRef = doc(db, 'users', username);
           const userSnap = await getDoc(docRef);
 
@@ -75,12 +115,58 @@ const CalendarPage = () => {
         }
       });
     };
-
     updateStreaks();
+ 
+ 
+    // Cleanup on component unmount
+    return () => {
+      if (unsubscribe) unsubscribe();
+    };
+    
     hasFetched.current = true;
   }, []);
+  
+  
+ 
+  useEffect(() => {
+    const journalsCollection = collection(db, "journals");
 
+    // Real-time listener for journal entries
+    const unsubscribe = onSnapshot(journalsCollection, (snapshot) => {
+      const journalData = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      
+      const moodColors = {
+         grateful: "rgb(255, 223, 186)",
+         joyful: "rgb(255, 165, 0)",
+         inspired: "rgb(135, 206, 235)",
+         peaceful: "rgb(144, 238, 144)",
+         hopeful: "rgb(216, 191, 216)",
+      };
+        
+        
+      // Map Firestore data to FullCalendar format
+      const formattedEvents = journalData.map((journal) => ({
+        title: journal.journalTitle,
+        start: journal.createdAt.toDate().toISOString(),
+        backgroundColor: moodColors[journal.journalMood],
+        borderColor: moodColors[journal.journalMood],
+        url: `/view-journal/${journal.id}`
+      }));
 
+      setEvents(formattedEvents);
+    });
+
+    // Cleanup subscription on component unmount
+    return () => unsubscribe();
+  }, []);
+  
+  const handleEventMouseEnter = (info) => {
+    toast.info('Journal title:', info.event.title);
+  }
+  
   return (
     <>
      <main className='calendar-container'>
@@ -93,6 +179,8 @@ const CalendarPage = () => {
           <FullCalendar
            plugins={[dayGridPlugin, interactionPlugin]}
            initialView='dayGridMonth'
+           events={events}
+           eventMouseEnter={handleEventMouseEnter}
            height='100%'
            headerToolbar={{
              left: 'prev',
