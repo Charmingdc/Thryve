@@ -1,6 +1,6 @@
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { auth } from '../../firebase/firebase-init';
-import formatError from '../../functions/formatFirebaseError.js';
+import { formatError } from '../../functions/formatFirebaseError.js';
 
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
