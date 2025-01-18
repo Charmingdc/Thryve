@@ -33,7 +33,7 @@ body {
   justify-content: center;
   color: var(--text-color);
   background-color: var(--bg);
-  transition: 300ms;
+  transition: 400ms;
 }
 
 
