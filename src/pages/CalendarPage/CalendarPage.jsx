@@ -156,8 +156,8 @@ const CalendarPage = () => {
            plugins={[dayGridPlugin, interactionPlugin]}
            initialView='dayGridMonth'
            events={events}
-           eventClick={handleEventClick(info)}
-           eventMouseEnter={handleEventMouseEnter(info)}
+           eventClick={handleEventClick}
+           eventMouseEnter={handleEventMouseEnter}
            height='100%'
            headerToolbar={{
              left: 'prev',

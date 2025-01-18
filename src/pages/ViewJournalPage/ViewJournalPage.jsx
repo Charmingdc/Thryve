@@ -60,6 +60,12 @@ const ViewJournalPage = () => {
 
         // get journal data
         const docSnap = await getDoc(journalRef);
+        
+        if (!docSnap.exist()) {
+          navigate('/home');
+          return;
+        }
+        
         const docData = {...docSnap.data(), id: docSnap.id};
    
 

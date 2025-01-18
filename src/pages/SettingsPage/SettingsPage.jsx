@@ -290,7 +290,7 @@ const SettingsPage = () => {
   
   const handleThemeUpdate = async () => {
     await toggleTheme();
-    toast.success('Theme preference changed')
+    toast.success('Theme preference updated successfully')
   }
 
   useEffect(() => {
