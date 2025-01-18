@@ -6,7 +6,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import FullCalendar from '@fullcalendar/react';
 
 import { onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc, collection, onSnapshot } from "firebase/firestore";
+import { doc, getDoc, collection, onSnapshot, query, where } from "firebase/firestore";
 import { useEffect, useRef, useState } from 'react';
 
 import { toast } from 'sonner';
@@ -22,7 +22,7 @@ import './Style.css';
 const CalendarPage = () => {
   const navigate = useNavigate();
   const [events, setEvents] = useState([]);
-  const [streakCount, setStreakCount] = useState(0);
+  const [streakCount, setStreakCount] = useState('');
   const [highestStreakCount, setHighestStreakCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const hasFetched = useRef(false);
