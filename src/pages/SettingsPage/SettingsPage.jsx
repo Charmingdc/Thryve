@@ -289,9 +289,9 @@ const SettingsPage = () => {
   
   
   const handleThemeUpdate = async () => {
-    alert('Toggled theme change');
+   const toastId = toast.loading('Changing theme');
     await toggleTheme();
-    alert('Updated to:', theme);
+    toast.dismiss(toastId);
   }
 
   useEffect(() => {

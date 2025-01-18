@@ -1,9 +1,9 @@
+import { useNavigate } from "react-router-dom";
+
 import "@fullcalendar/common/main.css"; 
 import dayGridPlugin from "@fullcalendar/daygrid"; 
 import interactionPlugin from "@fullcalendar/interaction"; 
 import FullCalendar from '@fullcalendar/react';
-
-
 
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc, collection, onSnapshot } from "firebase/firestore";
@@ -20,6 +20,7 @@ import './Style.css';
 
 
 const CalendarPage = () => {
+  const navigate = useNavigate();
   const [events, setEvents] = useState([]);
   const [streakCount, setStreakCount] = useState(0);
   const [highestStreakCount, setHighestStreakCount] = useState(0);
@@ -29,9 +30,16 @@ const CalendarPage = () => {
   
   
   const fetchJournals = () => {
+    const currentUser = auth.currentUser; // get current user
+    const userId = currentUser.uid;
+    console.log(userId);
+    
+    
     const journalsCollection = collection(db, "journals");
+    
+    const q = query(journalsCollection, where('userId', '==', userId));
 
-    return onSnapshot(journalsCollection, (snapshot) => {
+    return onSnapshot(q, (snapshot) => {
       const journalData = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
@@ -149,6 +157,7 @@ const CalendarPage = () => {
         
       // Map Firestore data to FullCalendar format
       const formattedEvents = journalData.map((journal) => ({
+        id: journal.id,
         title: journal.journalTitle,
         start: journal.createdAt.toDate().toISOString(),
         backgroundColor: moodColors[journal.journalMood],
@@ -163,9 +172,10 @@ const CalendarPage = () => {
     return () => unsubscribe();
   }, []);
   
-  const handleEventMouseEnter = (info) => {
-    toast.info('Journal title:', info.event.title);
-  }
+  
+  const handleEventClick = (info) => navigate(`/view-journal/${info.event.id}`);
+  
+  const handleEventMouseEnter = (info) => toast.info('Journal title:', info.event.title);
   
   return (
     <>
@@ -180,7 +190,8 @@ const CalendarPage = () => {
            plugins={[dayGridPlugin, interactionPlugin]}
            initialView='dayGridMonth'
            events={events}
-           eventMouseEnter={handleEventMouseEnter}
+           eventClick={() => handleEventClick(info)}
+           eventMouseEnter={() => handleEventMouseEnter(info)}
            height='100%'
            headerToolbar={{
              left: 'prev',

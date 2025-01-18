@@ -1,5 +1,6 @@
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { auth } from '../../firebase/firebase-init';
+import formatError from '../../functions/formatFirebaseError.js';
 
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -42,11 +43,12 @@ const ResetPassword = () => {
       setEmail('');
 
       // display success toast
-      toast.success('If this email exists in our system, a password reset email has been sent. Please check your inbox');
+      toast.success('A password reset email has been sent. Please check your inbox');
     } catch (err) {
        console.error(err.message);
+       const formattedErr = formatError(err.message);
 
-       toast.error(err.message)
+       toast.error(formattedErr);
     } finally {
       // reset loading state
       setLoading(false);
