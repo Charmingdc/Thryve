@@ -32,6 +32,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
        <Routes>
          <Route path='/' element={<App />} />
          <Route path='*' element={<ErrorPage />} />
+         <Route path='/no-match' element={<ErrorPage />} />
+         
          <Route path='/login' element={<PublicRoute> 
              <LoginPage /> 
            </PublicRoute>

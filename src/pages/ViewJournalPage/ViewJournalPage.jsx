@@ -62,7 +62,7 @@ const ViewJournalPage = () => {
         const docSnap = await getDoc(journalRef);
         
         if (!docSnap.exist()) {
-          navigate('/home');
+          navigate('/no-match');
           return;
         }
         

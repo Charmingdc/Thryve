@@ -7,11 +7,13 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [isEmailVerified, setIsEmailVerified] = useState(null);
   const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      setIsEmailVerified(currentUser.emailVerified);
       setLoading(false);
     });
 
@@ -24,7 +26,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated: !!user, logout }}>
+    <AuthContext.Provider value={{ user, isEmailVerified, isAuthenticated: !!user, logout }}>
       {!loading && children}
     </AuthContext.Provider>
   );
