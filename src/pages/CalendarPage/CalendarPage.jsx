@@ -32,8 +32,7 @@ const CalendarPage = () => {
   const fetchJournals = () => {
     const currentUser = auth.currentUser; // get current user
     const userId = currentUser.uid;
-    console.log(userId);
-    
+    console.log('Current user id:', userId);
     
     const journalsCollection = collection(db, "journals");
     
@@ -55,11 +54,11 @@ const CalendarPage = () => {
 
       // Map Firestore data to FullCalendar format
       const formattedEvents = journalData.map((journal) => ({
+        id: journal.id,
         title: journal.journalTitle,
         start: journal.createdAt.toDate().toISOString(),
         backgroundColor: moodColors[journal.journalMood],
         borderColor: moodColors[journal.journalMood],
-        url: `/view-journal/${journal.id}`,
       }));
 
       setEvents(formattedEvents);
@@ -135,47 +134,14 @@ const CalendarPage = () => {
   }, []);
   
   
- 
-  useEffect(() => {
-    const journalsCollection = collection(db, "journals");
-
-    // Real-time listener for journal entries
-    const unsubscribe = onSnapshot(journalsCollection, (snapshot) => {
-      const journalData = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      
-      const moodColors = {
-         grateful: "rgb(255, 223, 186)",
-         joyful: "rgb(255, 165, 0)",
-         inspired: "rgb(135, 206, 235)",
-         peaceful: "rgb(144, 238, 144)",
-         hopeful: "rgb(216, 191, 216)",
-      };
-        
-        
-      // Map Firestore data to FullCalendar format
-      const formattedEvents = journalData.map((journal) => ({
-        id: journal.id,
-        title: journal.journalTitle,
-        start: journal.createdAt.toDate().toISOString(),
-        backgroundColor: moodColors[journal.journalMood],
-        borderColor: moodColors[journal.journalMood],
-        url: `/view-journal/${journal.id}`
-      }));
-
-      setEvents(formattedEvents);
-    });
-
-    // Cleanup subscription on component unmount
-    return () => unsubscribe();
-  }, []);
   
+  const handleEventClick = (info) => {
+    navigate(`/view-journal/${info.event.id}`);
+  }
   
-  const handleEventClick = (info) => navigate(`/view-journal/${info.event.id}`);
-  
-  const handleEventMouseEnter = (info) => toast.info('Journal title:', info.event.title);
+  const handleEventMouseEnter = (info) => {
+    toast.info('Journal title:', info.event.title);
+  }
   
   return (
     <>
@@ -190,8 +156,8 @@ const CalendarPage = () => {
            plugins={[dayGridPlugin, interactionPlugin]}
            initialView='dayGridMonth'
            events={events}
-           eventClick={() => handleEventClick(info)}
-           eventMouseEnter={() => handleEventMouseEnter(info)}
+           eventClick={handleEventClick(info)}
+           eventMouseEnter={handleEventMouseEnter(info)}
            height='100%'
            headerToolbar={{
              left: 'prev',
