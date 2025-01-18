@@ -61,14 +61,13 @@ const ViewJournalPage = () => {
         // get journal data
         const docSnap = await getDoc(journalRef);
         
-        if (!docSnap.exist()) {
+        if (!docSnap.exists()) {
           navigate('/no-match');
           return;
         }
         
         const docData = {...docSnap.data(), id: docSnap.id};
    
-
         // transform journal mood to journal icons
         const moodIconUrl = await getMoodPicture(docData.journalMood);
 
