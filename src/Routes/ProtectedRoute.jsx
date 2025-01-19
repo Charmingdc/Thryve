@@ -5,6 +5,7 @@ import { useAuth } from '../contexts/AuthContext.jsx';
 const ProtectedRoute = ({ children }) => {
   const { user, isEmailVerified } = useAuth();
   const navigate = useNavigate();
+  
 
   useEffect(() => {
     if (!user) {

@@ -14,8 +14,8 @@ export const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       
-      console.log('Curent user details:', currentUser);
-      setIsEmailVerified(currentUser.emailVerified);
+      console.log('Current user:', currentUser || 'No user signed in');
+      setIsEmailVerified(currentUser?.emailVerified);
       setLoading(false);
     });
 
