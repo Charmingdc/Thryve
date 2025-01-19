@@ -18,7 +18,7 @@
 
 .calendar-wrapper {
   width: 86%;
-  min-height: 60dvh;
+  min-height: 60vh;
   padding: 2%;
   background-color: var(--shade);
   border-radius: 1rem;
@@ -27,9 +27,9 @@
 /* Target the FullCalendar container and apply border and border-radius */
 .fc {
   color: var(--text-color);
-  border: none; /* Example border color */
-  border-radius: .6rem; /* Example border radius */
-  padding: 10px; /* Optional: adds some spacing around the calendar */
+  border: none;
+  border-radius: .6rem; 
+  padding: 10px;
 }
 
 /* Change the font size of the calendar's month title */
@@ -52,16 +52,16 @@
 }
 
 .fc-daygrid-day.fc-day {
-  border: 0.1rem solid var(--shade); /* Example border color for day cells */
+  border: 0.1rem solid var(--shade); 
 }
 
 .streak-box {
   width: 86%;
-  min-height: 26dvh;
+  min-height: 26vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2dvh 4%;
+  padding: 2vh 4%;
   background-color: var(--shade);
   border-radius: 1rem;
   margin: 1rem 0 4rem 0;
