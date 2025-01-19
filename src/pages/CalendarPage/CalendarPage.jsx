@@ -139,10 +139,6 @@ const CalendarPage = () => {
     navigate(`/view-journal/${info.event.id}`);
   }
   
-  const handleEventMouseEnter = (info) => {
-    toast.info('Journal title:', info.event.title);
-  }
-  
   return (
     <>
      <main className='calendar-container'>
@@ -157,7 +153,6 @@ const CalendarPage = () => {
            initialView='dayGridMonth'
            events={events}
            eventClick={handleEventClick}
-           eventMouseEnter={handleEventMouseEnter}
            height='100%'
            headerToolbar={{
              left: 'prev',
