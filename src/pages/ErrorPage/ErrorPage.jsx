@@ -13,8 +13,8 @@ const ErrorPage = () => {
        src={PageNotFoundImg}
        alt='404 error, page not found'/>
 
-       <button onClick={() => navigate(-1)}> 
-         Go back 
+       <button onClick={() => navigate('/home')}> 
+         Go Back Home :)
        </button>
      </div>
     </>

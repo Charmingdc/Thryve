@@ -10,7 +10,7 @@ const ProtectedRoute = ({ children }) => {
     if (!user) {
       navigate('/login'); 
     } else if (!isEmailVerified) {
-      navigate('/verify-email');
+      navigate('/email-checkpoint');
     }
   }, [user, isEmailVerified, navigate]);
 

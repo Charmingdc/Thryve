@@ -13,6 +13,7 @@ import PublicRoute from './Routes/PublicRoute.jsx';
 import App from './App.jsx';
 import AddJournalPage from './pages/AddJournalPage';
 import CalendarPage from './pages/CalendarPage';
+import UnverifiedEmail from './components/Helpers/UnverifiedEmail';
 import ErrorPage from './pages/ErrorPage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
@@ -33,6 +34,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
          <Route path='/' element={<App />} />
          <Route path='*' element={<ErrorPage />} />
          <Route path='/no-match' element={<ErrorPage />} />
+         <Route path='/email-checkpoint' element={<UnverifiedEmail />} />
+         
          
          <Route path='/login' element={<PublicRoute> 
              <LoginPage /> 
@@ -47,8 +50,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
              <ResetPasswordPage />
            </PublicRoute>
          } />
-         
-         
+        
+        
          <Route path='/home' element={
            <ProtectedRoute>
              <HomePage />

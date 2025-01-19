@@ -1,0 +1,31 @@
+.error-div {
+ width: 100vw;
+ height: 100vh;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ color: var(--clr);
+ background-color: var(--bg);
+}
+
+.error-div > img {
+  width: 80%;
+  margin-bottom: 1rem;
+}
+
+.error-div > p {
+  margin: .5rem 0 4rem 0;
+}
+.error-div button {
+  width: 10rem;
+  height: 3.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: rgb(240, 240, 240);
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 1rem;
+}

@@ -13,7 +13,7 @@ const Header = () => {
             </button>
 
             <button className="register-btn">
-              <Link to='/signup'> SignUp </Link>
+              <Link to='/login'> Login </Link>
             </button>
         </div>
     </header>

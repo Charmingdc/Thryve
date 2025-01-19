@@ -15,7 +15,7 @@ const getMoodPicture = async (mood) => {
         break;
 
     case 'peaceful':
-        pictureUrl = '/public/icons/meditate.png';
+        pictureUrl = '/icons/meditate.png';
         break;
 
     case 'hopeful':
