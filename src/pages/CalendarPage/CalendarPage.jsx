@@ -32,7 +32,6 @@ const CalendarPage = () => {
   const fetchJournals = () => {
     const currentUser = auth.currentUser; // get current user
     const userId = currentUser.uid;
-    console.log('Current user id:', userId);
     
     const journalsCollection = collection(db, "journals");
     
