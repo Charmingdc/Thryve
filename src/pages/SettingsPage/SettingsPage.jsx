@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom";
 import { useAuth } from '../../contexts/AuthContext.jsx';
 import { useTheme } from '../../contexts/ThemeContext.jsx';
 
@@ -24,6 +25,7 @@ import { formatError } from '../../functions/formatFirebaseError.js';
 const SettingsPage = () => {
   const { user, logout } = useAuth();
   const { theme, toggleTheme } = useTheme()
+  const navigate = useNavigate();
   
   const [userDetails, setUserDetails] = useState({});
   const [usernameInput, setUsernameInput] = useState('');
@@ -225,6 +227,8 @@ const SettingsPage = () => {
       toast.success('Email updated successfully, check your new email for verification link.');
 
       setShowEmailModal(false);
+      
+      navigate('/email-checkpoint');
     } catch (err) {
       const formattedErr = await formatError(err.message);
       if (err.message.startsWith('Firebase')) {
