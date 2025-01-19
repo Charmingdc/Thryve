@@ -6,6 +6,7 @@
  align-items: center;
  justify-content: center;
  color: var(--clr);
+ text-align: center;
  background-color: var(--bg);
 }
 
@@ -15,8 +16,10 @@
 }
 
 .error-div > p {
+  align-self: center;
   margin: .5rem 0 4rem 0;
 }
+
 .error-div button {
   width: 10rem;
   height: 3.6rem;

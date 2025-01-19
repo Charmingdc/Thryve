@@ -41,6 +41,11 @@
     align-items: center;
 }
 
+.features-section .feature:first-of-type .image img {
+    width: 18rem;
+    height: 18r m;
+}
+
 .features-section .feature .image img {
     width: 20rem;
     height: 20rem;
