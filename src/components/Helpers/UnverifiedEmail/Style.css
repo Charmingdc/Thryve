@@ -17,11 +17,12 @@
 
 .error-div > p {
   align-self: center;
+  text-align: center;
   margin: .5rem 0 4rem 0;
 }
 
 .error-div button {
-  width: 10rem;
+  width: 12rem;
   height: 3.6rem;
   display: flex;
   align-items: center;
